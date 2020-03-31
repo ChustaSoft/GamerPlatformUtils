@@ -7,17 +7,17 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
 {
     public class PlatformFactory : IPlatformFactory
     {
-        public Task<IEnumerable<IAnalyzer>> GetAnalyzers()
+        public Task<IEnumerable<IAnalyzer>> GetAnalyzersAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ICleaner>> GetCleaners()
+        public Task<IEnumerable<ICleaner>> GetCleanersAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<IPlatform>> GetPlatforms()
+        public Task<IEnumerable<IPlatform>> GetPlatformsAsync()
         {
             throw new NotImplementedException();
         }

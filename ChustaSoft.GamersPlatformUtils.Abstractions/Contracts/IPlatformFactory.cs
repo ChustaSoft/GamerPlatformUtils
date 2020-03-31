@@ -6,11 +6,11 @@ namespace ChustaSoft.GamersPlatformUtils.Abstractions.Contracts
     public interface IPlatformFactory
     {
 
-        Task<IEnumerable<IPlatform>> GetPlatforms();
+        Task<IEnumerable<IPlatform>> GetPlatformsAsync();
 
-        Task<IEnumerable<IAnalyzer>> GetAnalyzers();
+        Task<IEnumerable<IAnalyzer>> GetAnalyzersAsync();
 
-        Task<IEnumerable<ICleaner>> GetCleaners();
+        Task<IEnumerable<ICleaner>> GetCleanersAsync();
 
     }
 }
