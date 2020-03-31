@@ -1,0 +1,86 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChustaSoft.GamersPlatformUtils.Domain", "GamersPlatformUtils\ChustaSoft.GamersPlatformUtils.Domain.csproj", "{7FFDF98B-6FFF-44A1-B232-312F508EEF9C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8C5B20BC-B43D-4861-91AF-223DACF8FC09} = {8C5B20BC-B43D-4861-91AF-223DACF8FC09}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChustaSoft.GamersPlatformUtils.Abstractions", "ChustaSoft.GamersPlatformUtils.Abstractions\ChustaSoft.GamersPlatformUtils.Abstractions.csproj", "{8C5B20BC-B43D-4861-91AF-223DACF8FC09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChustaSoft.GamersPlatformUtils.Domain.Steam", "ChustaSoft.GamersPlatformUtils.Domain.Steam\ChustaSoft.GamersPlatformUtils.Domain.Steam.csproj", "{2DBB8DCF-9620-464E-AAAE-49C938902095}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7FFDF98B-6FFF-44A1-B232-312F508EEF9C} = {7FFDF98B-6FFF-44A1-B232-312F508EEF9C}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChustaSoft.GamersPlatformUtils.Domain.Origin", "ChustaSoft.GamersPlatformUtils.Domain.Origin\ChustaSoft.GamersPlatformUtils.Domain.Origin.csproj", "{FBB9DD34-F625-4A87-B44D-167C686DA233}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7FFDF98B-6FFF-44A1-B232-312F508EEF9C} = {7FFDF98B-6FFF-44A1-B232-312F508EEF9C}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChustaSoft.GamersPlatformUtils.Domain.Xbox", "ChustaSoft.GamersPlatformUtils.Domain.Xbox\ChustaSoft.GamersPlatformUtils.Domain.Xbox.csproj", "{4CBF24B1-5374-408B-BAFD-302294B87C00}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7FFDF98B-6FFF-44A1-B232-312F508EEF9C} = {7FFDF98B-6FFF-44A1-B232-312F508EEF9C}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. UserInterface", "1. UserInterface", "{E9D01F4A-74C0-4DEE-B42B-5679CCD1BE3D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Application", "2. Application", "{58F1FC87-C90F-4297-B299-54A3ABA74F5D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Business", "3. Business", "{252AA76B-D6EB-48FA-B9E3-636FD12B91B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChustaSoft.GamersPlatformUtils.Services", "ChustaSoft.GamersPlatformUtils.Services\ChustaSoft.GamersPlatformUtils.Services.csproj", "{8939079D-BEDE-4083-8CA6-1E895D103FAB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FBB9DD34-F625-4A87-B44D-167C686DA233} = {FBB9DD34-F625-4A87-B44D-167C686DA233}
+		{4CBF24B1-5374-408B-BAFD-302294B87C00} = {4CBF24B1-5374-408B-BAFD-302294B87C00}
+		{2DBB8DCF-9620-464E-AAAE-49C938902095} = {2DBB8DCF-9620-464E-AAAE-49C938902095}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FFDF98B-6FFF-44A1-B232-312F508EEF9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FFDF98B-6FFF-44A1-B232-312F508EEF9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FFDF98B-6FFF-44A1-B232-312F508EEF9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FFDF98B-6FFF-44A1-B232-312F508EEF9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C5B20BC-B43D-4861-91AF-223DACF8FC09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C5B20BC-B43D-4861-91AF-223DACF8FC09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C5B20BC-B43D-4861-91AF-223DACF8FC09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C5B20BC-B43D-4861-91AF-223DACF8FC09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DBB8DCF-9620-464E-AAAE-49C938902095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DBB8DCF-9620-464E-AAAE-49C938902095}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DBB8DCF-9620-464E-AAAE-49C938902095}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DBB8DCF-9620-464E-AAAE-49C938902095}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBB9DD34-F625-4A87-B44D-167C686DA233}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBB9DD34-F625-4A87-B44D-167C686DA233}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBB9DD34-F625-4A87-B44D-167C686DA233}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBB9DD34-F625-4A87-B44D-167C686DA233}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CBF24B1-5374-408B-BAFD-302294B87C00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CBF24B1-5374-408B-BAFD-302294B87C00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CBF24B1-5374-408B-BAFD-302294B87C00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CBF24B1-5374-408B-BAFD-302294B87C00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8939079D-BEDE-4083-8CA6-1E895D103FAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8939079D-BEDE-4083-8CA6-1E895D103FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8939079D-BEDE-4083-8CA6-1E895D103FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8939079D-BEDE-4083-8CA6-1E895D103FAB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7FFDF98B-6FFF-44A1-B232-312F508EEF9C} = {252AA76B-D6EB-48FA-B9E3-636FD12B91B1}
+		{8C5B20BC-B43D-4861-91AF-223DACF8FC09} = {252AA76B-D6EB-48FA-B9E3-636FD12B91B1}
+		{2DBB8DCF-9620-464E-AAAE-49C938902095} = {252AA76B-D6EB-48FA-B9E3-636FD12B91B1}
+		{FBB9DD34-F625-4A87-B44D-167C686DA233} = {252AA76B-D6EB-48FA-B9E3-636FD12B91B1}
+		{4CBF24B1-5374-408B-BAFD-302294B87C00} = {252AA76B-D6EB-48FA-B9E3-636FD12B91B1}
+		{8939079D-BEDE-4083-8CA6-1E895D103FAB} = {58F1FC87-C90F-4297-B299-54A3ABA74F5D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {28D3C08D-A3D9-46AA-ABF7-06FE63CF2907}
+	EndGlobalSection
+EndGlobal
