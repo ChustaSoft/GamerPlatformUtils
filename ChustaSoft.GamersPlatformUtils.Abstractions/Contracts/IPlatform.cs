@@ -8,6 +8,6 @@ namespace ChustaSoft.GamersPlatformUtils.Abstractions.Contracts
         string Name { get; set; }
         string Brand { get; set; }
 
-        Platform GetInformation(Type platform);
+        Platform GetInformation();
     }
 }
