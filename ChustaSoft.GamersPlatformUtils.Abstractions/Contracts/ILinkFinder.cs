@@ -10,6 +10,6 @@ namespace ChustaSoft.GamersPlatformUtils.Abstractions.Contracts
     {
         string RootFolderName { get; set; }
 
-        Task<IEnumerable<GameLink>> Find();
+        Task<IEnumerable<GameLink>> FindAsync();
     }
 }

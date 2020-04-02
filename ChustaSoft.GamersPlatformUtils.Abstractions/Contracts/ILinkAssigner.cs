@@ -8,6 +8,6 @@ namespace ChustaSoft.GamersPlatformUtils.Abstractions.Contracts
 {
     public interface ILinkAssigner
     {
-        Task<bool> Assign(IEnumerable<GameLink> gameLinks);
+        Task<bool> AssignAsync(IEnumerable<GameLink> gameLinks);
     }
 }
