@@ -3,9 +3,9 @@ using System;
 
 namespace ChustaSoft.GamersPlatformUtils.Services
 {
-    public interface IInformationService
+    public interface ILoadService<T>
     {
-        event EventHandler<Information> InformationEvent;
+        event EventHandler<T> LoadEvent;
 
         void Load();
 

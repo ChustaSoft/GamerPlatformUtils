@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace ChustaSoft.GamersPlatformUtils.Services
 {
-    public class InformationService : IInformationService
+    public class InformationService : ILoadService<Information>
     {
 
         private readonly IPlatformFactory _platformFactory;
 
 
-        public event EventHandler<Information> InformationEvent;
+        public event EventHandler<Information> LoadEvent;
 
 
         public InformationService(IPlatformFactory platformFactory)
@@ -26,7 +26,7 @@ namespace ChustaSoft.GamersPlatformUtils.Services
             {
                 var platforms = _platformFactory.GetPlatforms();
 
-                InformationEvent?.Invoke(this, new Information
+                LoadEvent?.Invoke(this, new Information
                 {
                     MachineName = Environment.MachineName,
                     OperartiveSystem = Environment.OSVersion,

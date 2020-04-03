@@ -8,5 +8,6 @@
         
         <StackPanel Orientation="Horizontal">
         <Label Content="{Binding MachineName}" />
+        <Label Content="{Binding MachineSystem}" />
     </StackPanel>
 </UserControl>

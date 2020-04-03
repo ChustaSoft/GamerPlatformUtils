@@ -1,7 +1,6 @@
 ﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
 using ChustaSoft.GamersPlatformUtils.Domain.Implementations;
 using ChustaSoft.GamersPlatformUtils.Services;
-using ChustaSoft.GamersPlatformUtils.UI.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 
@@ -24,9 +23,9 @@ namespace ChustaSoft.GamersPlatformUtils.UI
         private void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IPlatformFactory, PlatformFactory>();
-            services.AddScoped<IInformationService, InformationService>();
+            services.AddScoped<ILoadService<Information>, InformationService>();
 
-            services.AddSingleton<MainWindow>(s => new MainWindow(s.GetRequiredService<IInformationService>()));
+            services.AddSingleton<MainWindow>(s => new MainWindow(s.GetRequiredService<ILoadService<Information>>()));
         }
 
         protected override void OnStartup(StartupEventArgs e)

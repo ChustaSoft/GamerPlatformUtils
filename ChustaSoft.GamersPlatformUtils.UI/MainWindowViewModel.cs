@@ -4,37 +4,12 @@ using ChustaSoft.GamersPlatformUtils.UI.Base;
 
 namespace ChustaSoft.GamersPlatformUtils.UI
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : ViewModelBase<Information>
     {
         
-        private IInformationService _informationService;
-        private Information _information;
-
-        public Information Information
-        {
-            get 
-            { 
-                return _information; 
-            }
-            set 
-            { 
-                _information = value;
-                OnPropertyChanged(nameof(Information));
-            }
-        }
-
-        public MainWindowViewModel(IInformationService informationService)
-        {
-            _informationService = informationService;
-
-            _informationService.InformationEvent += OnInformationChanged;
-            _informationService.Load();
-        }
-
-        private void OnInformationChanged(object sender, Information information)
-        {
-            _information = information;
-        }
+        public MainWindowViewModel(ILoadService<Information> informationService)
+            : base(informationService)
+        { }
 
     }
 }
