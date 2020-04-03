@@ -1,9 +1,8 @@
-﻿using ChustaSoft.GamersPlatformUtils.Abstractions.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace ChustaSoft.GamersPlatformUtils.Abstractions.Contracts
+namespace ChustaSoft.GamersPlatformUtils.Abstractions
 {
     public interface ICleaner
     {

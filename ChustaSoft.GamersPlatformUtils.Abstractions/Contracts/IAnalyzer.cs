@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace ChustaSoft.GamersPlatformUtils.Abstractions.Contracts
+namespace ChustaSoft.GamersPlatformUtils.Abstractions
 {
     public interface IAnalyzer
     {

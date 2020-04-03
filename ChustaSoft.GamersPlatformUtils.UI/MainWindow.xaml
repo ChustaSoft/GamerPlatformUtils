@@ -3,7 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-        xmlns:components="clr-namespace:ChustaSoft.GamersPlatformUtils.UI.Components"
+        xmlns:controls="clr-namespace:ChustaSoft.GamersPlatformUtils.UI.Controls"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -26,8 +26,7 @@
 
         <TabControl Grid.Row="0">
             <TabItem Header="Cleaner" Width="200">
-                <Grid Background="{DynamicResource MaterialDesignCardBackground}">
-                    <components:Information></components:Information>
+                <Grid Background="{DynamicResource MaterialDesignCardBackground}">                    
                 </Grid>
             </TabItem>
             <TabItem Header="Linker" Width="200">
@@ -36,7 +35,7 @@
         </TabControl>
 
         <StackPanel Grid.Row="1">
-            <Label Content="Info"></Label>
+            <controls:InformationControl DataContext="{Binding Information}"></controls:InformationControl>
         </StackPanel>
         
     </Grid>
