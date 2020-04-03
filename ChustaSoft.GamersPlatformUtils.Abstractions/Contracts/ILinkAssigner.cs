@@ -1,12 +1,13 @@
 ﻿using ChustaSoft.GamersPlatformUtils.Abstractions.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
 namespace ChustaSoft.GamersPlatformUtils.Abstractions.Contracts
 {
-    public interface ICleaner
+    public interface ILinkAssigner
     {
-        Task<CleanResult> CleanAsync(IEnumerable<FileInfo> paths);
+        Task<bool> AssignAsync(IEnumerable<GameLink> gameLinks);
     }
 }
