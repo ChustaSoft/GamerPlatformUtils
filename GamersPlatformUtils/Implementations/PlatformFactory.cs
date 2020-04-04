@@ -8,11 +8,13 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
     {
 
         private readonly SteamBusiness _steamBusiness;
+        private readonly OriginBusiness _originBusiness;
 
 
         public PlatformFactory()
         {
             _steamBusiness = new SteamBusiness();
+            _originBusiness = new OriginBusiness();
         }
 
 
@@ -40,7 +42,8 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
         {
             return new List<IPlatform>
             {
-                _steamBusiness
+                _steamBusiness,
+                _originBusiness
             };
         }
 
