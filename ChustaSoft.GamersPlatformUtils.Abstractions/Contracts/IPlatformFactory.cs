@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 
-namespace ChustaSoft.GamersPlatformUtils.Abstractions.Contracts
+namespace ChustaSoft.GamersPlatformUtils.Abstractions
 {
     public interface IPlatformFactory
     {
-        Task<IEnumerable<IPlatform>> GetPlatformsAsync();
+        IEnumerable<IPlatform> GetPlatforms();
 
-        Task<IEnumerable<IAnalyzer>> GetAnalyzersAsync();
+        IEnumerable<IAnalyzer> GetAnalyzers();
 
-        Task<IEnumerable<ICleaner>> GetCleanersAsync();
+        IEnumerable<ICleaner> GetCleaners();
 
-        Task<IEnumerable<ILinkFinder>> GetLinkFindersAsync();
+        IEnumerable<ILinkFinder> GetLinkFinders();
 
-        Task<IEnumerable<ILinkAssigner>> GetLinkAssignersAsync();
+        IEnumerable<ILinkAssigner> GetLinkAssigners();
     }
 }

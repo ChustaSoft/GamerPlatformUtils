@@ -1,13 +1,19 @@
-﻿using ChustaSoft.GamersPlatformUtils.Abstractions.Models;
-using System;
+﻿using System.Collections.Generic;
 
-namespace ChustaSoft.GamersPlatformUtils.Abstractions.Contracts
+namespace ChustaSoft.GamersPlatformUtils.Abstractions
 {
     public interface IPlatform
     {
-        string Name { get; set; }
-        string Brand { get; set; }
 
-        Platform GetInformation();
+        bool Available { get; }
+
+        string Name { get; }
+
+        string Brand { get; }
+
+        string AppPath { get; }
+
+        IEnumerable<string> Libraries { get; }
+
     }
 }

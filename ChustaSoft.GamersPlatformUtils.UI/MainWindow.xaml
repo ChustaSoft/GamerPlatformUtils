@@ -1,0 +1,42 @@
+﻿<Window x:Class="ChustaSoft.GamersPlatformUtils.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:ChustaSoft.GamersPlatformUtils.UI.Controls"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+
+        <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TabControl Grid.Row="0">
+            <TabItem Header="Cleaner" Width="200">
+                <Grid Background="{DynamicResource MaterialDesignCardBackground}">                    
+                </Grid>
+            </TabItem>
+            <TabItem Header="Linker" Width="200">
+                <Grid Background="{DynamicResource MaterialDesignCardBackground}"/>
+            </TabItem>
+        </TabControl>
+
+        <StackPanel Grid.Row="1">
+            <controls:InformationControl DataContext="{Binding ViewModel}"></controls:InformationControl>
+        </StackPanel>
+        
+    </Grid>
+</Window>

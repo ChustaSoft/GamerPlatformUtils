@@ -1,10 +1,7 @@
-﻿using ChustaSoft.GamersPlatformUtils.Abstractions.Models;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ChustaSoft.GamersPlatformUtils.Abstractions.Contracts
+namespace ChustaSoft.GamersPlatformUtils.Abstractions
 {
     public interface ILinkFinder
     {

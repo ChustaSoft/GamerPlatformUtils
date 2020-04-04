@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+﻿using System.IO;
 
-namespace ChustaSoft.GamersPlatformUtils.Abstractions.Models
+namespace ChustaSoft.GamersPlatformUtils.Abstractions
 {
     public class GameLink
     {
