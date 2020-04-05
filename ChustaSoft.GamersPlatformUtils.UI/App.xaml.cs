@@ -1,5 +1,6 @@
 ﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
 using ChustaSoft.GamersPlatformUtils.Domain.Implementations;
+using ChustaSoft.GamersPlatformUtils.Infrastructure;
 using ChustaSoft.GamersPlatformUtils.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
@@ -26,6 +27,12 @@ namespace ChustaSoft.GamersPlatformUtils.UI
             services.AddScoped<ILoadService<Information>, InformationService>();
 
             services.AddSingleton<MainWindow>(s => new MainWindow(s.GetRequiredService<ILoadService<Information>>()));
+            ConfigureRepositories(services);
+        }
+
+        private static void ConfigureRepositories(IServiceCollection services)
+        {
+            services.AddScoped<IFileRepository, FileRepository>();
         }
 
         protected override void OnStartup(StartupEventArgs e)
