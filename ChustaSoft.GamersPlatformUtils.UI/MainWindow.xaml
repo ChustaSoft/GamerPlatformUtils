@@ -4,6 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:ChustaSoft.GamersPlatformUtils.UI.Controls"
+        xmlns:converters="clr-namespace:ChustaSoft.GamersPlatformUtils.UI.Converters"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -13,12 +14,15 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
-
-        <Grid>
+    
+    <Window.Resources>
+        <converters:InformationConverter x:Key="InformationConverter" />
+    </Window.Resources>
+    
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -26,7 +30,7 @@
 
         <TabControl Grid.Row="0">
             <TabItem Header="Cleaner" Width="200">
-                <Grid Background="{DynamicResource MaterialDesignCardBackground}">                    
+                <Grid Background="{DynamicResource MaterialDesignCardBackground}">
                 </Grid>
             </TabItem>
             <TabItem Header="Linker" Width="200">
@@ -35,7 +39,7 @@
         </TabControl>
 
         <StackPanel Grid.Row="1">
-            <controls:InformationControl DataContext="{Binding ViewModel}"></controls:InformationControl>
+            <controls:InformationControl DataContext="{Binding ViewModel, Converter={StaticResource InformationConverter}}"></controls:InformationControl>
         </StackPanel>
         
     </Grid>
