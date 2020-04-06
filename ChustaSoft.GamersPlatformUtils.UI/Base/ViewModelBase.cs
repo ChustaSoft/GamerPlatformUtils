@@ -9,6 +9,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Base
         private ILoadService<T> _loadService;
 
         private T _viewModel;
+        
         public T ViewModel
         {
             get
@@ -25,10 +26,15 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Base
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        public ViewModelBase(ILoadService<T> loadService)
+        protected ViewModelBase(ILoadService<T> loadService)
         {
             _loadService = loadService;
             LoadModel();
+        }
+
+        protected ViewModelBase(object dataContext)
+        {
+            ViewModel = (T)dataContext;
         }
 
         protected void OnPropertyChanged(string propertyName)

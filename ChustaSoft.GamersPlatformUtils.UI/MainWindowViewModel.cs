@@ -11,5 +11,9 @@ namespace ChustaSoft.GamersPlatformUtils.UI
             : base(informationService)
         { }
 
+        public MainWindowViewModel(object information) 
+            : base(information)
+        { }
+
     }
 }
