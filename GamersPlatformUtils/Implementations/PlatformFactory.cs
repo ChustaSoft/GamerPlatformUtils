@@ -1,4 +1,5 @@
 ﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
+using ChustaSoft.GamersPlatformUtils.Infrastructure;
 using System;
 using System.Collections.Generic;
 
@@ -8,11 +9,13 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
     {
 
         private readonly SteamBusiness _steamBusiness;
+        private readonly OriginBusiness _originBusiness;
 
 
-        public PlatformFactory()
+        public PlatformFactory(IFileRepository fileRepository)
         {
             _steamBusiness = new SteamBusiness();
+            _originBusiness = new OriginBusiness(fileRepository);
         }
 
 
@@ -40,7 +43,8 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
         {
             return new List<IPlatform>
             {
-                _steamBusiness
+                _steamBusiness,
+                _originBusiness
             };
         }
 

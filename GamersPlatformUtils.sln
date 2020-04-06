@@ -33,9 +33,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChustaSoft.GamersPlatformUt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChustaSoft.GamersPlatformUtils.UI", "ChustaSoft.GamersPlatformUtils.UI\ChustaSoft.GamersPlatformUtils.UI.csproj", "{863E4D6A-0BDE-46B5-9B53-3CE146A255BB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Testing", "4. Testing", "{40FEA078-DA24-47EA-B6B9-4186BB6F8E53}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Testing", "5. Testing", "{40FEA078-DA24-47EA-B6B9-4186BB6F8E53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChustaSoft.GamersPlatformUtils.Steam.Tests", "ChustaSoft.GamersPlatformUtils.Steam.Tests\ChustaSoft.GamersPlatformUtils.Steam.Tests.csproj", "{8F98440B-8C54-4178-B978-8B5D8169B5C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChustaSoft.GamersPlatformUtils.Steam.Tests", "ChustaSoft.GamersPlatformUtils.Steam.Tests\ChustaSoft.GamersPlatformUtils.Steam.Tests.csproj", "{8F98440B-8C54-4178-B978-8B5D8169B5C0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Infrastructure", "4. Infrastructure", "{4497B662-259C-4270-8BC8-7414BFC428C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chustasoft.GamersPlatformUtils.Infrastructure", "Chustasoft.GamersPlatformUtils.Infrastructure\Chustasoft.GamersPlatformUtils.Infrastructure.csproj", "{27C0742B-B80B-4F23-9D5F-24FE181BA2EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +79,10 @@ Global
 		{8F98440B-8C54-4178-B978-8B5D8169B5C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F98440B-8C54-4178-B978-8B5D8169B5C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F98440B-8C54-4178-B978-8B5D8169B5C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27C0742B-B80B-4F23-9D5F-24FE181BA2EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27C0742B-B80B-4F23-9D5F-24FE181BA2EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27C0742B-B80B-4F23-9D5F-24FE181BA2EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27C0742B-B80B-4F23-9D5F-24FE181BA2EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +96,7 @@ Global
 		{8939079D-BEDE-4083-8CA6-1E895D103FAB} = {58F1FC87-C90F-4297-B299-54A3ABA74F5D}
 		{863E4D6A-0BDE-46B5-9B53-3CE146A255BB} = {E9D01F4A-74C0-4DEE-B42B-5679CCD1BE3D}
 		{8F98440B-8C54-4178-B978-8B5D8169B5C0} = {40FEA078-DA24-47EA-B6B9-4186BB6F8E53}
+		{27C0742B-B80B-4F23-9D5F-24FE181BA2EC} = {4497B662-259C-4270-8BC8-7414BFC428C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28D3C08D-A3D9-46AA-ABF7-06FE63CF2907}
