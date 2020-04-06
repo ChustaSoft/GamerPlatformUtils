@@ -6,6 +6,6 @@ namespace ChustaSoft.GamersPlatformUtils.Abstractions
 {
     public interface IAnalyzer
     {
-        Task<IEnumerable<FileInfo>> AnalyzeAsync(string path);
+        Task<IEnumerable<FileInfo>> AnalyzeAsync();
     }
 }
