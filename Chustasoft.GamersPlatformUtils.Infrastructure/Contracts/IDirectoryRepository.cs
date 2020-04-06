@@ -5,11 +5,11 @@ namespace ChustaSoft.GamersPlatformUtils.Infrastructure
 {
     public interface IDirectoryRepository
     {
-        void CleanDirectory(string path);
+        void Clean(string path);
 
-        void WriteDirectory(FileInfo fileInfo);
+        void Write(FileInfo fileInfo);
 
-        IEnumerable<FileInfo> ReadDirectory(string path);
+        IEnumerable<FileInfo> Read(string path);
 
     }
 }

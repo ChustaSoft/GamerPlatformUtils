@@ -27,14 +27,14 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
         public string ConfigXMLPath { private set; get; }
         public IEnumerable<string> Libraries => throw new NotImplementedException();
 
-        private readonly IFileRepository FileRepository;
+        private readonly IFileRepository _fileRepository;
 
         public string RootFolderName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public OriginBusiness(IFileRepository fileRepository)
         {
             LoadPlatform();
-            FileRepository = fileRepository;
+            _fileRepository = fileRepository;
         }
 
         private void LoadPlatform()
@@ -47,7 +47,7 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
         {
             return Task.Run(() => {
 
-                var  xmlValues = FileRepository.ReadXML(this.ConfigXMLPath);
+                var  xmlValues = _fileRepository.ReadXML(this.ConfigXMLPath);
 
                 string libraryLocation = xmlValues.ContainsKey(LIBRARY_XML_KEY) ? xmlValues[LIBRARY_XML_KEY] : string.Empty;
 
