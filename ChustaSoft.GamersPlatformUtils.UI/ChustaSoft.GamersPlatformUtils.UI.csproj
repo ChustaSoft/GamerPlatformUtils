@@ -35,11 +35,26 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Modules\Cleaner\" />
     <Folder Include="Modules\Linker\" />
+
+    <Compile Update="MainWindowViewModel.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     
     <Compile Update="Controls\InformationControlViewModel.cs">
       <DependentUpon>InformationControl.xaml</DependentUpon>
+    </Compile>
+
+    <Compile Update="Controls\InformationControlConverter.cs">
+      <DependentUpon>InformationControl.xaml</DependentUpon>
+    </Compile>
+
+    <Compile Update="Modules\Cleaner\CleanerControlViewModel.cs">
+      <DependentUpon>CleanerControl.xaml</DependentUpon>
+    </Compile>
+
+    <Compile Update="Modules\Cleaner\CleanerControlConverter.cs">
+      <DependentUpon>CleanerControl.xaml</DependentUpon>
     </Compile>
     
   </ItemGroup>

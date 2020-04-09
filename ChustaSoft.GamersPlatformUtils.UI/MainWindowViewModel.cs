@@ -17,16 +17,17 @@ namespace ChustaSoft.GamersPlatformUtils.UI
             _informationService.LoadEvent += OnLoadCompleted;
         }
 
-        public MainWindowViewModel(object information) 
-            : base(information)
+        public MainWindowViewModel()
+            : base()
         { }
+
 
         public void OnLoad() => _informationService.Load();
 
 
         private void OnLoadCompleted(object sender, Information information)
         {
-            ViewModel = information;
+            Model = information;
         }
 
     }

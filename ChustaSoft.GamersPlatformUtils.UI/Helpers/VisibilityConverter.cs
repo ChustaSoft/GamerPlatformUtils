@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace ChustaSoft.GamersPlatformUtils.UI.Converters
+namespace ChustaSoft.GamersPlatformUtils.UI.Helpers
 {
     public class VisibilityConverter : IValueConverter
     {

@@ -1,7 +1,9 @@
 ﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
 using ChustaSoft.GamersPlatformUtils.Domain.Constants;
 using ChustaSoft.GamersPlatformUtils.UI.Base;
+using ChustaSoft.GamersPlatformUtils.UI.Styles;
 using System.Linq;
+using System.Windows;
 
 namespace ChustaSoft.GamersPlatformUtils.UI.Controls
 {
@@ -9,18 +11,20 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Controls
     {
 
         public bool HasSteam
-            => ViewModel?.Platforms.Any(x => x.Name.Equals(SteamConstants.PLATFORM_NAME)) ?? false;
+            => Model?.Platforms.Any(x => x.Name.Equals(SteamConstants.PLATFORM_NAME)) ?? false;
 
         public bool HasOrigin
-            => ViewModel?.Platforms.Any(x => x.Name.Equals("Origin")) ?? false;
+            => Model?.Platforms.Any(x => x.Name.Equals("Origin")) ?? false;
 
         public bool HasXbox
             => true;
 
 
-        public InformationControlViewModel(object dataContext)
-            : base(dataContext)
-        { }
+        #region Styles
+
+        public Thickness IconsMargins => StyleConstants.HorizontalCommonMargins;
+
+        #endregion
 
     }
 }
