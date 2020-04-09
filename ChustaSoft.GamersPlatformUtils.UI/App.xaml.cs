@@ -33,6 +33,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI
         private static void ConfigureRepositories(IServiceCollection services)
         {
             services.AddScoped<IFileRepository, FileRepository>();
+            services.AddScoped<IAnalyzer, SteamAnalyzer>();
         }
 
         protected override void OnStartup(StartupEventArgs e)
