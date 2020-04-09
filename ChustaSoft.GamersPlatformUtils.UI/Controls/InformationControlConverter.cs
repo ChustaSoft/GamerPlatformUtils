@@ -1,4 +1,4 @@
-﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
+﻿using ChustaSoft.GamersPlatformUtils.Services;
 using System;
 using System.Globalization;
 using System.Windows.Data;

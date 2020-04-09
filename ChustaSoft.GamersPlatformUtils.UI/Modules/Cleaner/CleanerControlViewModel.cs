@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
 {
-    public class CleanerControlViewModel : ViewModelBase<IEnumerable<IPlatform>>
+    public class CleanerControlViewModel : ViewModelBase<IEnumerable<PlatformBase>>
     {
 
         public RelayCommand AnalyseCommand { get; private set; }

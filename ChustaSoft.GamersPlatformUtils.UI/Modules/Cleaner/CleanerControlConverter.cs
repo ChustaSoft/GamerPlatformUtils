@@ -12,7 +12,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
         {
             return new CleanerControlViewModel 
             { 
-                Model = (IEnumerable<IPlatform>)value
+                Model = (IEnumerable<PlatformBase>)value
             };
         }
 
