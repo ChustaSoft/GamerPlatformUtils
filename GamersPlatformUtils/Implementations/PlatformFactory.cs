@@ -10,12 +10,14 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
 
         private readonly SteamBusiness _steamBusiness;
         private readonly OriginBusiness _originBusiness;
+        private readonly XboxBusiness _xboxBusiness;
 
 
         public PlatformFactory(IFileRepository fileRepository)
         {
             _steamBusiness = new SteamBusiness();
             _originBusiness = new OriginBusiness(fileRepository);
+            _xboxBusiness = new XboxBusiness();
         }
 
 
