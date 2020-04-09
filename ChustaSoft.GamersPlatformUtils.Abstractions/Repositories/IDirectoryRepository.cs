@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace ChustaSoft.GamersPlatformUtils.Infrastructure
+namespace ChustaSoft.GamersPlatformUtils.Abstractions
 {
     public interface IDirectoryRepository
     {

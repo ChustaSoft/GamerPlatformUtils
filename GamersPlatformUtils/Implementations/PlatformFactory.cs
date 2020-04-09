@@ -1,5 +1,4 @@
 ﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
-using ChustaSoft.GamersPlatformUtils.Infrastructure;
 using System;
 using System.Collections.Generic;
 
@@ -21,7 +20,10 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
 
         public IEnumerable<IAnalyzer> GetAnalyzers()
         {
-            throw new NotImplementedException();
+            return new List<IAnalyzer>
+            {
+                _steamBusiness
+            };
         }
 
         public IEnumerable<ICleaner> GetCleaners()
@@ -39,9 +41,9 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IPlatform> GetPlatforms()
+        public IEnumerable<Platform> GetPlatforms()
         {
-            return new List<IPlatform>
+            return new List<Platform>
             {
                 _steamBusiness,
                 _originBusiness
