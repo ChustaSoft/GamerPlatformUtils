@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:ChustaSoft.GamersPlatformUtils.UI.Controls"
         xmlns:converters="clr-namespace:ChustaSoft.GamersPlatformUtils.UI.Converters"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -18,6 +19,11 @@
     <Window.Resources>
         <converters:InformationConverter x:Key="InformationConverter" />
     </Window.Resources>
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:CallMethodAction TargetObject="{Binding}" MethodName="LoadTest" />
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
     
     <Grid>
         <Grid.RowDefinitions>

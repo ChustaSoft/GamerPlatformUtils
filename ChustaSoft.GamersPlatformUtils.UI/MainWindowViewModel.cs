@@ -15,5 +15,10 @@ namespace ChustaSoft.GamersPlatformUtils.UI
             : base(information)
         { }
 
+        public void LoadTest() 
+        { 
+        
+        }
+
     }
 }
