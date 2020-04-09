@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
 {
-    public class OriginBusiness : Platform, ILinkFinder
+    public class OriginBusiness : PlatformBase, ILinkFinder
     {
 
         private readonly IFileRepository _xmlFileRepository;

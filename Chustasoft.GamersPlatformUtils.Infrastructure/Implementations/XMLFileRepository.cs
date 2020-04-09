@@ -13,7 +13,7 @@ namespace ChustaSoft.GamersPlatformUtils.Infrastructure
 		{ }
 
 
-		public Dictionary<string, string> Read(string path)
+		public IDictionary<string, string> Read(string path)
 		{
 			XDocument doc = XDocument.Load(path);
 			Dictionary<string, string> dataDictionary = new Dictionary<string, string>();

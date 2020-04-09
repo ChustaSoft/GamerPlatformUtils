@@ -2,7 +2,7 @@
 
 namespace ChustaSoft.GamersPlatformUtils.Abstractions
 {
-    public abstract class Platform
+    public abstract class PlatformBase
     {
 
         public virtual bool Available { get; protected set; }
@@ -12,7 +12,7 @@ namespace ChustaSoft.GamersPlatformUtils.Abstractions
         public virtual IEnumerable<string> Libraries { get; protected set; }
 
 
-        public Platform()
+        public PlatformBase()
         {
             LoadPlatform();
         }

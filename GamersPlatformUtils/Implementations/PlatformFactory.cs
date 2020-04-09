@@ -41,9 +41,9 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Platform> GetPlatforms()
+        public IEnumerable<PlatformBase> GetPlatforms()
         {
-            return new List<Platform>
+            return new List<PlatformBase>
             {
                 _steamBusiness,
                 _originBusiness
