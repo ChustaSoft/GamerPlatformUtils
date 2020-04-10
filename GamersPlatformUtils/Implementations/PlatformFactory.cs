@@ -17,7 +17,7 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
         {
             _steamBusiness = new SteamBusiness();
             _originBusiness = new OriginBusiness(fileRepository);
-            _xboxBusiness = new XboxBusiness();
+            _xboxBusiness = new XboxBusiness(fileRepository);
         }
 
 
@@ -46,7 +46,8 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
             return new List<IPlatform>
             {
                 _steamBusiness,
-                _originBusiness
+                _originBusiness,
+                _xboxBusiness
             };
         }
 

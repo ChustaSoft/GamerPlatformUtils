@@ -32,7 +32,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI
 
         private static void ConfigureRepositories(IServiceCollection services)
         {
-            services.AddScoped<IFileRepository, FileRepository>();
+            services.AddScoped<IFileRepository, PowershellRepository>();
         }
 
         protected override void OnStartup(StartupEventArgs e)

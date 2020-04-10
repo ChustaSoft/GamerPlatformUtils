@@ -5,13 +5,13 @@ using System.Xml.Linq;
 
 namespace ChustaSoft.GamersPlatformUtils.Infrastructure
 {
-	public class FileRepository : IFileRepository
+	public class XMLRepository : IFileRepository
 	{
-		public FileRepository()
+		public XMLRepository()
 		{
 		}
 
-		public Dictionary<string, string> ReadXML(string path)
+		public Dictionary<string, string> Read(string path)
 		{
 			XDocument doc = XDocument.Load(path);
 			Dictionary<string, string> dataDictionary = new Dictionary<string, string>();
@@ -28,7 +28,7 @@ namespace ChustaSoft.GamersPlatformUtils.Infrastructure
 			return element.Attributes(propertyName).FirstOrDefault()?.Value;
 		}
 
-		public void WriteXML()
+		public void Write()
 		{
 			throw new NotImplementedException();
 		}

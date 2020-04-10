@@ -1,0 +1,22 @@
+$allAppsInstalled = get-AppxPackage
+$filteredApps = @()
+
+foreach ($installedApp in $allAppsInstalled)
+{    
+	if(-not $installedApp.IsFramework){	
+		$appx = Get-AppxPackageManifest $installedApp;
+		$installedAppInfo = $appx.Package.Properties.DisplayName;
+
+		if($installedAppInfo -like '*DisplayName*' -or $installedAppInfo -like '*ms-resource*')
+		{
+			$installedAppInfo = $appx.Package.Applications.Application.VisualElements.DisplayName;
+		}
+		if(-not ($installedAppInfo -like '*DisplayName*' -or $installedAppInfo -like '*ms-resource*'))
+		{
+			$installedAppInfo = $installedAppInfo + " || " + $installedApp.InstallLocation;
+			$filteredApps += $installedAppInfo;
+		}			
+	}     
+}
+
+$filteredApps;

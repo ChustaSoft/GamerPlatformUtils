@@ -5,9 +5,9 @@ namespace ChustaSoft.GamersPlatformUtils.Infrastructure
 {
     public interface IFileRepository
     {
-        Dictionary<string, string> ReadXML(string path);
+        Dictionary<string, string> Read(string path);
 
-        void WriteXML();
+        void Write();
 
     }
 }

@@ -47,7 +47,7 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
         {
             return Task.Run(() => {
 
-                var  xmlValues = _fileRepository.ReadXML(this.ConfigXMLPath);
+                var  xmlValues = _fileRepository.Read(this.ConfigXMLPath);
 
                 string libraryLocation = xmlValues.ContainsKey(LIBRARY_XML_KEY) ? xmlValues[LIBRARY_XML_KEY] : string.Empty;
 
