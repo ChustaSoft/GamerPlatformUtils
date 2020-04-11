@@ -1,63 +1,47 @@
 ﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
+using ChustaSoft.GamersPlatformUtils.Domain.Constants;
+using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using Microsoft.Win32;
 using System.IO;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 using System.Linq;
-using Microsoft.VisualBasic.FileIO;
-using ChustaSoft.GamersPlatformUtils.Infrastructure;
+using System.Threading.Tasks;
 
 namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
 {
-    public class OriginBusiness : IPlatform, ILinkFinder
+    public class OriginBusiness : Platform, ILinkFinder
     {
-        private const string ORIGIN_CONFIG_XML = "local.xml";
-        private const string ORIGIN_FOLDER_NAME = "Origin";
 
-        private const string LIBRARY_XML_KEY = "DownloadInPlaceDir";
-        private const string LIBRARY_XML_FIRST_LEVEL_TAG = "Settings";
+        private readonly IFileRepository _xmlFileRepository;
 
-        public bool Available => IsAvailable();
-        public string Name => "Origin";
-        public string Brand => "Electronic Arts";
-        public string AppPath { private set; get; }
-        public string ConfigXMLPath { private set; get; }
-        public IEnumerable<string> Libraries => throw new NotImplementedException();
-
-        private readonly IFileRepository _fileRepository;
-
-        public string RootFolderName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        private string ConfigXMLPath { get; set; }
 
         public OriginBusiness(IFileRepository fileRepository)
+            : base()
         {
-            LoadPlatform();
-            _fileRepository = fileRepository;
+            _xmlFileRepository = fileRepository;
         }
 
-        private void LoadPlatform()
+        protected override void LoadPlatform()
         {
-            this.AppPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), ORIGIN_FOLDER_NAME);
-            this.ConfigXMLPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), ORIGIN_FOLDER_NAME, ORIGIN_CONFIG_XML);
+            this.AppPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), OriginConstants.ORIGIN_FOLDER_NAME);
+            this.ConfigXMLPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), OriginConstants.ORIGIN_FOLDER_NAME, OriginConstants.ORIGIN_CONFIG_XML);
+            this.Available = Directory.Exists(this.AppPath);
+            this.Name = OriginConstants.PLATFORM_NAME;
+            this.Brand = OriginConstants.BRAND_NAME;
+            this.Libraries = Enumerable.Empty<string>();
         }
 
         public Task<IEnumerable<GameLink>> FindAsync()
         {
             return Task.Run(() => {
 
-                var  xmlValues = _fileRepository.Read(this.ConfigXMLPath);
+                var  xmlValues = _xmlFileRepository.Read(this.ConfigXMLPath);
 
-                string libraryLocation = xmlValues.ContainsKey(LIBRARY_XML_KEY) ? xmlValues[LIBRARY_XML_KEY] : string.Empty;
+                string libraryLocation = xmlValues.ContainsKey(OriginConstants.LIBRARY_XML_KEY) ? xmlValues[OriginConstants.LIBRARY_XML_KEY] : string.Empty;
 
                 return GetGameLinksFromLibraryDirectory(libraryLocation);
             });
-        }
-
-        private bool IsAvailable()
-        {
-            return Directory.Exists(this.AppPath);
         }
 
         private IEnumerable<GameLink> GetGameLinksFromLibraryDirectory(string path)

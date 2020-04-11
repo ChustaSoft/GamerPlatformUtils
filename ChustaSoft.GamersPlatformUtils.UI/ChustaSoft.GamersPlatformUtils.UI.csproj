@@ -7,6 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\origin-logo.png" />
+    <None Remove="Resources\steam-logo.png" />
+    <None Remove="Resources\xbox-logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\origin-logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\steam-logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\xbox-logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="3.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.3" />
   </ItemGroup>
@@ -18,6 +36,11 @@
   <ItemGroup>
     <Folder Include="Modules\Cleaner\" />
     <Folder Include="Modules\Linker\" />
+    
+    <Compile Update="Controls\InformationControlViewModel.cs">
+      <DependentUpon>InformationControl.xaml</DependentUpon>
+    </Compile>
+    
   </ItemGroup>
 
 </Project>

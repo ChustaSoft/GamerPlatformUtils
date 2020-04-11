@@ -27,12 +27,6 @@ namespace ChustaSoft.GamersPlatformUtils.UI
             services.AddScoped<ILoadService<Information>, InformationService>();
 
             services.AddSingleton<MainWindow>(s => new MainWindow(s.GetRequiredService<ILoadService<Information>>()));
-            ConfigureRepositories(services);
-        }
-
-        private static void ConfigureRepositories(IServiceCollection services)
-        {
-            services.AddScoped<IFileRepository, PowershellRepository>();
         }
 
         protected override void OnStartup(StartupEventArgs e)

@@ -1,15 +1,17 @@
-﻿using System;
+﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
 namespace ChustaSoft.GamersPlatformUtils.Infrastructure
 {
-	public class XMLRepository : IFileRepository
+	public class XMLFileRepository : IFileRepository
 	{
-		public XMLRepository()
-		{
-		}
+
+		public XMLFileRepository()
+		{ }
+
 
 		public Dictionary<string, string> Read(string path)
 		{
@@ -23,14 +25,16 @@ namespace ChustaSoft.GamersPlatformUtils.Infrastructure
 			return dataDictionary;
 		}
 
+		public void Write()
+		{
+			throw new NotImplementedException();
+		}
+
+
 		private string GetElementProperty(XElement element, string propertyName)
 		{
 			return element.Attributes(propertyName).FirstOrDefault()?.Value;
 		}
 
-		public void Write()
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

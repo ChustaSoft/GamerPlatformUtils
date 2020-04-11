@@ -1,41 +1,30 @@
 ﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using System.Runtime;
 using System.Linq;
-using Microsoft.Win32;
 using System.IO;
-using System.Reflection;
-using System.Management.Automation.Runspaces;
-using System.Collections.ObjectModel;
-using System.Management.Automation;
-using ChustaSoft.GamersPlatformUtils.Infrastructure;
+using ChustaSoft.GamersPlatformUtils.Domain.Constants;
 
 namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
 {
-    public class XboxBusiness : IPlatform, ILinkFinder
+    public class XboxBusiness : Platform, ILinkFinder
     {
-        public bool Available => throw new NotImplementedException();
-
-        public string Name => "Xbox";
-
-        public string Brand => "Micosoft";
-
-        public string AppPath => throw new NotImplementedException();
-
-        public IEnumerable<string> Libraries => throw new NotImplementedException();
-
-        public string RootFolderName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        private readonly string powershellExecutionPolicy = "Set-ExecutionPolicy -Scope Process -ExecutionPolicy Unrestricted;";
-
         IFileRepository _fileRepository;
 
-        public XboxBusiness(IFileRepository fileRepository)
+        public XboxBusiness(IFileRepository fileRepository) 
+            : base()
         {
             _fileRepository = fileRepository;
+        }
+
+        protected override void LoadPlatform()
+        {
+            this.AppPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            this.Available = Directory.Exists(AppPath);
+            this.Name = SteamConstants.PLATFORM_NAME;
+            this.Brand = SteamConstants.BRAND_NAME;
+            this.Libraries = Enumerable.Empty<string>();
         }
 
         public Task<IEnumerable<GameLink>> FindAsync()

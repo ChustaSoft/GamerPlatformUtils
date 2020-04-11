@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ChustaSoft.GamersPlatformUtils.Abstractions\ChustaSoft.GamersPlatformUtils.Abstractions.csproj" />
+    <ProjectReference Include="..\ChustaSoft.GamersPlatformUtils.Domain.Steam\ChustaSoft.GamersPlatformUtils.Domain.Steam.csproj" />
     <ProjectReference Include="..\Chustasoft.GamersPlatformUtils.Infrastructure\Chustasoft.GamersPlatformUtils.Infrastructure.csproj" />
   </ItemGroup>
 

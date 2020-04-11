@@ -13,17 +13,20 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
         private readonly XboxBusiness _xboxBusiness;
 
 
-        public PlatformFactory(IFileRepository fileRepository)
+        public PlatformFactory() 
         {
             _steamBusiness = new SteamBusiness();
-            _originBusiness = new OriginBusiness(fileRepository);
-            _xboxBusiness = new XboxBusiness(fileRepository);
+            _originBusiness = new OriginBusiness(new XMLFileRepository());
+            _xboxBusiness = new XboxBusiness(new PowershellRepository());
         }
 
 
         public IEnumerable<IAnalyzer> GetAnalyzers()
         {
-            throw new NotImplementedException();
+            return new List<IAnalyzer>
+            {
+                _steamBusiness,                
+            };
         }
 
         public IEnumerable<ICleaner> GetCleaners()
@@ -38,12 +41,15 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
 
         public IEnumerable<ILinkFinder> GetLinkFinders()
         {
-            throw new NotImplementedException();
+            return new List<ILinkFinder> {
+                _originBusiness,
+                _xboxBusiness
+            };
         }
 
-        public IEnumerable<IPlatform> GetPlatforms()
+        public IEnumerable<Platform> GetPlatforms()
         {
-            return new List<IPlatform>
+            return new List<Platform>
             {
                 _steamBusiness,
                 _originBusiness,
