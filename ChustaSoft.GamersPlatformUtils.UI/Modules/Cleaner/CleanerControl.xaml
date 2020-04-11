@@ -18,6 +18,16 @@
     <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
         <materialDesign:Card Height="50">
             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
+                <ComboBox ItemsSource="{Binding Model}" Width="200" ToolTip="Platforms found...">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding Path=Selected, Mode=TwoWay}" Margin="0 0 5 0"/>
+                                <TextBlock Text="{Binding Path=Name, Mode=OneWay}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
                 <Button Content="Analyze" Command="{Binding AnalyseCommand}" Margin="{Binding ButtonMargins}"></Button>
                 <Button Content="Clean" Command="{Binding CleanCommand}" Margin="{Binding ButtonMargins}"></Button>
             </StackPanel>

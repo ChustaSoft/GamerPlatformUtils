@@ -1,11 +1,10 @@
-﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
-using ChustaSoft.GamersPlatformUtils.Services;
+﻿using ChustaSoft.GamersPlatformUtils.Services;
 using ChustaSoft.GamersPlatformUtils.UI.Base;
 using ChustaSoft.GamersPlatformUtils.UI.Contracts;
 
 namespace ChustaSoft.GamersPlatformUtils.UI
 {
-    public class MainWindowViewModel : ViewModelBase<Information>, ILoadable<Information>
+    public class MainWindowViewModel : ViewModelBase<Information>, ILoadable
     {
 
         private readonly ILoadService<Information> _informationService;
@@ -20,8 +19,6 @@ namespace ChustaSoft.GamersPlatformUtils.UI
         public MainWindowViewModel()
             : base()
         { }
-
-
         public void OnLoad() => _informationService.Load();
 
 

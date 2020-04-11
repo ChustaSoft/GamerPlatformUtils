@@ -9,9 +9,6 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Base
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        protected ViewModelBase() { }
-
-
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

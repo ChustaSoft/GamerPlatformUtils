@@ -1,4 +1,5 @@
 ﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
+using ChustaSoft.GamersPlatformUtils.Domain.Constants;
 using System;
 using System.Collections.Generic;
 
@@ -18,35 +19,35 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
         }
 
 
-        public IEnumerable<IAnalyzer> GetAnalyzers()
+        public IDictionary<string, IAnalyzer> GetAnalyzers()
         {
-            return new List<IAnalyzer>
+            return new Dictionary<string, IAnalyzer>
             {
-                _steamBusiness
+                { SteamConstants.PLATFORM_NAME, _steamBusiness }
             };
         }
 
-        public IEnumerable<ICleaner> GetCleaners()
+        public IDictionary<string, ICleaner> GetCleaners()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ILinkAssigner> GetLinkAssigners()
+        public IDictionary<string, ILinkAssigner> GetLinkAssigners()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ILinkFinder> GetLinkFinders()
+        public IDictionary<string, ILinkFinder> GetLinkFinders()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<PlatformBase> GetPlatforms()
+        public IDictionary<string, PlatformBase> GetPlatforms()
         {
-            return new List<PlatformBase>
+            return new Dictionary<string, PlatformBase>
             {
-                _steamBusiness,
-                _originBusiness
+                { SteamConstants.PLATFORM_NAME, _steamBusiness },
+                { OriginConstants.PLATFORM_NAME, _originBusiness },
             };
         }
 

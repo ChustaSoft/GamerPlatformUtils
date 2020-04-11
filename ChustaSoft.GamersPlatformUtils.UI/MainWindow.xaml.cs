@@ -1,5 +1,4 @@
-﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
-using ChustaSoft.GamersPlatformUtils.Services;
+﻿using ChustaSoft.GamersPlatformUtils.Services;
 using System.Windows;
 
 namespace ChustaSoft.GamersPlatformUtils.UI

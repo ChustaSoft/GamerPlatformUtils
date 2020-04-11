@@ -30,7 +30,7 @@ namespace ChustaSoft.GamersPlatformUtils.Services
                 {
                     MachineName = Environment.MachineName,
                     OperartiveSystem = Environment.OSVersion,
-                    Platforms = platforms.Where(x => x.Available)
+                    Platforms = platforms.Where(x => x.Value.Available).Select(x => x.Value)
                 });
             });
         }
