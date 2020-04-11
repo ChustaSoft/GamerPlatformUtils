@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
 {
-    public class SteamBusiness : Platform, IAnalyzer
+    public class SteamBusiness : PlatformBase, IAnalyzer
     {
 
         public SteamBusiness() 
