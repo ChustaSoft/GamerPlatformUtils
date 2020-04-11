@@ -21,7 +21,7 @@ namespace ChustaSoft.GamersPlatformUtils.Infrastructure
 		{
 		}
 
-		public Dictionary<string, string> Read(string path)
+		public IDictionary<string, string> Read(string path)
 		{
             RunScript(POWERSHELL_EXECUTION_POLICY);
 

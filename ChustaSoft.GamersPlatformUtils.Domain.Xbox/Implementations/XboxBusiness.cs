@@ -8,7 +8,7 @@ using ChustaSoft.GamersPlatformUtils.Domain.Constants;
 
 namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
 {
-    public class XboxBusiness : Platform, ILinkFinder
+    public class XboxBusiness : PlatformBase, ILinkFinder
     {
         IFileRepository _fileRepository;
 
@@ -31,7 +31,7 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
         {
             return Task.Run(() =>
             {
-                Dictionary<string, string> fileResults = _fileRepository.Read(string.Empty);
+                var fileResults = _fileRepository.Read(string.Empty);
 
                 IEnumerable<GameLink> installedApps = fileResults.Keys.Select(x => new GameLink { Name = x, Path = new FileInfo(fileResults[x]) }).ToList();
 
