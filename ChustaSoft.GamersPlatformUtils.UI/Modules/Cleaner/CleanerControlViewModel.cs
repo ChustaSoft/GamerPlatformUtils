@@ -39,8 +39,9 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
         private async void OnAnalyze() 
         {
             var selectedPlatforms = Model.Platforms.Where(x => x.Selected).Select(x => x.Name);
-
-            this.Model.PathsAnalyzed = new ObservableCollection<FileInfo>(await _analyzerService.AnalyzeAsync(selectedPlatforms));
+            var pathsAnalised = await _analyzerService.AnalyzeAsync(selectedPlatforms);
+            
+            this.Model.PathsAnalyzed = new ObservableCollection<FileInfo>(pathsAnalised);
         }
 
         private void OnClean()

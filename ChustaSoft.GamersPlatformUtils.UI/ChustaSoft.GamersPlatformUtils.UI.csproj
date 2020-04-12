@@ -48,6 +48,9 @@
     <Compile Update="Modules\Cleaner\CleanerControlViewModel.cs">
       <DependentUpon>CleanerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Modules\Cleaner\CleanerControlModel.cs">
+      <DependentUpon>CleanerControl.xaml</DependentUpon>
+    </Compile>
 
     <Compile Update="Helpers\IViewModelFactory.cs">
       <DependentUpon>ViewModelFactory.cs</DependentUpon>
