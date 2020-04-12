@@ -25,8 +25,9 @@ namespace ChustaSoft.GamersPlatformUtils.UI
         {
             services.AddSingleton<IPlatformFactory, PlatformFactory>();
             services.AddScoped<ILoadService<Information>, InformationService>();
+            services.AddScoped<IAnalyzerService, AnalyzerService>();
 
-            services.AddSingleton<MainWindow>(s => new MainWindow(s.GetRequiredService<ILoadService<Information>>()));
+            services.AddSingleton<MainWindow>(s => new MainWindow(s));
             ConfigureRepositories(services);
         }
 

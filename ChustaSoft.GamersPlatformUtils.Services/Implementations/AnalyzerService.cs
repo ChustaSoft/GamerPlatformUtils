@@ -1,12 +1,12 @@
-﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
-using ChustaSoft.GamersPlatformUtils.Services.Contracts;
+﻿using ChustaSoft.Common.Helpers;
+using ChustaSoft.GamersPlatformUtils.Abstractions;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ChustaSoft.GamersPlatformUtils.Services.Implementations
+namespace ChustaSoft.GamersPlatformUtils.Services
 {
     public class AnalyzerService : IAnalyzerService
     {

@@ -1,4 +1,4 @@
-﻿using ChustaSoft.GamersPlatformUtils.Services;
+﻿using System;
 using System.Windows;
 
 namespace ChustaSoft.GamersPlatformUtils.UI
@@ -9,9 +9,9 @@ namespace ChustaSoft.GamersPlatformUtils.UI
     public partial class MainWindow : Window
     {
 
-        public MainWindow(ILoadService<Information> informationService)
+        public MainWindow(IServiceProvider serviceProvider)
         {
-            DataContext = new MainWindowViewModel(informationService);
+            DataContext = new MainWindowViewModel(serviceProvider);
             
             InitializeComponent();
         }

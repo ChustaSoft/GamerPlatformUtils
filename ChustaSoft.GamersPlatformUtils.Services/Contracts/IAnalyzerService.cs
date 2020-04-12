@@ -2,7 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace ChustaSoft.GamersPlatformUtils.Services.Contracts
+namespace ChustaSoft.GamersPlatformUtils.Services
 {
     public interface IAnalyzerService
     {
