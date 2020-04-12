@@ -14,7 +14,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Controls
             => Model?.Platforms.Any(x => x.Name.Equals(SteamConstants.PLATFORM_NAME)) ?? false;
 
         public bool HasOrigin
-            => Model?.Platforms.Any(x => x.Name.Equals("Origin")) ?? false;
+            => Model?.Platforms.Any(x => x.Name.Equals(OriginConstants.PLATFORM_NAME)) ?? false;
 
         public bool HasXbox
             => true;

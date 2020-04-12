@@ -18,7 +18,7 @@
     <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
         <materialDesign:Card Height="50">
             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
-                <ComboBox ItemsSource="{Binding Model}" Width="200" ToolTip="Platforms found...">
+                <ComboBox ItemsSource="{Binding Model.Platforms}" Width="200" ToolTip="Platforms found in this machine">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">

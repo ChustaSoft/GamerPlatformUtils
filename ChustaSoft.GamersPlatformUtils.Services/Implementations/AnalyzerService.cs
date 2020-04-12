@@ -34,7 +34,10 @@ namespace ChustaSoft.GamersPlatformUtils.Services
                 .AsParallel()
                 .ForAll(async platform =>
                 {
-                    filePaths.AddRange(await _analyzers[platform].AnalyzeAsync());
+                    if(_analyzers.ContainsKey(platform))
+                        filePaths.AddRange(await _analyzers[platform].AnalyzeAsync());
+                    
+                    //TODO: Throw warning: Selected platform has no analyzer
                 });
 
             return filePaths;
