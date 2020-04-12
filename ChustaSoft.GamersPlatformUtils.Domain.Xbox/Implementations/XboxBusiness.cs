@@ -22,8 +22,8 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
         {
             this.AppPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             this.Available = Directory.Exists(AppPath);
-            this.Name = SteamConstants.PLATFORM_NAME;
-            this.Brand = SteamConstants.BRAND_NAME;
+            this.Name = XboxConstants.PLATFORM_NAME;
+            this.Brand = XboxConstants.BRAND_NAME;
             this.Libraries = Enumerable.Empty<string>();
         }
 
