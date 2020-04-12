@@ -18,7 +18,10 @@ namespace ChustaSoft.GamersPlatformUtils.UI
         {
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
+            ConfigureRepositories(serviceCollection);
             _serviceProvider = serviceCollection.BuildServiceProvider();
+
+
         }
 
         private void ConfigureServices(IServiceCollection services)
@@ -26,14 +29,13 @@ namespace ChustaSoft.GamersPlatformUtils.UI
             services.AddSingleton<IPlatformFactory, PlatformFactory>();
             services.AddScoped<ILoadService<Information>, InformationService>();
             services.AddScoped<IAnalyzerService, AnalyzerService>();
-
             services.AddSingleton<MainWindow>(s => new MainWindow(s));
-            ConfigureRepositories(services);
         }
 
-        private static void ConfigureRepositories(IServiceCollection services)
+        private void ConfigureRepositories(IServiceCollection services)
         {
-            services.AddScoped<IFileRepository, XMLFileRepository>();
+            services.AddScoped<IReadWriteFileRepository, XMLFileRepository>();
+            services.AddScoped<IReadFileRepository, PowershellFileRepository>();
         }
 
         protected override void OnStartup(StartupEventArgs e)

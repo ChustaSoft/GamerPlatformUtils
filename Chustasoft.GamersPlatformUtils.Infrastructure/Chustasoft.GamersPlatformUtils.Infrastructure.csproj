@@ -5,7 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ChustaSoft.GamersPlatformUtils.Abstractions\ChustaSoft.GamersPlatformUtils.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="getInstalledMicrosoftAppsPs.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
