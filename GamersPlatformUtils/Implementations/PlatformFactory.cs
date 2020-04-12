@@ -41,9 +41,9 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
 
         public IDictionary<string, ILinkFinder> GetLinkFinders()
         {
-            return new List<ILinkFinder> {
-                _originBusiness,
-                _xboxBusiness
+            return new Dictionary<string, ILinkFinder> {
+                { OriginConstants.PLATFORM_NAME, _originBusiness },
+                { XboxConstants.PLATFORM_NAME, _xboxBusiness }
             };
         }
 
