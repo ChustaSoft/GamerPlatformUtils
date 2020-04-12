@@ -1,9 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+  <PropertyGroup>    
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>ChustaSoft.GamersPlatformUtils.Domain</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Win32.Registry" Version="4.7.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ChustaSoft.GamersPlatformUtils.Abstractions\ChustaSoft.GamersPlatformUtils.Abstractions.csproj" />

@@ -9,12 +9,14 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
 
         private readonly SteamBusiness _steamBusiness;
         private readonly OriginBusiness _originBusiness;
+        private readonly XboxBusiness _xboxBusiness;
 
 
-        public PlatformFactory(IFileRepository fileRepository)
+        public PlatformFactory(IReadWriteFileRepository readWriteFileRepository, IReadFileRepository readFileRepository) 
         {
             _steamBusiness = new SteamBusiness();
-            _originBusiness = new OriginBusiness(fileRepository);
+            _originBusiness = new OriginBusiness(readWriteFileRepository);
+            _xboxBusiness = new XboxBusiness(readFileRepository);
         }
 
 
@@ -22,7 +24,7 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
         {
             return new List<IAnalyzer>
             {
-                _steamBusiness
+                _steamBusiness,                
             };
         }
 
@@ -38,7 +40,10 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
 
         public IEnumerable<ILinkFinder> GetLinkFinders()
         {
-            throw new NotImplementedException();
+            return new List<ILinkFinder> {
+                _originBusiness,
+                _xboxBusiness
+            };
         }
 
         public IEnumerable<PlatformBase> GetPlatforms()
@@ -46,7 +51,8 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
             return new List<PlatformBase>
             {
                 _steamBusiness,
-                _originBusiness
+                _originBusiness,
+                _xboxBusiness
             };
         }
 

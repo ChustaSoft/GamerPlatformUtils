@@ -12,14 +12,14 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
     public class OriginBusiness : PlatformBase, ILinkFinder
     {
 
-        private readonly IFileRepository _xmlFileRepository;
+        private readonly IReadWriteFileRepository _readWriteFileRepository;
 
         private string ConfigXMLPath { get; set; }
 
-        public OriginBusiness(IFileRepository fileRepository)
+        public OriginBusiness(IReadWriteFileRepository readWriteFileRepository)
             : base()
         {
-            _xmlFileRepository = fileRepository;
+            _readWriteFileRepository = readWriteFileRepository;
         }
 
         protected override void LoadPlatform()
@@ -36,7 +36,7 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
         {
             return Task.Run(() => {
 
-                var  xmlValues = _xmlFileRepository.Read(this.ConfigXMLPath);
+                var  xmlValues = _readWriteFileRepository.Read(this.ConfigXMLPath);
 
                 string libraryLocation = xmlValues.ContainsKey(OriginConstants.LIBRARY_XML_KEY) ? xmlValues[OriginConstants.LIBRARY_XML_KEY] : string.Empty;
 

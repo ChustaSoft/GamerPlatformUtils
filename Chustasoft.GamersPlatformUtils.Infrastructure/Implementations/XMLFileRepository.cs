@@ -6,7 +6,7 @@ using System.Xml.Linq;
 
 namespace ChustaSoft.GamersPlatformUtils.Infrastructure
 {
-	public class XMLFileRepository : IFileRepository
+	public class XMLFileRepository : IReadWriteFileRepository
 	{
 
 		public XMLFileRepository()
