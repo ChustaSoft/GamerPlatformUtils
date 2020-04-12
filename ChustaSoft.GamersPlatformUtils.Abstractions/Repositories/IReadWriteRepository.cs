@@ -2,11 +2,8 @@
 
 namespace ChustaSoft.GamersPlatformUtils.Abstractions
 {
-    public interface IFileRepository
+    public interface IReadWriteFileRepository : IReadFileRepository
     {
-        IDictionary<string, string> Read(string path);
-
         void Write();
-
     }
 }

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>    
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -12,7 +12,6 @@
   <ItemGroup>
     <ProjectReference Include="..\ChustaSoft.GamersPlatformUtils.Abstractions\ChustaSoft.GamersPlatformUtils.Abstractions.csproj" />
     <ProjectReference Include="..\ChustaSoft.GamersPlatformUtils.Domain.Steam\ChustaSoft.GamersPlatformUtils.Domain.Steam.csproj" />
-    <ProjectReference Include="..\Chustasoft.GamersPlatformUtils.Infrastructure\Chustasoft.GamersPlatformUtils.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

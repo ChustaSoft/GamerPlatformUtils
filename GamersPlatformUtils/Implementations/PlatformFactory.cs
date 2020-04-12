@@ -1,5 +1,4 @@
 ﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
-using ChustaSoft.GamersPlatformUtils.Infrastructure;
 using System;
 using System.Collections.Generic;
 
@@ -13,11 +12,11 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
         private readonly XboxBusiness _xboxBusiness;
 
 
-        public PlatformFactory() 
+        public PlatformFactory(IReadWriteFileRepository readWriteFileRepository, IReadFileRepository readFileRepository) 
         {
             _steamBusiness = new SteamBusiness();
-            _originBusiness = new OriginBusiness(new XMLFileRepository());
-            _xboxBusiness = new XboxBusiness(new PowershellRepository());
+            _originBusiness = new OriginBusiness(readWriteFileRepository);
+            _xboxBusiness = new XboxBusiness(readFileRepository);
         }
 
 

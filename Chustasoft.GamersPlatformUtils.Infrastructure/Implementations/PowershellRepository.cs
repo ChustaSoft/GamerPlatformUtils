@@ -10,19 +10,19 @@ using System.Text;
 
 namespace ChustaSoft.GamersPlatformUtils.Infrastructure
 {
-	public class PowershellRepository : IFileRepository
-	{
+    public class PowershellFileRepository : IReadFileRepository
+    {
         private const string POWERSHELL_RESULTS_SEPARATOR = "\n";
         private const string POWERSHELL_EXECUTION_POLICY = "Set-ExecutionPolicy -Scope Process -ExecutionPolicy Unrestricted;";
         private const string POWERSHELL_PATH = "getInstalledMicrosoftAppsPs.txt";
         private const string POWERSHELL_LINE_PARTS_SEPARATOR = "||";
 
-        public PowershellRepository()
-		{
-		}
+        public PowershellFileRepository()
+        {
+        }
 
-		public IDictionary<string, string> Read(string path)
-		{
+        public IDictionary<string, string> Read(string path)
+        {
             RunScript(POWERSHELL_EXECUTION_POLICY);
 
             string psScript = File.ReadAllText(POWERSHELL_PATH);
@@ -31,17 +31,12 @@ namespace ChustaSoft.GamersPlatformUtils.Infrastructure
 
             Dictionary<string, string> dataDictionary = new Dictionary<string, string>();
 
-            resultLines.ToList().ForEach(x => BuildResults(x, dataDictionary));
+            resultLines.ToList().ForEach(x => BuildResultsToDictionary(x, dataDictionary));
 
             return dataDictionary;
-		}
+        }
 
-		public void Write()
-		{
-			throw new NotImplementedException();
-		}
-
-        private void BuildResults(string appInfo, Dictionary<string, string> dataDictionary)
+        private void BuildResultsToDictionary(string appInfo, Dictionary<string, string> dataDictionary)
         {
             string[] appInfoParts = appInfo.Split(POWERSHELL_LINE_PARTS_SEPARATOR, StringSplitOptions.RemoveEmptyEntries);
             if (appInfo.Contains(POWERSHELL_LINE_PARTS_SEPARATOR) && !dataDictionary.ContainsKey(appInfoParts[0]))
@@ -56,15 +51,27 @@ namespace ChustaSoft.GamersPlatformUtils.Infrastructure
 
             runspace.Open();
 
-            Pipeline pipeline = runspace.CreatePipeline();
-            pipeline.Commands.AddScript(scriptText);
-
-            pipeline.Commands.Add("Out-String");
+            Pipeline pipeline = CreatePipeline(scriptText, runspace);
 
             Collection<PSObject> results = pipeline.Invoke();
 
             runspace.Close();
 
+            return BuildResultsAsLinePerResult(results);
+        }
+
+        private Pipeline CreatePipeline(string scriptText, Runspace runspace)
+        {
+            Pipeline pipeline = runspace.CreatePipeline();
+
+            pipeline.Commands.AddScript(scriptText);
+
+            pipeline.Commands.Add("Out-String");
+            return pipeline;
+        }
+
+        private string BuildResultsAsLinePerResult(Collection<PSObject> results)
+        {
             StringBuilder stringBuilder = new StringBuilder();
             foreach (PSObject obj in results)
             {

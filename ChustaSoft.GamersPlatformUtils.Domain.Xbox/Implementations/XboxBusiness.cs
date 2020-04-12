@@ -10,12 +10,12 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
 {
     public class XboxBusiness : PlatformBase, ILinkFinder
     {
-        IFileRepository _fileRepository;
+        private readonly IReadFileRepository _readFileRepository;
 
-        public XboxBusiness(IFileRepository fileRepository) 
+        public XboxBusiness(IReadFileRepository readFileRepository) 
             : base()
         {
-            _fileRepository = fileRepository;
+            _readFileRepository = readFileRepository;
         }
 
         protected override void LoadPlatform()
@@ -31,7 +31,7 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
         {
             return Task.Run(() =>
             {
-                var fileResults = _fileRepository.Read(string.Empty);
+                var fileResults = _readFileRepository.Read(string.Empty);
 
                 IEnumerable<GameLink> installedApps = fileResults.Keys.Select(x => new GameLink { Name = x, Path = new FileInfo(fileResults[x]) }).ToList();
 
