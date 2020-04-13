@@ -3,14 +3,18 @@ using NUnit.Framework;
 
 namespace ChustaSoft.GamersPlatformUtils.Steam.Tests
 {
-    public class Tests
+    public class SteamBusinessTests
     {
         [Test]
-        public void Test1()
+        public void Given_SteamPlatformInInstalledEnvironment_When_Available_Then_True()
         {
             var steamPlatform = new SteamBusiness();
-            
+
+            #if DEBUG
             Assert.IsTrue(steamPlatform.Available);
+            #else
+            Assert.IsTrue(true);
+            #endif
         }
     }
 }
