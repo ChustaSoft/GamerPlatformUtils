@@ -69,7 +69,7 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
                     files.AddRange(nestedFolderFiles);
                 }
 
-                if (!nestedDirectory.GetDirectories().Any())
+                if (nestedDirectory.GetDirectories().Any())
                     files.AddRange(GetFiles(nestedDirectory.FullName));
             }
 
