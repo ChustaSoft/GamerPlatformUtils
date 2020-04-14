@@ -30,12 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ChustaSoft.GamersPlatformUtils.Services\ChustaSoft.GamersPlatformUtils.Services.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Modules\Cleaner\" />
     <Folder Include="Modules\Linker\" />
+    <ProjectReference Include="..\ChustaSoft.GamersPlatformUtils.Services\ChustaSoft.GamersPlatformUtils.Services.csproj" />
     
     <Compile Update="Controls\InformationControlViewModel.cs">
       <DependentUpon>InformationControl.xaml</DependentUpon>
