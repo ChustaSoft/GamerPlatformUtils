@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GamersPlatformUtils\ChustaSoft.GamersPlatformUtils.Domain.csproj" />
+    <ProjectReference Include="..\ChustaSoft.GamersPlatformUtils.Domain\ChustaSoft.GamersPlatformUtils.Domain.csproj" />
   </ItemGroup>
 
 </Project>

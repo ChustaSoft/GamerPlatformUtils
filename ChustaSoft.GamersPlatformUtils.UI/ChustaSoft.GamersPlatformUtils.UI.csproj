@@ -35,6 +35,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ChustaSoft.GamersPlatformUtils.Services\ChustaSoft.GamersPlatformUtils.Services.csproj" />
+
     <Folder Include="Modules\Linker\" />
 
     <Compile Update="MainWindowViewModel.cs">
