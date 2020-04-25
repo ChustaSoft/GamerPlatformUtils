@@ -40,13 +40,13 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
         {
             var selectedPlatforms = Model.Platforms.Where(x => x.Selected).Select(x => x.Name);
             var pathsAnalised = await _analyzerService.AnalyzeAsync(selectedPlatforms);
-            
+
             this.Model.PathsAnalyzed = new ObservableCollection<FileInfo>(pathsAnalised);
         }
 
         private void OnClean()
         {
-
+            //TODO: Get selected values and remove from the system
         }
 
 
