@@ -3,12 +3,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:converters="clr-namespace:ChustaSoft.GamersPlatformUtils.UI.Converters"
+             xmlns:helpers="clr-namespace:ChustaSoft.GamersPlatformUtils.UI.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
-        <converters:VisibilityConverter x:Key="VisibilityConverter" />
+        <helpers:VisibilityConverter x:Key="VisibilityConverter" />
     </UserControl.Resources>
 
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -17,7 +17,7 @@
             <Image Source="/Resources/steam-logo.png"  Width="20" Height="20" Visibility="{Binding HasSteam, Converter={StaticResource VisibilityConverter}, ConverterParameter=Steam}" Margin="{Binding IconsMargins}"/>
             <Image Source="/Resources/origin-logo.png"  Width="20" Height="20" Visibility="{Binding HasOrigin, Converter={StaticResource VisibilityConverter}, ConverterParameter=Origin}" Margin="{Binding IconsMargins}"/>
         </StackPanel>
-        <Label Content="{Binding ViewModel.MachineName}" />
-        <Label Content="{Binding ViewModel.MachineSystem}" />
+        <Label Content="{Binding Model.MachineName}" />
+        <Label Content="{Binding Model.MachineSystem}" />
     </StackPanel>
 </UserControl>

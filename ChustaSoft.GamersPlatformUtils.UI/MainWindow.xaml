@@ -4,7 +4,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:ChustaSoft.GamersPlatformUtils.UI.Controls"
-        xmlns:converters="clr-namespace:ChustaSoft.GamersPlatformUtils.UI.Converters"
+        xmlns:cleaner="clr-namespace:ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -15,9 +16,11 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
     
-    <Window.Resources>
-        <converters:InformationConverter x:Key="InformationConverter" />
-    </Window.Resources>
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:CallMethodAction TargetObject="{Binding}" MethodName="OnLoad" />
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
     
     <Grid>
         <Grid.RowDefinitions>
@@ -29,17 +32,21 @@
         </Grid.ColumnDefinitions>
 
         <TabControl Grid.Row="0">
+            
             <TabItem Header="Cleaner" Width="200">
                 <Grid Background="{DynamicResource MaterialDesignCardBackground}">
+                    <cleaner:CleanerControl DataContext="{Binding CleanerControlViewModel}"></cleaner:CleanerControl>
                 </Grid>
             </TabItem>
+            
             <TabItem Header="Linker" Width="200">
                 <Grid Background="{DynamicResource MaterialDesignCardBackground}"/>
             </TabItem>
+            
         </TabControl>
 
         <StackPanel Grid.Row="1">
-            <controls:InformationControl DataContext="{Binding ViewModel, Converter={StaticResource InformationConverter}}"></controls:InformationControl>
+            <controls:InformationControl DataContext="{Binding InformationControlViewModel}"></controls:InformationControl>
         </StackPanel>
         
     </Grid>
