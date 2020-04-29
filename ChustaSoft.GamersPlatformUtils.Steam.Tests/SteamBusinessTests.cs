@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 namespace ChustaSoft.GamersPlatformUtils.Steam.Tests
 {
     public class SteamBusinessTests
-    {        
+    {
         [Test]
         public void Given_SteamPlatformInInstalledEnvironment_When_Available_Then_True()
         {
             var steamPlatform = new SteamBusiness();
 
-            #if DEBUG
+#if DEBUG
             Assert.IsTrue(steamPlatform.Available);
-            #else
+#else
             Assert.IsTrue(true);
-            #endif
+#endif
         }
 
         [Test]
@@ -24,15 +24,30 @@ namespace ChustaSoft.GamersPlatformUtils.Steam.Tests
         {
             var steamPlatform = new SteamBusiness();
 
-            #if DEBUG
+#if DEBUG
             var files = await steamPlatform.AnalyzeAsync();
             bool result = files.Count() >= 0;
 
             Assert.IsTrue(result);
-            #else
+#else
             Assert.IsTrue(true);
-            #endif
+#endif
 
+        }
+
+        [Test]
+        public async Task Given_ListOfFileInfo_When_Clean_Then_ReturnSuccessCleanResult()
+        {
+#if DEBUG 
+            var steamPlatform = new SteamBusiness();
+            var files = await steamPlatform.AnalyzeAsync();
+
+            var cleanResult = await steamPlatform.CleanAsync(files.Take(1));
+
+            Assert.IsTrue(cleanResult.Success);       
+#else
+            Assert.IsTrue(true);
+#endif
         }
     }
 }
