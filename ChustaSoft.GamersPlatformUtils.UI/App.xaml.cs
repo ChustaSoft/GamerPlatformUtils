@@ -1,8 +1,4 @@
-﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
-using ChustaSoft.GamersPlatformUtils.Domain.Implementations;
-using ChustaSoft.GamersPlatformUtils.Infrastructure;
-using ChustaSoft.GamersPlatformUtils.Services;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 
 namespace ChustaSoft.GamersPlatformUtils.UI
@@ -16,26 +12,11 @@ namespace ChustaSoft.GamersPlatformUtils.UI
 
         public App()
         {
-            var serviceCollection = new ServiceCollection();
-            ConfigureServices(serviceCollection);
-            ConfigureRepositories(serviceCollection);
-            _serviceProvider = serviceCollection.BuildServiceProvider();
-
-
-        }
-
-        private void ConfigureServices(IServiceCollection services)
-        {
-            services.AddSingleton<IPlatformFactory, PlatformFactory>();
-            services.AddScoped<ILoadService<Information>, InformationService>();
-            services.AddScoped<IAnalyzerService, AnalyzerService>();
-            services.AddSingleton<MainWindow>(s => new MainWindow(s));
-        }
-
-        private void ConfigureRepositories(IServiceCollection services)
-        {
-            services.AddScoped<IReadWriteFileRepository, XMLFileRepository>();
-            services.AddScoped<IReadFileRepository, PowershellFileRepository>();
+            _serviceProvider = ServiceProviderBuilder.Init()
+                .ConfigureDomain()
+                .ConfigureServices()
+                .ConfigureRepositories()
+                .Build();
         }
 
         protected override void OnStartup(StartupEventArgs e)

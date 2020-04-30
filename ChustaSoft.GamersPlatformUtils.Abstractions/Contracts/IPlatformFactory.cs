@@ -4,7 +4,7 @@ namespace ChustaSoft.GamersPlatformUtils.Abstractions
 {
     public interface IPlatformFactory
     {
-        IDictionary<string,PlatformBase> GetPlatforms();
+        IDictionary<string, IPlatform> GetPlatforms();
 
         IDictionary<string, IAnalyzer> GetAnalyzers();
 
