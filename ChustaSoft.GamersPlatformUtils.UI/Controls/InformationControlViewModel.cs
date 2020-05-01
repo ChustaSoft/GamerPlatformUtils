@@ -2,12 +2,13 @@
 using ChustaSoft.GamersPlatformUtils.Services;
 using ChustaSoft.GamersPlatformUtils.UI.Base;
 using ChustaSoft.GamersPlatformUtils.UI.Styles;
+using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Windows;
 
 namespace ChustaSoft.GamersPlatformUtils.UI.Controls
 {
-    public class InformationControlViewModel : ViewModelBase<Information>
+    public class InformationControlViewModel : TraceableViewModelBase<Information>
     {
 
         public bool HasSteam
@@ -18,6 +19,11 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Controls
 
         public bool HasXbox
             => true;
+
+
+        public InformationControlViewModel(ILogger logger)
+            : base(logger)
+        { }
 
 
         #region Styles

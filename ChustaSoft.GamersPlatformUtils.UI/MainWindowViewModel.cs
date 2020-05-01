@@ -6,11 +6,12 @@ using ChustaSoft.GamersPlatformUtils.UI.Enums;
 using ChustaSoft.GamersPlatformUtils.UI.Helpers;
 using ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 
 namespace ChustaSoft.GamersPlatformUtils.UI
 {
-    public class MainWindowViewModel : ViewModelBase<Information>, ILoadable
+    public class MainWindowViewModel : TraceableViewModelBase<Information>, ILoadable
     {
 
         private readonly IViewModelFactory _viewModelFactory;
@@ -46,12 +47,11 @@ namespace ChustaSoft.GamersPlatformUtils.UI
         }
 
 
-        public MainWindowViewModel(IServiceProvider serviceProvider)
-            : base()
+        public MainWindowViewModel(ILogger logger, IServiceProvider serviceProvider)
+            : base(logger)
         {
-            
             _informationService = serviceProvider.GetService<ILoadService<Information>>();
-            _viewModelFactory = new ViewModelFactory(serviceProvider, this);
+            _viewModelFactory = new ViewModelFactory(serviceProvider, logger, this);
             
             _informationService.LoadEvent += OnLoadCompleted;
         }

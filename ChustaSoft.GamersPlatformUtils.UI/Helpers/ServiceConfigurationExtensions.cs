@@ -3,16 +3,28 @@ using ChustaSoft.GamersPlatformUtils.Domain;
 using ChustaSoft.GamersPlatformUtils.Infrastructure;
 using ChustaSoft.GamersPlatformUtils.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System;
 
 namespace ChustaSoft.GamersPlatformUtils.UI
 {
-    public static class ServiceProviderBuilder
+    public static class ServiceConfigurationExtensions
     {
+
+        private const string APP_LOG_FILENAME = "cs-gputils.app.log";
+
 
         public static ServiceCollection Init() => new ServiceCollection();
 
 
-        public static ServiceCollection ConfigureDomain(this ServiceCollection serviceCollection) 
+        public static ServiceCollection ConfigureGeneral(this ServiceCollection serviceCollection)
+        {
+            serviceCollection.AddLogging(configure => configure.AddFile(APP_LOG_FILENAME, append: true));
+
+            return serviceCollection;
+        }
+
+        internal static ServiceCollection ConfigureDomain(this ServiceCollection serviceCollection) 
         {
             serviceCollection.AddScoped<ISteamBusiness, SteamBusiness>();
             serviceCollection.AddScoped<IOriginBusiness, OriginBusiness>();
@@ -21,17 +33,19 @@ namespace ChustaSoft.GamersPlatformUtils.UI
             return serviceCollection;
         }
 
-        public static ServiceCollection ConfigureServices(this ServiceCollection serviceCollection)
+        internal static ServiceCollection ConfigureServices(this ServiceCollection serviceCollection)
         {
+            
+
             serviceCollection.AddSingleton<IPlatformFactory, PlatformFactory>();
             serviceCollection.AddScoped<ILoadService<Information>, InformationService>();
             serviceCollection.AddScoped<IAnalyzerService, AnalyzerService>();
-            serviceCollection.AddSingleton<MainWindow>(s => new MainWindow(s));
+            serviceCollection.AddSingleton<MainWindow>(s => new MainWindow(s, s.GetLogger()));
 
             return serviceCollection;
         }
 
-        public static ServiceCollection ConfigureRepositories(this ServiceCollection serviceCollection)
+        internal static ServiceCollection ConfigureRepositories(this ServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<IReadWriteFileRepository, XMLFileRepository>();
             serviceCollection.AddScoped<IReadFileRepository, PowershellFileRepository>();
@@ -39,10 +53,13 @@ namespace ChustaSoft.GamersPlatformUtils.UI
             return serviceCollection;
         }
 
-        public static ServiceProvider Build(this ServiceCollection serviceCollection)
+        internal static ServiceProvider Build(this ServiceCollection serviceCollection)
         {
             return serviceCollection.BuildServiceProvider();
         }
+
+        internal static ILogger GetLogger(this IServiceProvider serviceProvider) 
+            => serviceProvider.GetRequiredService<ILoggerProvider>().CreateLogger("DEBUG");
 
     }
 }
