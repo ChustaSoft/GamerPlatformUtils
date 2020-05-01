@@ -31,4 +31,4 @@ Tools provided:
 ### Contact
 
 
-[![Twitter]https://img.shields.io/twitter/follow/ChustaSoft?label=Follow%20us&style=social]
+![Twitter]https://img.shields.io/twitter/follow/ChustaSoft?label=Follow%20us&style=social
