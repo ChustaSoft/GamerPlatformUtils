@@ -2,7 +2,7 @@
 
 [![GPL License](https://img.shields.io/github/license/ChustaSoft/GamerPlatformUtils?style=for-the-badge)](https://github.com/ChustaSoft/GamerPlatformUtils/blob/master/LICENSE)
 ![.NET Core](https://github.com/ChustaSoft/GamerPlatformUtils/workflows/.NET%20Core/badge.svg?branch=master)
-[![This software is under development](https://img.shields.io/badge/-In%20development-yellow)
+![This software is under development](https://img.shields.io/badge/-In%20development-yellow)
 
 
 
@@ -31,4 +31,4 @@ Tools provided:
 ### Contact
 
 
-[![twitter](https://twitter.com/ChustaSoft)
+![twitter](https://twitter.com/ChustaSoft)
