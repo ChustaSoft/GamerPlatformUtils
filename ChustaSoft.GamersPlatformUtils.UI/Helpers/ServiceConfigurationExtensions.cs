@@ -20,6 +20,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI
         public static ServiceCollection ConfigureGeneral(this ServiceCollection serviceCollection)
         {
             serviceCollection.AddLogging(configure => configure.AddFile(APP_LOG_FILENAME, append: true));
+            serviceCollection.AddSingleton<ILogger>(s => s.GetLogger());
 
             return serviceCollection;
         }
@@ -40,7 +41,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI
             serviceCollection.AddSingleton<IPlatformFactory, PlatformFactory>();
             serviceCollection.AddScoped<ILoadService<Information>, InformationService>();
             serviceCollection.AddScoped<IAnalyzerService, AnalyzerService>();
-            serviceCollection.AddSingleton<MainWindow>(s => new MainWindow(s, s.GetLogger()));
+            serviceCollection.AddSingleton<MainWindow>(s => new MainWindow(s, s.GetRequiredService<ILogger>()));
 
             return serviceCollection;
         }
