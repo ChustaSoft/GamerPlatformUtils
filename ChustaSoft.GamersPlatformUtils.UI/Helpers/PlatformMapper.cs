@@ -6,7 +6,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Helpers
     public static class PlatformMapper
     {
 
-        public static SelectablePlatform Map(PlatformBase source)
+        public static SelectablePlatform Map(IPlatform source)
         {
             return new SelectablePlatform 
             { 

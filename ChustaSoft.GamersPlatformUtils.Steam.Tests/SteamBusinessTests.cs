@@ -1,4 +1,4 @@
-using ChustaSoft.GamersPlatformUtils.Domain.Implementations;
+using ChustaSoft.GamersPlatformUtils.Domain;
 using NUnit.Framework;
 using System.Linq;
 using System.Threading.Tasks;
@@ -44,7 +44,7 @@ namespace ChustaSoft.GamersPlatformUtils.Steam.Tests
 
             var cleanResult = await steamPlatform.CleanAsync(files.Take(1));
 
-            Assert.IsTrue(cleanResult.Success);       
+            Assert.IsTrue(cleanResult.Success);
 #else
             Assert.IsTrue(true);
 #endif

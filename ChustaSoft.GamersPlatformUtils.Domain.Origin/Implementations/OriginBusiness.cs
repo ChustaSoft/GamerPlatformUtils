@@ -1,23 +1,22 @@
 ﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
-using ChustaSoft.GamersPlatformUtils.Domain.Constants;
 using Microsoft.VisualBasic.FileIO;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
+namespace ChustaSoft.GamersPlatformUtils.Domain
 {
-    public class OriginBusiness : PlatformBase, ILinkFinder, IAnalyzer
+    public class OriginBusiness : PlatformBase, IOriginBusiness, ILinkFinder, IAnalyzer
     {
+
         private readonly IReadWriteFileRepository _readWriteFileRepository;
 
         private string ConfigXMLPath { get; set; }
+
 
         public OriginBusiness(IReadWriteFileRepository readWriteFileRepository)
             : base()
@@ -25,15 +24,6 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
             _readWriteFileRepository = readWriteFileRepository;
         }
 
-        protected override void LoadPlatform()
-        {
-            this.AppPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), OriginConstants.ORIGIN_FOLDER_NAME);
-            this.ConfigXMLPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), OriginConstants.ORIGIN_FOLDER_NAME, OriginConstants.ORIGIN_CONFIG_XML);
-            this.Available = Directory.Exists(this.AppPath);
-            this.Name = OriginConstants.PLATFORM_NAME;
-            this.Brand = OriginConstants.BRAND_NAME;
-            this.Libraries = Enumerable.Empty<string>();
-        }
 
         public Task<IEnumerable<GameLink>> FindAsync()
         {
@@ -47,6 +37,24 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
             });
         }
 
+        public async Task<IEnumerable<FileInfo>> AnalyzeAsync()
+        {
+            return await Task.Run(() =>
+            {
+                return new List<FileInfo>(FindPaths().Select(x => new FileInfo(x)));
+            });
+        }
+
+        protected override void LoadPlatform()
+        {
+            this.AppPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), OriginConstants.ORIGIN_FOLDER_NAME);
+            this.ConfigXMLPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), OriginConstants.ORIGIN_FOLDER_NAME, OriginConstants.ORIGIN_CONFIG_XML);
+            this.Available = Directory.Exists(this.AppPath);
+            this.Name = OriginConstants.PLATFORM_NAME;
+            this.Brand = OriginConstants.BRAND_NAME;
+            this.Libraries = Enumerable.Empty<string>();
+        }
+
         private IEnumerable<GameLink> GetGameLinksFromLibraryDirectory(string path)
         {
             List<GameLink> gameLinks = new List<GameLink>();
@@ -58,14 +66,6 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
             return gameLinks;
         }
 
-        public async Task<IEnumerable<FileInfo>> AnalyzeAsync()
-        {
-            return await Task.Run(() =>
-            {
-                return new List<FileInfo>(FindPaths().Select(x => new FileInfo(x)));
-            });
-        }
-
         private IEnumerable<string> FindPaths()
         {
             List<string> foundPaths = new List<string>();
@@ -75,9 +75,9 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
             foundPaths.AddRange(SearchOnLegacyLocations());
 
             AddNestedFiles(foundPaths);
-
             FindFilesByType(files, foundPaths);
             FindFilesOnLibFolder(files, foundPaths);
+
             return foundPaths;
         }
 
@@ -178,5 +178,6 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
             }
             return foundPaths;
         }
+
     }
 }

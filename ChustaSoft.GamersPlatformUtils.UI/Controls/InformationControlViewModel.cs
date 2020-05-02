@@ -1,4 +1,4 @@
-﻿using ChustaSoft.GamersPlatformUtils.Domain.Constants;
+﻿using ChustaSoft.GamersPlatformUtils.Domain;
 using ChustaSoft.GamersPlatformUtils.Services;
 using ChustaSoft.GamersPlatformUtils.UI.Base;
 using ChustaSoft.GamersPlatformUtils.UI.Styles;

@@ -1,5 +1,4 @@
 ﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
-using ChustaSoft.GamersPlatformUtils.Domain.Constants;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -8,9 +7,9 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
+namespace ChustaSoft.GamersPlatformUtils.Domain
 {
-    public class SteamBusiness : PlatformBase, IAnalyzer, ICleaner
+    public class SteamBusiness : PlatformBase, ISteamBusiness, IAnalyzer, ICleaner
     {
 
         public SteamBusiness()

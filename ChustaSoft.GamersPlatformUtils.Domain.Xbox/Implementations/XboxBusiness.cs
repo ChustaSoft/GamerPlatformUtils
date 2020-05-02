@@ -1,16 +1,17 @@
 ﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
 using System.IO;
-using ChustaSoft.GamersPlatformUtils.Domain.Constants;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
+namespace ChustaSoft.GamersPlatformUtils.Domain
 {
-    public class XboxBusiness : PlatformBase, ILinkFinder
+    public class XboxBusiness : PlatformBase, IXboxBusiness, ILinkFinder
     {
+
         private readonly IReadFileRepository _readFileRepository;
+
 
         public XboxBusiness(IReadFileRepository readFileRepository) 
             : base()
@@ -18,14 +19,6 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
             _readFileRepository = readFileRepository;
         }
 
-        protected override void LoadPlatform()
-        {
-            this.AppPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            this.Available = Directory.Exists(AppPath);
-            this.Name = XboxConstants.PLATFORM_NAME;
-            this.Brand = XboxConstants.BRAND_NAME;
-            this.Libraries = Enumerable.Empty<string>();
-        }
 
         public Task<IEnumerable<GameLink>> FindAsync()
         {
@@ -38,6 +31,15 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
                 return installedApps;
             });
         }
-                
+
+        protected override void LoadPlatform()
+        {
+            this.AppPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            this.Available = Directory.Exists(AppPath);
+            this.Name = XboxConstants.PLATFORM_NAME;
+            this.Brand = XboxConstants.BRAND_NAME;
+            this.Libraries = Enumerable.Empty<string>();
+        }
+
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace ChustaSoft.GamersPlatformUtils.Domain.Constants
+﻿namespace ChustaSoft.GamersPlatformUtils.Domain
 {
     public struct SteamConstants
     {

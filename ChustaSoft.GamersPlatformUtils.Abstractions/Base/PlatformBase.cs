@@ -2,7 +2,7 @@
 
 namespace ChustaSoft.GamersPlatformUtils.Abstractions
 {
-    public abstract class PlatformBase
+    public abstract class PlatformBase : IPlatform
     {
 
         public virtual bool Available { get; protected set; }

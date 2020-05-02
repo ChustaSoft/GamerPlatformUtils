@@ -1,23 +1,22 @@
 ﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
-using ChustaSoft.GamersPlatformUtils.Domain.Constants;
 using System;
 using System.Collections.Generic;
 
-namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
+namespace ChustaSoft.GamersPlatformUtils.Domain
 {
     public class PlatformFactory : IPlatformFactory
     {
 
-        private readonly SteamBusiness _steamBusiness;
-        private readonly OriginBusiness _originBusiness;
-        private readonly XboxBusiness _xboxBusiness;
+        private readonly ISteamBusiness _steamBusiness;
+        private readonly IOriginBusiness _originBusiness;
+        private readonly IXboxBusiness _xboxBusiness;
 
 
-        public PlatformFactory(IReadWriteFileRepository readWriteFileRepository, IReadFileRepository readFileRepository) 
+        public PlatformFactory(ISteamBusiness steamBusiness, IOriginBusiness originBusiness, IXboxBusiness xboxBusiness)
         {
-            _steamBusiness = new SteamBusiness();
-            _originBusiness = new OriginBusiness(readWriteFileRepository);
-            _xboxBusiness = new XboxBusiness(readFileRepository);
+            _steamBusiness = steamBusiness;
+            _originBusiness = originBusiness;
+            _xboxBusiness = xboxBusiness;
         }
 
 
@@ -25,7 +24,8 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
         {
             return new Dictionary<string, IAnalyzer>
             {
-                { SteamConstants.PLATFORM_NAME, _steamBusiness }
+                { SteamConstants.PLATFORM_NAME, _steamBusiness },
+                { OriginConstants.PLATFORM_NAME, _originBusiness }
             };
         }
 
@@ -47,9 +47,9 @@ namespace ChustaSoft.GamersPlatformUtils.Domain.Implementations
             };
         }
 
-        public IDictionary<string, PlatformBase> GetPlatforms()
+        public IDictionary<string, IPlatform> GetPlatforms()
         {
-            return new Dictionary<string, PlatformBase>
+            return new Dictionary<string, IPlatform>
             {
                 { SteamConstants.PLATFORM_NAME, _steamBusiness },
                 { OriginConstants.PLATFORM_NAME, _originBusiness },
