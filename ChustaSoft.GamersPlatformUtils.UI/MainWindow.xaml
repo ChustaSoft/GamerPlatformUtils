@@ -7,14 +7,14 @@
         xmlns:cleaner="clr-namespace:ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="ChustaSoft GamerPlatformUtils" Height="450" Width="800"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}">
+        FontFamily="{DynamicResource MaterialDesignFont}" Icon="/Resources/chustasoft-logo.png" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow">
     
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
@@ -32,7 +32,27 @@
         </Grid.ColumnDefinitions>
 
         <TabControl Grid.Row="0">
-            
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="{DynamicResource MaterialDesignBody}" CornerRadius="5,5,0,0" Margin="0,0,2,0">
+                                    <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="10,2"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Border" Property="Background" Value="{DynamicResource MaterialDesignCardBackground}" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
             <TabItem Header="Cleaner" Width="200">
                 <Grid Background="{DynamicResource MaterialDesignCardBackground}">
                     <cleaner:CleanerControl DataContext="{Binding CleanerControlViewModel}"></cleaner:CleanerControl>
