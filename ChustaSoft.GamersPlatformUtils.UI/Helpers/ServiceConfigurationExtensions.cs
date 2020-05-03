@@ -36,8 +36,6 @@ namespace ChustaSoft.GamersPlatformUtils.UI
 
         internal static ServiceCollection ConfigureServices(this ServiceCollection serviceCollection)
         {
-            
-
             serviceCollection.AddSingleton<IPlatformFactory, PlatformFactory>();
             serviceCollection.AddScoped<ILoadService<Information>, InformationService>();
             serviceCollection.AddScoped<IAnalyzerService, AnalyzerService>();
