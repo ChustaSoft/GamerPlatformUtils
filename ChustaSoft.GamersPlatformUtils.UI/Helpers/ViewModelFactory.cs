@@ -4,6 +4,7 @@ using ChustaSoft.GamersPlatformUtils.UI.Controls;
 using ChustaSoft.GamersPlatformUtils.UI.Enums;
 using ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,13 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Helpers
         private readonly MainWindowViewModel _mainWindowViewModel;
         private readonly IServiceProvider _serviceProvider;
 
+        private readonly ILogger _logger;
 
-        public ViewModelFactory(IServiceProvider serviceProvider, MainWindowViewModel mainWindowViewModel)
+
+        public ViewModelFactory(IServiceProvider serviceProvider, ILogger logger, MainWindowViewModel mainWindowViewModel)
         {
             _serviceProvider = serviceProvider;
+            _logger = logger;
             _mainWindowViewModel = mainWindowViewModel;
         }
 
@@ -46,10 +50,9 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Helpers
         {
             if (!_viewModels.ContainsKey(ViewModelType.Information))
             {
-                var viewModel = new InformationControlViewModel
-                {
-                    Model = _mainWindowViewModel?.Model ?? null
-                };
+                var viewModel = new InformationControlViewModel(_logger);
+
+                viewModel.Model = _mainWindowViewModel?.Model ?? null;
 
                 _viewModels.Add(ViewModelType.Information, viewModel);
             }
@@ -61,7 +64,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Helpers
         {
             if (!_viewModels.ContainsKey(ViewModelType.Cleaner)) 
             {
-                var viewModel = new CleanerControlViewModel(_serviceProvider.GetService<IAnalyzerService>());
+                var viewModel = new CleanerControlViewModel(_logger, _serviceProvider.GetService<IAnalyzerService>());
 
                 if(_mainWindowViewModel.Model?.Platforms != null)
                     viewModel.Assign(_mainWindowViewModel.Model.Platforms.Select(x => PlatformMapper.Map(x)));

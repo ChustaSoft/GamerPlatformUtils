@@ -1,17 +1,15 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Windows;
 
 namespace ChustaSoft.GamersPlatformUtils.UI
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
 
-        public MainWindow(IServiceProvider serviceProvider)
+        public MainWindow(IServiceProvider serviceProvider, ILogger logger)
         {
-            DataContext = new MainWindowViewModel(serviceProvider);
+            DataContext = new MainWindowViewModel(logger, serviceProvider);
             
             InitializeComponent();
         }

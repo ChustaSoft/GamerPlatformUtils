@@ -3,6 +3,7 @@ using ChustaSoft.GamersPlatformUtils.UI.Base;
 using ChustaSoft.GamersPlatformUtils.UI.Helpers;
 using ChustaSoft.GamersPlatformUtils.UI.Models;
 using ChustaSoft.GamersPlatformUtils.UI.Styles;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -11,7 +12,7 @@ using System.Windows;
 
 namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
 {
-    public class CleanerControlViewModel : ViewModelBase<CleanerControlModel>
+    public class CleanerControlViewModel : TraceableViewModelBase<CleanerControlModel>
     {
 
         private readonly IAnalyzerService _analyzerService;
@@ -20,8 +21,8 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
         public RelayCommand CleanCommand { get; private set; }
 
 
-        public CleanerControlViewModel(IAnalyzerService analyzerService)
-            : base()
+        public CleanerControlViewModel(ILogger logger, IAnalyzerService analyzerService)
+            : base(logger)
         {
             AnalyseCommand = new RelayCommand(OnAnalyze);
             CleanCommand = new RelayCommand(OnClean);

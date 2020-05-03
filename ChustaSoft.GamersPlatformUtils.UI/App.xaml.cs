@@ -1,18 +1,18 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System.Windows;
 
 namespace ChustaSoft.GamersPlatformUtils.UI
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
+
         private readonly ServiceProvider _serviceProvider;
 
         public App()
         {
-            _serviceProvider = ServiceProviderBuilder.Init()
+            _serviceProvider = ServiceConfigurationExtensions.Init()
+                .ConfigureGeneral()
                 .ConfigureDomain()
                 .ConfigureServices()
                 .ConfigureRepositories()
@@ -21,10 +21,19 @@ namespace ChustaSoft.GamersPlatformUtils.UI
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            LogApplicationStartup();
+
             var mainWindow = _serviceProvider.GetService<MainWindow>();
             mainWindow.Show();
 
             base.OnStartup(e);
+        }
+
+
+        private void LogApplicationStartup()
+        {
+            var logger = _serviceProvider.GetLogger();
+            logger.LogInformation("Application started");
         }
 
     }
