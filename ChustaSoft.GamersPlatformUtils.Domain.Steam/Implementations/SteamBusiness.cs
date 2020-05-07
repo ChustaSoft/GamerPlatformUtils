@@ -1,6 +1,5 @@
 ﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
 using Microsoft.Win32;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ChustaSoft.GamersPlatformUtils.Domain
 {
-    public class SteamBusiness : PlatformBase, ISteamBusiness, IAnalyzer, ICleaner
+    public class SteamBusiness : PlatformBase, ISteamBusiness, IAnalyzer
     {
 
         public SteamBusiness()
@@ -32,34 +31,6 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
             return await Task.Run(() => GetFiles(commonSteamPath));
         }
 
-        public async Task<CleanResult> CleanAsync(IEnumerable<FileInfo> paths)
-        {
-            return await Task.Run(() =>
-            {
-                var result = new CleanResult();
-
-                foreach (FileInfo file in paths)
-                {
-                    try
-                    {
-                        if (!file.IsReadOnly)
-                        {
-                            file.Delete();
-                            result.CleanedDirectories++;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        result.ErrorList.Add(file.FullName, ex.Message);
-                    }
-                }
-
-                if (result.ErrorList.Any())
-                    result.Success = false;
-
-                return result;
-            });
-        }
 
         protected override void LoadPlatform()
         {
@@ -103,5 +74,6 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
 
             return files.OrderBy(x => x.FullName);
         }
+
     }
 }

@@ -29,11 +29,6 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
             };
         }
 
-        public IDictionary<string, ICleaner> GetCleaners()
-        {
-            throw new NotImplementedException();
-        }
-
         public IDictionary<string, ILinkAssigner> GetLinkAssigners()
         {
             throw new NotImplementedException();
