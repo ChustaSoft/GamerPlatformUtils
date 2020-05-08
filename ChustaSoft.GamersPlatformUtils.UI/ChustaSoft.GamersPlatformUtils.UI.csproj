@@ -7,12 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\chustasoft-logo.png" />
     <None Remove="Resources\origin-logo.png" />
     <None Remove="Resources\steam-logo.png" />
     <None Remove="Resources\xbox-logo.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Resources\chustasoft-logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\origin-logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
