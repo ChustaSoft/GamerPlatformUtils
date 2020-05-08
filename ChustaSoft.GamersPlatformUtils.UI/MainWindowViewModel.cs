@@ -5,6 +5,7 @@ using ChustaSoft.GamersPlatformUtils.UI.Controls;
 using ChustaSoft.GamersPlatformUtils.UI.Enums;
 using ChustaSoft.GamersPlatformUtils.UI.Helpers;
 using ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner;
+using ChustaSoft.GamersPlatformUtils.UI.Modules.Linker;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -46,6 +47,20 @@ namespace ChustaSoft.GamersPlatformUtils.UI
             }
         }
 
+        private LinkerControlViewModel _linkerControlViewModel;
+        public LinkerControlViewModel LinkerControlViewModel
+        {
+            get
+            {
+                return _linkerControlViewModel;
+            }
+            set
+            {
+                _linkerControlViewModel = value;
+                OnPropertyChanged(nameof(LinkerControlViewModel));
+            }
+        }
+
 
         public MainWindowViewModel(ILogger logger, IServiceProvider serviceProvider)
             : base(logger)
@@ -66,6 +81,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI
 
             InformationControlViewModel = (InformationControlViewModel)_viewModelFactory.CreateViewModel(ViewModelType.Information);
             CleanerControlViewModel = (CleanerControlViewModel)_viewModelFactory.CreateViewModel(ViewModelType.Cleaner);
+            LinkerControlViewModel = (LinkerControlViewModel)_viewModelFactory.CreateViewModel(ViewModelType.Linker);
         }
 
     }
