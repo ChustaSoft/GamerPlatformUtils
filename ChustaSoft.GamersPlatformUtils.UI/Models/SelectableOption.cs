@@ -2,7 +2,7 @@
 
 namespace ChustaSoft.GamersPlatformUtils.UI.Models
 {
-    public class SelectablePlatform : ViewModelBase
+    public class SelectableOption : ViewModelBase
     {
 
         private bool _Selected;

@@ -8,8 +8,8 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
     public class CleanerControlModel : ViewModelBase
     {
 
-        private ObservableCollection<SelectablePlatform> _platforms;
-        public ObservableCollection<SelectablePlatform> Platforms
+        private ObservableCollection<SelectableOption> _platforms;
+        public ObservableCollection<SelectableOption> Platforms
         {
             get { return _platforms; }
             set { 
@@ -32,7 +32,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
 
         public CleanerControlModel() 
         {
-            Platforms = new ObservableCollection<SelectablePlatform>();
+            Platforms = new ObservableCollection<SelectableOption>();
             PathsAnalyzed = new ObservableCollection<FileInfo>(); 
         }
 

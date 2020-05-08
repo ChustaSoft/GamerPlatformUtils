@@ -31,9 +31,9 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
         }
 
 
-        public void Assign(IEnumerable<SelectablePlatform> selectablePlatforms)
+        public void Assign(IEnumerable<SelectableOption> selectablePlatforms)
         {
-            this.Model.Platforms = new ObservableCollection<SelectablePlatform>(selectablePlatforms);
+            this.Model.Platforms = new ObservableCollection<SelectableOption>(selectablePlatforms);
         }
 
 
