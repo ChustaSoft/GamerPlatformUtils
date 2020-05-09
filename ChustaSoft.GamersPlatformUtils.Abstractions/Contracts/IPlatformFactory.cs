@@ -8,8 +8,6 @@ namespace ChustaSoft.GamersPlatformUtils.Abstractions
 
         IDictionary<string, IAnalyzer> GetAnalyzers();
 
-        IDictionary<string, ICleaner> GetCleaners();
-
         IDictionary<string, ILinkFinder> GetLinkFinders();
 
         IDictionary<string, ILinkAssigner> GetLinkAssigners();
