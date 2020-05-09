@@ -1,7 +1,7 @@
-﻿using ChustaSoft.GamersPlatformUtils.Services;
-using ChustaSoft.GamersPlatformUtils.UI.Base;
-using ChustaSoft.GamersPlatformUtils.UI.Helpers;
-using ChustaSoft.GamersPlatformUtils.UI.Models;
+﻿using ChustaSoft.Common.Base;
+using ChustaSoft.Common.Helpers;
+using ChustaSoft.Common.Models;
+using ChustaSoft.GamersPlatformUtils.Services;
 using ChustaSoft.GamersPlatformUtils.UI.Styles;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -31,9 +31,9 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
         }
 
 
-        public void Assign(IEnumerable<SelectablePlatform> selectablePlatforms)
+        public void Assign(IEnumerable<SelectableOption> selectablePlatforms)
         {
-            this.Model.Platforms = new ObservableCollection<SelectablePlatform>(selectablePlatforms);
+            this.Model.Platforms = new ObservableCollection<SelectableOption>(selectablePlatforms);
         }
 
 

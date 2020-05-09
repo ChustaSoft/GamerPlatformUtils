@@ -35,19 +35,5 @@ namespace ChustaSoft.GamersPlatformUtils.Steam.Tests
 
         }
 
-        [Test]
-        public async Task Given_ListOfFileInfo_When_Clean_Then_ReturnSuccessCleanResult()
-        {
-#if DEBUG 
-            var steamPlatform = new SteamBusiness();
-            var files = await steamPlatform.AnalyzeAsync();
-
-            var cleanResult = await steamPlatform.CleanAsync(files.Take(1));
-
-            Assert.IsTrue(cleanResult.Success);
-#else
-            Assert.IsTrue(true);
-#endif
-        }
     }
 }

@@ -2,5 +2,5 @@
 
 namespace ChustaSoft.GamersPlatformUtils.Domain
 {
-    public interface ISteamBusiness : IPlatform, IAnalyzer, ICleaner { }
+    public interface ISteamBusiness : IPlatform, IAnalyzer { }
 }

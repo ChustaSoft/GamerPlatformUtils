@@ -1,6 +1,6 @@
-﻿using ChustaSoft.GamersPlatformUtils.Domain;
+﻿using ChustaSoft.Common.Base;
+using ChustaSoft.GamersPlatformUtils.Domain;
 using ChustaSoft.GamersPlatformUtils.Services;
-using ChustaSoft.GamersPlatformUtils.UI.Base;
 using ChustaSoft.GamersPlatformUtils.UI.Styles;
 using Microsoft.Extensions.Logging;
 using System.Linq;

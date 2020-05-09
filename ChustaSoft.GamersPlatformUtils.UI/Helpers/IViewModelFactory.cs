@@ -1,4 +1,4 @@
-﻿using ChustaSoft.GamersPlatformUtils.UI.Base;
+﻿using ChustaSoft.Common.Base;
 using ChustaSoft.GamersPlatformUtils.UI.Enums;
 
 namespace ChustaSoft.GamersPlatformUtils.UI.Helpers
