@@ -1,7 +1,9 @@
 ﻿
+using ChustaSoft.Common.Base;
+using ChustaSoft.Common.Helpers;
+using ChustaSoft.Common.Models;
 using ChustaSoft.GamersPlatformUtils.Abstractions;
 using ChustaSoft.GamersPlatformUtils.Services;
-using ChustaSoft.GamersPlatformUtils.UI.Base;
 using ChustaSoft.GamersPlatformUtils.UI.Helpers;
 using ChustaSoft.GamersPlatformUtils.UI.Models;
 using ChustaSoft.GamersPlatformUtils.UI.Styles;
@@ -34,19 +36,19 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
         }
 
 
-        public void Assign(IEnumerable<SelectablePlatform> selectablePlatforms)
+        public void Assign(IEnumerable<SelectableOption> selectablePlatforms)
         {
-            this.Model.PlatformsSource = new ObservableCollection<SelectablePlatform>(RemoveSteamPlatform(selectablePlatforms));
+            this.Model.PlatformsSource = new ObservableCollection<SelectableOption>(RemoveSteamPlatform(selectablePlatforms));
 
-            this.Model.PlatformsDestination = new ObservableCollection<SelectablePlatform>(SelectSteamPlatform(selectablePlatforms));
+            this.Model.PlatformsDestination = new ObservableCollection<SelectableOption>(SelectSteamPlatform(selectablePlatforms));
         }
 
-        private IEnumerable<SelectablePlatform> SelectSteamPlatform(IEnumerable<SelectablePlatform> selectablePlatforms)
+        private IEnumerable<SelectableOption> SelectSteamPlatform(IEnumerable<SelectableOption> selectablePlatforms)
         {
             return selectablePlatforms.Where(x => x.Name.ToLower() == STEAM_PLATFORM_NAME);
         }
 
-        private IEnumerable<SelectablePlatform> RemoveSteamPlatform(IEnumerable<SelectablePlatform> selectablePlatforms)
+        private IEnumerable<SelectableOption> RemoveSteamPlatform(IEnumerable<SelectableOption> selectablePlatforms)
         {
             return selectablePlatforms.Where(x => !x.Name.ToLower().Contains(STEAM_PLATFORM_NAME));
         }

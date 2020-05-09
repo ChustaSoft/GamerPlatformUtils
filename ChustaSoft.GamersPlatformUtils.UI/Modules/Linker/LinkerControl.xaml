@@ -4,6 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:ChustaSoft.Common.Controls;assembly=ChustaSoft.Common.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -25,7 +26,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <CheckBox IsChecked="{Binding Selected, Mode=TwoWay}" Margin="0 50 50 0"/>
+                        <CheckBox IsChecked="{Binding Path=Selected, Mode=TwoWay}" Margin="0 0 10 0" />
                         <TextBlock Text="{Binding Path=Name, Mode=OneWay}" />
                     </StackPanel>
                 </DataTemplate>
@@ -34,28 +35,10 @@
 
         <materialDesign:Card Grid.Row="1" Height="50">
             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
-                <ComboBox ItemsSource="{Binding Model.PlatformsDestination}" Width="196" ToolTip="Platform where games will be linked">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <CheckBox IsChecked="{Binding Selected, Mode=TwoWay}" Margin="0 0 5 0"/>
-                                <TextBlock Text="{Binding Name, Mode=OneWay}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-                <ComboBox ItemsSource="{Binding Model.PlatformsSource}" Width="196" ToolTip="Platforms found in this machine">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <CheckBox IsChecked="{Binding Selected, Mode=TwoWay}" Margin="0 0 5 0"/>
-                                <TextBlock Text="{Binding Name, Mode=OneWay}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-                <Button Content="Analyze" Command="{Binding AnalyseCommand}" Margin="{Binding ButtonMargins}"/>
-                <Button Content="Link" Command="{Binding LinkCommand}" Margin="{Binding ButtonMargins}"/>
+                <controls:Selection Items="{Binding Model.PlatformsDestination, Mode=TwoWay}" DefaultText="Select destination platform..." Margin="0 0 10 0" />
+                <controls:MultiSelection Items="{Binding Model.PlatformsSource, Mode=TwoWay}" DefaultText="Select source platforms..." Margin="0 0 10 0" />
+                <Button Content="Analyze" Command="{Binding AnalyseCommand}" Margin="{Binding ButtonMargins}"></Button>
+                <Button Content="Link" Command="{Binding LinkCommand}" Margin="{Binding ButtonMargins}"></Button>
             </StackPanel>
         </materialDesign:Card>
 

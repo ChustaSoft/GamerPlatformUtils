@@ -1,5 +1,5 @@
-﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
-using ChustaSoft.GamersPlatformUtils.UI.Base;
+﻿using ChustaSoft.Common.Base;
+using ChustaSoft.Common.Models;
 using ChustaSoft.GamersPlatformUtils.UI.Models;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -9,8 +9,8 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
     public class LinkerControlModel : ViewModelBase
     {
 
-        private ObservableCollection<SelectablePlatform> _platformsSource;
-        public ObservableCollection<SelectablePlatform> PlatformsSource
+        private ObservableCollection<SelectableOption> _platformsSource;
+        public ObservableCollection<SelectableOption> PlatformsSource
         {
             get { return _platformsSource; }
             set { 
@@ -19,8 +19,8 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
             }
         }
 
-        private ObservableCollection<SelectablePlatform> _platformsDestination;
-        public ObservableCollection<SelectablePlatform> PlatformsDestination
+        private ObservableCollection<SelectableOption> _platformsDestination;
+        public ObservableCollection<SelectableOption> PlatformsDestination
         {
             get { return _platformsDestination; }
             set
@@ -44,8 +44,8 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
 
         public LinkerControlModel() 
         {
-            PlatformsSource = new ObservableCollection<SelectablePlatform>();
-            PlatformsDestination = new ObservableCollection<SelectablePlatform>();
+            PlatformsSource = new ObservableCollection<SelectableOption>();
+            PlatformsDestination = new ObservableCollection<SelectableOption>();
             PathsAnalyzed = new ObservableCollection<SelectableItem>(); 
         }
 
