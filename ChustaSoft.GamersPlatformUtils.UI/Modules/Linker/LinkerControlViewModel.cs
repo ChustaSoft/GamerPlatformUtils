@@ -39,7 +39,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
             this.Model.Platforms = new ObservableCollection<SelectablePlatform>(RemoveSteamPlatform(selectablePlatforms));
         }
 
-        private static IEnumerable<SelectablePlatform> RemoveSteamPlatform(IEnumerable<SelectablePlatform> selectablePlatforms)
+        private IEnumerable<SelectablePlatform> RemoveSteamPlatform(IEnumerable<SelectablePlatform> selectablePlatforms)
         {
             return selectablePlatforms.Where(x => !x.Name.ToLower().Contains(STEAM_PLATFORM_NAME));
         }
@@ -49,11 +49,12 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
             var selectedPlatforms = Model.Platforms.Where(x => x.Selected).Select(x => x.Name);
             var pathsAnalised = await _linkerService.SearchAsync(selectedPlatforms);
 
-            this.Model.PathsAnalyzed = new ObservableCollection<GameLink>(pathsAnalised);
+            this.Model.PathsAnalyzed = new ObservableCollection<SelectableItem>( pathsAnalised.Select(x => ListItemMapper.Map(x)));
         }
 
         private void OnLink()
         {
+            IEnumerable<GameLink> gameLinksToLink = this.Model.PathsAnalyzed.Where(x => x.Selected).Select(x => x.GameLink);
             //TODO: Get selected values and Link them to steam
         }
 

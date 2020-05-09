@@ -25,7 +25,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <CheckBox Margin="0 0 10 0" />
+                        <CheckBox IsChecked="{Binding Selected, Mode=TwoWay}" Margin="0 0 10 0"/>
                         <TextBlock Text="{Binding Path=Name, Mode=OneWay}" />
                     </StackPanel>
                 </DataTemplate>

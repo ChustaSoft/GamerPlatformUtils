@@ -19,8 +19,8 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
             }
         }
 
-        private ObservableCollection<GameLink> _pathsAnalyzed;
-        public ObservableCollection<GameLink> PathsAnalyzed
+        private ObservableCollection<SelectableItem> _pathsAnalyzed;
+        public ObservableCollection<SelectableItem> PathsAnalyzed
         {
             get { return _pathsAnalyzed; }
             set
@@ -34,7 +34,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
         public LinkerControlModel() 
         {
             Platforms = new ObservableCollection<SelectablePlatform>();
-            PathsAnalyzed = new ObservableCollection<GameLink>(); 
+            PathsAnalyzed = new ObservableCollection<SelectableItem>(); 
         }
 
     }
