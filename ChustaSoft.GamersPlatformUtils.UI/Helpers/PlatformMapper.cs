@@ -1,14 +1,14 @@
-﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
-using ChustaSoft.GamersPlatformUtils.UI.Models;
+﻿using ChustaSoft.Common.Models;
+using ChustaSoft.GamersPlatformUtils.Abstractions;
 
 namespace ChustaSoft.GamersPlatformUtils.UI.Helpers
 {
     public static class PlatformMapper
     {
 
-        public static SelectablePlatform Map(IPlatform source)
+        public static SelectableOption Map(IPlatform source)
         {
-            return new SelectablePlatform 
+            return new SelectableOption 
             { 
                 Name = source.Name,
                 Selected = true
