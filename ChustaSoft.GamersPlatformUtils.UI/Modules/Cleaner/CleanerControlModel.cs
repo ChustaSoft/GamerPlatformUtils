@@ -1,5 +1,5 @@
-﻿using ChustaSoft.GamersPlatformUtils.UI.Base;
-using ChustaSoft.GamersPlatformUtils.UI.Models;
+﻿using ChustaSoft.Common.Base;
+using ChustaSoft.Common.Models;
 using System.Collections.ObjectModel;
 using System.IO;
 

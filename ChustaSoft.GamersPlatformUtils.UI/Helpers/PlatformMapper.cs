@@ -1,5 +1,5 @@
-﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
-using ChustaSoft.GamersPlatformUtils.UI.Models;
+﻿using ChustaSoft.Common.Models;
+using ChustaSoft.GamersPlatformUtils.Abstractions;
 
 namespace ChustaSoft.GamersPlatformUtils.UI.Helpers
 {

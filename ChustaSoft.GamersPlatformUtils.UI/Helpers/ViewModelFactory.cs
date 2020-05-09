@@ -1,5 +1,5 @@
-﻿using ChustaSoft.GamersPlatformUtils.Services;
-using ChustaSoft.GamersPlatformUtils.UI.Base;
+﻿using ChustaSoft.Common.Base;
+using ChustaSoft.GamersPlatformUtils.Services;
 using ChustaSoft.GamersPlatformUtils.UI.Controls;
 using ChustaSoft.GamersPlatformUtils.UI.Enums;
 using ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner;
