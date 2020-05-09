@@ -9,13 +9,24 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
     public class LinkerControlModel : ViewModelBase
     {
 
-        private ObservableCollection<SelectablePlatform> _platforms;
-        public ObservableCollection<SelectablePlatform> Platforms
+        private ObservableCollection<SelectablePlatform> _platformsSource;
+        public ObservableCollection<SelectablePlatform> PlatformsSource
         {
-            get { return _platforms; }
+            get { return _platformsSource; }
             set { 
-                _platforms = value;
-                OnPropertyChanged(nameof(Platforms));
+                _platformsSource = value;
+                OnPropertyChanged(nameof(PlatformsSource));
+            }
+        }
+
+        private ObservableCollection<SelectablePlatform> _platformsDestination;
+        public ObservableCollection<SelectablePlatform> PlatformsDestination
+        {
+            get { return _platformsDestination; }
+            set
+            {
+                _platformsDestination = value;
+                OnPropertyChanged(nameof(PlatformsDestination));
             }
         }
 
@@ -33,7 +44,8 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
 
         public LinkerControlModel() 
         {
-            Platforms = new ObservableCollection<SelectablePlatform>();
+            PlatformsSource = new ObservableCollection<SelectablePlatform>();
+            PlatformsDestination = new ObservableCollection<SelectablePlatform>();
             PathsAnalyzed = new ObservableCollection<SelectableItem>(); 
         }
 

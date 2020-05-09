@@ -36,7 +36,14 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
 
         public void Assign(IEnumerable<SelectablePlatform> selectablePlatforms)
         {
-            this.Model.Platforms = new ObservableCollection<SelectablePlatform>(RemoveSteamPlatform(selectablePlatforms));
+            this.Model.PlatformsSource = new ObservableCollection<SelectablePlatform>(RemoveSteamPlatform(selectablePlatforms));
+
+            this.Model.PlatformsDestination = new ObservableCollection<SelectablePlatform>(SelectSteamPlatform(selectablePlatforms));
+        }
+
+        private IEnumerable<SelectablePlatform> SelectSteamPlatform(IEnumerable<SelectablePlatform> selectablePlatforms)
+        {
+            return selectablePlatforms.Where(x => x.Name.ToLower() == STEAM_PLATFORM_NAME);
         }
 
         private IEnumerable<SelectablePlatform> RemoveSteamPlatform(IEnumerable<SelectablePlatform> selectablePlatforms)
@@ -46,8 +53,8 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
 
         private async void OnAnalyze() 
         {
-            var selectedPlatforms = Model.Platforms.Where(x => x.Selected).Select(x => x.Name);
-            var pathsAnalised = await _linkerService.SearchAsync(selectedPlatforms);
+            var selectedSourcePlatforms = Model.PlatformsSource.Where(x => x.Selected).Select(x => x.Name);
+            var pathsAnalised = await _linkerService.SearchAsync(selectedSourcePlatforms);
 
             this.Model.PathsAnalyzed = new ObservableCollection<SelectableItem>( pathsAnalised.Select(x => ListItemMapper.Map(x)));
         }
