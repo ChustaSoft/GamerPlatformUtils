@@ -7,7 +7,7 @@
         xmlns:cleaner="clr-namespace:ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="ChustaSoft GamerPlatformUtils" Height="450" Width="800"
+        Title="ChustaSoft GamerPlatformUtils" Height="768" Width="1024"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -43,6 +43,7 @@
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
                                         <Setter TargetName="Border" Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}" />
+                                        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBodyLight}" />
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="False">
                                         <Setter TargetName="Border" Property="Background" Value="{DynamicResource MaterialDesignCardBackground}" />
@@ -53,13 +54,13 @@
                     </Setter>
                 </Style>
             </TabControl.Resources>
-            <TabItem Header="Cleaner" Width="200">
+            <TabItem Header="Cleaner" Width="200" Height="35">
                 <Grid Background="{DynamicResource MaterialDesignCardBackground}">
                     <cleaner:CleanerControl DataContext="{Binding CleanerControlViewModel}"></cleaner:CleanerControl>
                 </Grid>
             </TabItem>
-            
-            <TabItem Header="Linker" Width="200">
+
+            <TabItem Header="Linker" Width="200" Height="35">
                 <Grid Background="{DynamicResource MaterialDesignCardBackground}"/>
             </TabItem>
             
