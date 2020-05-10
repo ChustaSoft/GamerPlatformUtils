@@ -2,6 +2,7 @@
 using ChustaSoft.Common.Helpers;
 using ChustaSoft.Common.Models;
 using ChustaSoft.GamersPlatformUtils.Services;
+using ChustaSoft.GamersPlatformUtils.UI.Helpers;
 using ChustaSoft.GamersPlatformUtils.UI.Styles;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -31,9 +32,9 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
         }
 
 
-        public void Assign(IEnumerable<SelectableOption> selectablePlatforms)
+        public void Assign(ObservableCollection<SelectableOption> selectablePlatforms)
         {
-            this.Model.Platforms = new ObservableCollection<SelectableOption>(selectablePlatforms);
+            this.Model.Platforms = selectablePlatforms;
         }
 
 
@@ -42,7 +43,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
             var selectedPlatforms = Model.Platforms.Where(x => x.Selected).Select(x => x.Name);
             var pathsAnalised = await _analyzerService.AnalyzeAsync(selectedPlatforms);
 
-            this.Model.PathsAnalyzed = new ObservableCollection<FileInfo>(pathsAnalised);
+            this.Model.PathsAnalyzed = FileInfoMapper.Map(pathsAnalised);
         }
 
         private void OnClean()

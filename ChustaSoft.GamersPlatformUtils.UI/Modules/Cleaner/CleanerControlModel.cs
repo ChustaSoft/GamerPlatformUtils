@@ -18,8 +18,8 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
             }
         }
 
-        private ObservableCollection<FileInfo> _pathsAnalyzed;
-        public ObservableCollection<FileInfo> PathsAnalyzed
+        private ObservableCollection<SelectableOption<FileInfo>> _pathsAnalyzed;
+        public ObservableCollection<SelectableOption<FileInfo>> PathsAnalyzed
         {
             get { return _pathsAnalyzed; }
             set
@@ -33,7 +33,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
         public CleanerControlModel() 
         {
             Platforms = new ObservableCollection<SelectableOption>();
-            PathsAnalyzed = new ObservableCollection<FileInfo>(); 
+            PathsAnalyzed = new ObservableCollection<SelectableOption<FileInfo>>(); 
         }
 
     }
