@@ -63,7 +63,11 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Helpers
         {
             if (!_viewModels.ContainsKey(ViewModelType.Cleaner)) 
             {
-                var viewModel = new CleanerControlViewModel(_logger, _serviceProvider.GetService<IAnalyzerService>());
+                var viewModel = new CleanerControlViewModel(
+                    _logger, 
+                    _serviceProvider.GetService<IAnalyzerService>(),
+                    _serviceProvider.GetService<IFileService>()
+                    );
 
                 if(_mainWindowViewModel.Model?.Platforms != null)
                     viewModel.Assign(PlatformMapper.Map(_mainWindowViewModel.Model.Platforms));

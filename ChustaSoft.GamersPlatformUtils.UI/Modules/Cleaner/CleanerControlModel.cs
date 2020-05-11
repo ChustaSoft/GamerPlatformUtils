@@ -2,6 +2,7 @@
 using ChustaSoft.Common.Models;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 
 namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
 {
@@ -26,14 +27,40 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
             {
                 _pathsAnalyzed = value;
                 OnPropertyChanged(nameof(PathsAnalyzed));
+                OnPropertyChanged(nameof(HasResults));
             }
+        }
+        public bool HasResults => PathsAnalyzed.Any();
+
+        public CleanerControlModel()
+        {
+            SetEmptyPlatforms();
+            SetEmptyPaths();
         }
 
 
-        public CleanerControlModel() 
+        internal void ClearPaths() 
+        {
+            SetEmptyPaths();
+        }
+
+        internal void ChangeAllPathsSelection(bool multipleSelection)
+        {
+            foreach (var filePathSelect in PathsAnalyzed)
+                filePathSelect.Selected = multipleSelection;
+        }
+
+        
+
+
+        private void SetEmptyPlatforms()
         {
             Platforms = new ObservableCollection<SelectableOption>();
-            PathsAnalyzed = new ObservableCollection<SelectableOption<FileInfo>>(); 
+        }
+
+        private void SetEmptyPaths()
+        {
+            PathsAnalyzed = new ObservableCollection<SelectableOption<FileInfo>>();
         }
 
     }

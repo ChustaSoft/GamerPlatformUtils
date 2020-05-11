@@ -5,10 +5,7 @@ using ChustaSoft.GamersPlatformUtils.Services;
 using ChustaSoft.GamersPlatformUtils.UI.Helpers;
 using ChustaSoft.GamersPlatformUtils.UI.Styles;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
 using System.Windows;
 
 namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
@@ -17,18 +14,29 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
     {
 
         private readonly IAnalyzerService _analyzerService;
+        private readonly IFileService _fileService;
+        
+        private bool _multipleSelection = false;
+
 
         public RelayCommand AnalyseCommand { get; private set; }
         public RelayCommand CleanCommand { get; private set; }
+        public RelayCommand ClearCommand { get; private set; }
+        public RelayCommand ChangeAllSelectionCommand { get; private set; }
 
 
-        public CleanerControlViewModel(ILogger logger, IAnalyzerService analyzerService)
+        public CleanerControlViewModel(ILogger logger, IAnalyzerService analyzerService, IFileService fileService)
             : base(logger)
         {
             AnalyseCommand = new RelayCommand(OnAnalyze);
             CleanCommand = new RelayCommand(OnClean);
+            ClearCommand = new RelayCommand(OnClear);
+            ChangeAllSelectionCommand = new RelayCommand(OnChangeAllSelection);
 
             _analyzerService = analyzerService;
+            _fileService = fileService;
+
+            ResetDefaultMultipleSelection();
         }
 
 
@@ -40,15 +48,42 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
 
         private async void OnAnalyze() 
         {
-            var selectedPlatforms = Model.Platforms.Where(x => x.Selected).Select(x => x.Name);
+            var selectedPlatforms = Model.Platforms.GetSelected();
             var pathsAnalised = await _analyzerService.AnalyzeAsync(selectedPlatforms);
 
             this.Model.PathsAnalyzed = FileInfoMapper.Map(pathsAnalised);
+            ResetDefaultMultipleSelection();
         }
 
-        private void OnClean()
+        private async void OnClean()
         {
-            //TODO: Get selected values and remove from the system
+            var selectedFiles = Model.PathsAnalyzed.GetSelected();
+            var cleanResult = await _fileService.Clean(selectedFiles);
+
+            //TODO: Show results
+            ClearResultView();
+        }
+
+        private void OnClear()
+        {
+            ClearResultView();
+        }
+
+        private void ClearResultView()
+        {
+            this.Model.ClearPaths();
+            ResetDefaultMultipleSelection();
+        }
+
+        private void OnChangeAllSelection() 
+        {
+            this.Model.ChangeAllPathsSelection(_multipleSelection);
+            _multipleSelection = !_multipleSelection;
+        }
+
+        private void ResetDefaultMultipleSelection() 
+        {
+            _multipleSelection = false;
         }
 
 
