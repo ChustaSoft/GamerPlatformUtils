@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ChustaSoft.GamersPlatformUtils.UI.Helpers
 {
@@ -64,10 +63,14 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Helpers
         {
             if (!_viewModels.ContainsKey(ViewModelType.Cleaner)) 
             {
-                var viewModel = new CleanerControlViewModel(_logger, _serviceProvider.GetService<IAnalyzerService>());
+                var viewModel = new CleanerControlViewModel(
+                    _logger, 
+                    _serviceProvider.GetService<IAnalyzerService>(),
+                    _serviceProvider.GetService<IFileService>()
+                    );
 
                 if(_mainWindowViewModel.Model?.Platforms != null)
-                    viewModel.Assign(_mainWindowViewModel.Model.Platforms.Select(x => PlatformMapper.Map(x)));
+                    viewModel.Assign(PlatformMapper.Map(_mainWindowViewModel.Model.Platforms));
 
                 _viewModels.Add(ViewModelType.Cleaner, viewModel);
             }
