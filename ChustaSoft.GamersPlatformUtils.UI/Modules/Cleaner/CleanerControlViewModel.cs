@@ -19,10 +19,15 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
         private bool _multipleSelection = false;
 
 
+        public bool CleanCompleted { get; private set; }
+        public string CleanResultMessage { get; private set; }
+
+
         public RelayCommand AnalyseCommand { get; private set; }
         public RelayCommand CleanCommand { get; private set; }
         public RelayCommand ClearCommand { get; private set; }
         public RelayCommand ChangeAllSelectionCommand { get; private set; }
+        public RelayCommand DiscardCommand { get; private set; }
 
 
         public CleanerControlViewModel(ILogger logger, IAnalyzerService analyzerService, IFileService fileService)
@@ -32,6 +37,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
             CleanCommand = new RelayCommand(OnClean);
             ClearCommand = new RelayCommand(OnClear);
             ChangeAllSelectionCommand = new RelayCommand(OnChangeAllSelection);
+            DiscardCommand = new RelayCommand(OnDiscard);
 
             _analyzerService = analyzerService;
             _fileService = fileService;
@@ -60,8 +66,17 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
             var selectedFiles = Model.PathsAnalyzed.GetSelected();
             var cleanResult = await _fileService.Clean(selectedFiles);
 
-            //TODO: Show results
+            SetCleanResult(cleanResult.ToString(), true);
             ClearResultView();
+        }
+
+        private void SetCleanResult(string message, bool isCompleted)
+        {
+            CleanResultMessage = message;
+            CleanCompleted = isCompleted;
+
+            OnPropertyChanged(nameof(CleanResultMessage));
+            OnPropertyChanged(nameof(CleanCompleted));
         }
 
         private void OnClear()
@@ -79,6 +94,11 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
         {
             this.Model.ChangeAllPathsSelection(_multipleSelection);
             _multipleSelection = !_multipleSelection;
+        }
+
+        private void OnDiscard()
+        {
+            SetCleanResult(string.Empty, false);
         }
 
         private void ResetDefaultMultipleSelection() 

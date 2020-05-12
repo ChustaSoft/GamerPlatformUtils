@@ -37,6 +37,7 @@
                 </Button>
             </StackPanel>
             <ListView Grid.Row="0" ItemsSource="{Binding Model.PathsAnalyzed}" ScrollViewer.CanContentScroll="True" >
+                
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -46,6 +47,9 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <materialDesign:Snackbar IsActive="{Binding CleanCompleted}" ActionButtonStyle="{StaticResource MaterialDesignSnackbarActionDarkButton}" >
+                <materialDesign:SnackbarMessage Content="{Binding CleanResultMessage}" ActionContent="Discard" ActionCommand="{Binding DiscardCommand}" />
+            </materialDesign:Snackbar>
         </StackPanel>
         
 
