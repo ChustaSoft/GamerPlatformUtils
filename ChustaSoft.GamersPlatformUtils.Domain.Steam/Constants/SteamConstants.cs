@@ -9,5 +9,7 @@
         internal const string INSTALLPATH_HKEY = "InstallPath";
         internal const string REDIST_FOLDER_NAME = "_CommonRedist";
         internal const string GAMES_FOLDER = "\\steamapps\\common";
+        internal const string BASEFOLDER_CONFIG_KEY = "BaseInstallFolder_";
+        internal const string CONFIG_SUBPATH = "\\config\\config.vdf";
     }
 }
