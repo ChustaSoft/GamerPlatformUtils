@@ -95,7 +95,7 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
             var configPath = this.AppPath + SteamConstants.CONFIG_SUBPATH;
             var dataArray = await File.ReadAllLinesAsync(configPath);
 
-            var secondaryPaths = dataArray.Where(x => x.Contains(SteamConstants.BASEFOLDER_CONFIG_KEY)).ToList();
+            var secondaryPaths = dataArray.Where(x => x.Contains(SteamConstants.BASEFOLDER_CONFIG_KEY));
 
             return secondaryPaths.Select(x => GetPathFromConfigLine(x));
 
