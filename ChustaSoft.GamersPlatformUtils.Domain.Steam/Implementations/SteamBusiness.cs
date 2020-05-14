@@ -24,13 +24,7 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
 
             var paths = new List<string>();
 
-            string commonSteamPath = $"{AppPath}{SteamConstants.GAMES_FOLDER}";
-
-            if (!Directory.Exists(commonSteamPath))
-                return null;
-
-            paths.Add(commonSteamPath);
-            paths.AddRange(await GetSecondaryPathsAsync());
+            paths = await SetPathsAsync();
 
             return await Task.Run(() =>
             {
@@ -46,7 +40,6 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
             );
         }
 
-
         protected override void LoadPlatform()
         {
             this.AppPath = GetPath();
@@ -54,6 +47,26 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
             this.Name = SteamConstants.PLATFORM_NAME;
             this.Brand = SteamConstants.BRAND_NAME;
             this.Libraries = Enumerable.Empty<string>();
+        }
+
+        private async Task<List<string>> SetPathsAsync()
+        {
+            string commonSteamPath = $"{AppPath}{SteamConstants.GAMES_FOLDER}";
+
+            if (CheckMainPath(commonSteamPath))
+                return null;
+
+            List<string> paths = new List<string>();
+
+            paths.Add(commonSteamPath);
+            paths.AddRange(await GetSecondaryPathsAsync());
+
+            return paths;
+        }
+
+        private static bool CheckMainPath(string commonSteamPath)
+        {
+            return !Directory.Exists(commonSteamPath);
         }
 
 
