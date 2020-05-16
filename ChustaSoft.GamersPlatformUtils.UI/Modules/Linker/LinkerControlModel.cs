@@ -9,6 +9,17 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
     public class LinkerControlModel : ViewModelBase
     {
 
+        private bool _isLoading;
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+            }
+        }
+
         private ObservableCollection<SelectableOption> _platformsSource;
         public ObservableCollection<SelectableOption> PlatformsSource
         {

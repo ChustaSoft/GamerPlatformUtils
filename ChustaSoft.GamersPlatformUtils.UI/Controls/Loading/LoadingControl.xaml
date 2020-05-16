@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="ChustaSoft.GamersPlatformUtils.UI.Controls.Loading.LoadingControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChustaSoft.GamersPlatformUtils.UI.Controls.Loading"
+             xmlns:classicTheme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic"
+             x:Name="self" Height="117">
+
+    <UserControl.Resources>
+
+        <SolidColorBrush x:Key="panelBackground" Opacity="{Binding PanelOpacity, ElementName=self}" Color="{Binding BackgroundColor, ElementName=self}"></SolidColorBrush>
+
+        <Style x:Key="panelMessageText" TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,11,0,0" />
+            <Setter Property="TextWrapping" Value="WrapWithOverflow" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Roboto" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Foreground" Value="{Binding TextColor, ElementName=self}"/>
+        </Style>
+ 
+        <BooleanToVisibilityConverter x:Key="Converter" />
+
+    </UserControl.Resources>
+
+    <StackPanel Orientation="Vertical" VerticalAlignment="Center"  Background="{StaticResource panelBackground}" Margin="0,0,0,0" Height="90" Visibility="{Binding Path=Visible, Converter={StaticResource Converter}, ElementName=self}">
+        <ProgressBar Minimum="0" Maximum="0" x:Name="dynamicPbStatusTop" IsIndeterminate="True" Margin="0 0 0 0" VerticalAlignment="Bottom" Height="2"  Visibility="{Binding Path=TopBarVisible, Converter={StaticResource Converter}, ElementName=self}"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+            <TextBlock x:Name="LoadingMessage" Text="{Binding Text, ElementName=self}" Style="{StaticResource panelMessageText}" HorizontalAlignment="Center" Margin="0 32 0 15" />
+        </StackPanel>
+        <ProgressBar Minimum="0" Maximum="0" x:Name="dynamicPbStatusBottom" IsIndeterminate="True" Margin="0 0 0 0" VerticalAlignment="Bottom" Height="2"  Visibility="{Binding Path=BottomBarVisible, Converter={StaticResource Converter}, ElementName=self}"/>
+    </StackPanel>
+
+</UserControl>

@@ -6,7 +6,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
     /// Interaction logic for LinkerControl.xaml
     /// </summary>
     public partial class LinkerControl : UserControl
-    {
+    {       
         public LinkerControl()
         {
             InitializeComponent();

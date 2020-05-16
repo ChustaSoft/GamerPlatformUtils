@@ -33,6 +33,8 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
             LinkCommand = new RelayCommand(OnLink);
 
             _linkerService = linkerService;
+
+            this.Model.IsLoading = true;
         }
 
 
