@@ -35,7 +35,6 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
 
             _linkerService = linkerService;
 
-            this.Model.IsLoading = false;
         }
 
 
@@ -65,7 +64,6 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
             var pathsAnalised = await ManageLoadingVisibility(_linkerService.SearchAsync(selectedSourcePlatforms));
 
             this.Model.PathsAnalyzed = new ObservableCollection<SelectableItem>( pathsAnalised.Select(x => ListItemMapper.Map(x)));
-            this.Model.IsLoading = false;
 
         }
 
