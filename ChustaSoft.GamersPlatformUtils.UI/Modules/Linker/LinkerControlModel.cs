@@ -1,6 +1,6 @@
 ﻿using ChustaSoft.Common.Base;
 using ChustaSoft.Common.Models;
-using ChustaSoft.GamersPlatformUtils.UI.Models;
+using ChustaSoft.GamersPlatformUtils.Abstractions;
 using System.Collections.ObjectModel;
 using System.IO;
 
@@ -41,8 +41,8 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
             }
         }
 
-        private ObservableCollection<SelectableItem> _pathsAnalyzed;
-        public ObservableCollection<SelectableItem> PathsAnalyzed
+        private ObservableCollection<SelectableOption<GameLink>> _pathsAnalyzed;
+        public ObservableCollection<SelectableOption<GameLink>> PathsAnalyzed
         {
             get { return _pathsAnalyzed; }
             set
@@ -57,7 +57,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
         {
             PlatformsSource = new ObservableCollection<SelectableOption>();
             PlatformsDestination = new ObservableCollection<SelectableOption>();
-            PathsAnalyzed = new ObservableCollection<SelectableItem>(); 
+            PathsAnalyzed = new ObservableCollection<SelectableOption<GameLink>>(); 
         }
 
     }

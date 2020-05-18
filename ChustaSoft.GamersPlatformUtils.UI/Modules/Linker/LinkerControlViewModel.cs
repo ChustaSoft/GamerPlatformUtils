@@ -5,7 +5,6 @@ using ChustaSoft.Common.Models;
 using ChustaSoft.GamersPlatformUtils.Abstractions;
 using ChustaSoft.GamersPlatformUtils.Services;
 using ChustaSoft.GamersPlatformUtils.UI.Helpers;
-using ChustaSoft.GamersPlatformUtils.UI.Models;
 using ChustaSoft.GamersPlatformUtils.UI.Styles;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -63,13 +62,13 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
 
             var pathsAnalised = await ManageLoadingVisibility(_linkerService.SearchAsync(selectedSourcePlatforms));
 
-            this.Model.PathsAnalyzed = new ObservableCollection<SelectableItem>( pathsAnalised.Select(x => ListItemMapper.Map(x)));
+            this.Model.PathsAnalyzed = new ObservableCollection<SelectableOption<GameLink>>( pathsAnalised.Select(x => GameLinkMapper.Map(x)));
 
         }
 
         private void OnLink()
         {
-            IEnumerable<GameLink> gameLinksToLink = this.Model.PathsAnalyzed.Where(x => x.Selected).Select(x => x.GameLink);
+            IEnumerable<GameLink> gameLinksToLink = this.Model.PathsAnalyzed.Where(x => x.Selected).Select(x => x.Value);
             //TODO: Get selected values and Link them to steam
         }
 

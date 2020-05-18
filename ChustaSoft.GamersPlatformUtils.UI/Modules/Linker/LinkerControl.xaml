@@ -27,7 +27,7 @@
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <CheckBox IsChecked="{Binding Path=Selected, Mode=TwoWay}" Margin="0 0 10 0" />
-                        <TextBlock Text="{Binding Path=GameLink.Name, Mode=OneWay}" />
+                        <TextBlock Text="{Binding Path=Value.Name, Mode=OneWay}" />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
