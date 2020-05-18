@@ -8,7 +8,7 @@
         xmlns:linker="clr-namespace:ChustaSoft.GamersPlatformUtils.UI.Modules.Linker"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="ChustaSoft GamerPlatformUtils" Height="450" Width="800"
+        Title="ChustaSoft GamerPlatformUtils" Height="768" Width="1024"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"

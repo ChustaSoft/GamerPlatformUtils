@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ChustaSoft.GamersPlatformUtils.Domain
@@ -23,14 +24,21 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
 
             var paths = new List<string>();
 
-            string commonSteamPath = $"{AppPath}{SteamConstants.GAMES_FOLDER}";
+            paths = await SetPathsAsync();
 
-            if (!Directory.Exists(commonSteamPath))
-                return null;
+            return await Task.Run(() =>
+            {
+                var filesList = new List<FileInfo>();
 
-            return await Task.Run(() => GetFiles(commonSteamPath));
+                foreach (string path in paths)
+                {
+                    filesList.AddRange(GetFiles(path));
+                }
+
+                return filesList;
+            }
+            );
         }
-
 
         protected override void LoadPlatform()
         {
@@ -39,6 +47,26 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
             this.Name = SteamConstants.PLATFORM_NAME;
             this.Brand = SteamConstants.BRAND_NAME;
             this.Libraries = Enumerable.Empty<string>();
+        }
+
+        private async Task<List<string>> SetPathsAsync()
+        {
+            string commonSteamPath = $"{AppPath}{SteamConstants.GAMES_FOLDER}";
+
+            if (CheckMainPath(commonSteamPath))
+                return null;
+
+            List<string> paths = new List<string>();
+
+            paths.Add(commonSteamPath);
+            paths.AddRange(await GetSecondaryPathsAsync());
+
+            return paths;
+        }
+
+        private static bool CheckMainPath(string commonSteamPath)
+        {
+            return !Directory.Exists(commonSteamPath);
         }
 
 
@@ -73,6 +101,24 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
             }
 
             return files.OrderBy(x => x.FullName);
+        }
+
+        private async Task<IEnumerable<string>> GetSecondaryPathsAsync()
+        {
+            var configPath = this.AppPath + SteamConstants.CONFIG_SUBPATH;
+            var dataArray = await File.ReadAllLinesAsync(configPath);
+
+            var secondaryPaths = dataArray.Where(x => x.Contains(SteamConstants.BASEFOLDER_CONFIG_KEY));
+
+            return secondaryPaths.Select(x => GetPathFromConfigLine(x));
+
+        }
+
+        private string GetPathFromConfigLine(string configLine)
+        {
+            Regex pathRegex = new Regex(@"[A-Z]:\\\\(.*)", RegexOptions.IgnoreCase);
+
+            return pathRegex.Match(configLine).Value.Replace("\\\\", "\\");
         }
 
     }

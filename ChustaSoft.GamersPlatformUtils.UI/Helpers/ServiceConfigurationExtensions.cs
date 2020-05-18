@@ -1,4 +1,5 @@
-﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
+﻿using Chustasoft.GamersPlatformUtils.Infrastructure.Implementations;
+using ChustaSoft.GamersPlatformUtils.Abstractions;
 using ChustaSoft.GamersPlatformUtils.Domain;
 using ChustaSoft.GamersPlatformUtils.Infrastructure;
 using ChustaSoft.GamersPlatformUtils.Services;
@@ -40,6 +41,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI
             serviceCollection.AddScoped<ILoadService<Information>, InformationService>();
             serviceCollection.AddScoped<IAnalyzerService, AnalyzerService>();
             serviceCollection.AddScoped<ILinkerService, LinkerService>();
+            serviceCollection.AddScoped<IFileService, FileService>();
             serviceCollection.AddSingleton<MainWindow>(s => new MainWindow(s, s.GetRequiredService<ILogger>()));
 
             return serviceCollection;
@@ -49,6 +51,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI
         {
             serviceCollection.AddScoped<IReadWriteFileRepository, XMLFileRepository>();
             serviceCollection.AddScoped<IReadFileRepository, PowershellFileRepository>();
+            serviceCollection.AddScoped<IFileDeleteRepository, SystemFileRepository>();
 
             return serviceCollection;
         }
