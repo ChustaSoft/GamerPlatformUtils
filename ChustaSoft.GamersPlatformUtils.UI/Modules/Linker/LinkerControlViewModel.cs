@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
@@ -34,7 +35,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
 
             _linkerService = linkerService;
 
-            this.Model.IsLoading = true;
+            this.Model.IsLoading = false;
         }
 
 
@@ -57,16 +58,28 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
 
         private async void OnAnalyze() 
         {
+            this.Model.IsLoading = true;
+
             var selectedSourcePlatforms = Model.PlatformsSource.Where(x => x.Selected).Select(x => x.Name);
-            var pathsAnalised = await _linkerService.SearchAsync(selectedSourcePlatforms);
+
+            var pathsAnalised = await ManageLoadingVisibility(_linkerService.SearchAsync(selectedSourcePlatforms));
 
             this.Model.PathsAnalyzed = new ObservableCollection<SelectableItem>( pathsAnalised.Select(x => ListItemMapper.Map(x)));
+            this.Model.IsLoading = false;
+
         }
 
         private void OnLink()
         {
             IEnumerable<GameLink> gameLinksToLink = this.Model.PathsAnalyzed.Where(x => x.Selected).Select(x => x.GameLink);
             //TODO: Get selected values and Link them to steam
+        }
+
+        private Task<IEnumerable<GameLink>> ManageLoadingVisibility(Task<IEnumerable<GameLink>> task)
+        {
+            this.Model.IsLoading = true;
+            task.ContinueWith(x => this.Model.IsLoading = false);
+            return task;
         }
 
 

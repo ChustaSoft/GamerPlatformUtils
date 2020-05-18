@@ -41,7 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Infrastructure", "4. Inf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chustasoft.GamersPlatformUtils.Infrastructure", "Chustasoft.GamersPlatformUtils.Infrastructure\Chustasoft.GamersPlatformUtils.Infrastructure.csproj", "{27C0742B-B80B-4F23-9D5F-24FE181BA2EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChustaSoft.GamersPlatformUtils.Infrastructure.Tests", "ChustaSoft.GamersPlatformUtils.Infrastructure.Tests\ChustaSoft.GamersPlatformUtils.Infrastructure.Tests.csproj", "{806B045B-7FB1-4B50-AD06-C0EB1E41EC87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChustaSoft.GamersPlatformUtils.Infrastructure.Tests", "ChustaSoft.GamersPlatformUtils.Infrastructure.Tests\ChustaSoft.GamersPlatformUtils.Infrastructure.Tests.csproj", "{806B045B-7FB1-4B50-AD06-C0EB1E41EC87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -4,8 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:controls="clr-namespace:ChustaSoft.Common.Controls;assembly=ChustaSoft.Common.WPF"
-             xmlns:controls1="clr-namespace:ChustaSoft.GamersPlatformUtils.UI.Controls.Loading"
+             xmlns:controls="clr-namespace:ChustaSoft.Common.Controls;assembly=ChustaSoft.Common.WPF"             
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -43,7 +42,7 @@
             </StackPanel>
         </materialDesign:Card>
 
-        <controls1:LoadingControl x:Name="loadingControl" Text="Loading ..." BackgroundColor="#555577" TextColor="#ffffff" PanelOpacity="0.5" Visible="{Binding Model.IsLoading, Mode=OneWay}" TopBarVisible="False" BottomBarVisible="True" />
+        <controls:Loading x:Name="loadingControl" Text="Loading ..." BackgroundColor="#555577" TextColor="#ffffff" PanelOpacity="0.5" Visible="{Binding Model.IsLoading, Mode=OneWay}" TopBarVisible="False" BottomBarVisible="True" Width="400" />
 
     </Grid>
 
