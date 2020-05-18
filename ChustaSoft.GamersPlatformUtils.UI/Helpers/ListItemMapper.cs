@@ -11,8 +11,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Helpers
             return new SelectableItem
             { 
                 GameLink = gameLink,
-                Selected = false,
-                Name = gameLink.Name
+                Selected = false
             };
         }
 

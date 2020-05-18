@@ -15,18 +15,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Models
                 _Selected = value;
                 OnPropertyChanged(nameof(Selected));
             }
-        }
-
-        private string _name;
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                _name = value;
-                OnPropertyChanged(nameof(Name));
-            }
-        }
+        }       
 
         private GameLink _gameLink;
         public GameLink GameLink
