@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:ChustaSoft.GamersPlatformUtils.UI.Controls"
         xmlns:cleaner="clr-namespace:ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner"
+        xmlns:linker="clr-namespace:ChustaSoft.GamersPlatformUtils.UI.Modules.Linker"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="ChustaSoft GamerPlatformUtils" Height="768" Width="1024"
@@ -43,7 +44,6 @@
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
                                         <Setter TargetName="Border" Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}" />
-                                        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBodyLight}" />
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="False">
                                         <Setter TargetName="Border" Property="Background" Value="{DynamicResource MaterialDesignCardBackground}" />
@@ -54,14 +54,16 @@
                     </Setter>
                 </Style>
             </TabControl.Resources>
-            <TabItem Header="Cleaner" Width="200" Height="35">
+            <TabItem Header="Cleaner" Width="200">
                 <Grid Background="{DynamicResource MaterialDesignCardBackground}">
                     <cleaner:CleanerControl DataContext="{Binding CleanerControlViewModel}"></cleaner:CleanerControl>
                 </Grid>
             </TabItem>
-
-            <TabItem Header="Linker" Width="200" Height="35">
-                <Grid Background="{DynamicResource MaterialDesignCardBackground}"/>
+            
+            <TabItem Header="Linker" Width="200">
+                <Grid Background="{DynamicResource MaterialDesignCardBackground}">
+                    <linker:LinkerControl DataContext="{Binding LinkerControlViewModel}"></linker:LinkerControl>
+                </Grid>
             </TabItem>
             
         </TabControl>

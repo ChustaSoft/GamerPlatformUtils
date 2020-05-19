@@ -58,10 +58,14 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
         private IEnumerable<GameLink> GetGameLinksFromLibraryDirectory(string path)
         {
             List<GameLink> gameLinks = new List<GameLink>();
-            Directory.GetDirectories(path).ToList().ForEach(subDirectory =>
+
+            if (Directory.Exists(path))
             {
-                gameLinks.Add(new GameLink { Name = Path.GetFileName(subDirectory), Path = FileSystem.GetFileInfo((Path.Combine(path, subDirectory))) });
-            });
+                Directory.GetDirectories(path).ToList().ForEach(subDirectory =>
+                {
+                    gameLinks.Add(new GameLink { Name = Path.GetFileName(subDirectory), Path = FileSystem.GetFileInfo((Path.Combine(path, subDirectory))) });
+                });
+            }
 
             return gameLinks;
         }

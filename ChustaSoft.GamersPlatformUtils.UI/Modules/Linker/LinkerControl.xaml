@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="ChustaSoft.GamersPlatformUtils.UI.Modules.Linker.LinkerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:ChustaSoft.Common.Controls;assembly=ChustaSoft.Common.WPF"             
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Card.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ListView Grid.Row="0" ItemsSource="{Binding Model.PathsAnalyzed}" ScrollViewer.CanContentScroll="True" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox IsChecked="{Binding Path=Selected, Mode=TwoWay}" Margin="0 0 10 0" />
+                        <TextBlock Text="{Binding Path=Value.Name, Mode=OneWay}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <materialDesign:Card Grid.Row="1" Height="50">
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
+                <controls:Selection Items="{Binding Model.PlatformsDestination, Mode=TwoWay}" DefaultText="Select destination platform..." Margin="0 0 10 0" />
+                <controls:MultiSelection Items="{Binding Model.PlatformsSource, Mode=TwoWay}" DefaultText="Select source platforms..." Margin="0 0 10 0" />
+                <Button Content="Analyze" Command="{Binding AnalyseCommand}" Margin="{Binding ButtonMargins}"></Button>
+                <Button Content="Link" Command="{Binding LinkCommand}" Margin="{Binding ButtonMargins}"></Button>
+            </StackPanel>
+        </materialDesign:Card>
+
+        <controls:Loading x:Name="loadingControl" Text="Loading ..." BackgroundColor="#555577" TextColor="#ffffff" PanelOpacity="0.5" Visible="{Binding IsLoading, Mode=OneWay}" TopBarVisible="False" BottomBarVisible="True" Width="400" />
+
+    </Grid>
+
+</UserControl>

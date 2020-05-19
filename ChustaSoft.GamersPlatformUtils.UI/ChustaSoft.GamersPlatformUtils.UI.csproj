@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ChustaSoft.Common.Wpf" Version="1.0.3" />
+    <PackageReference Include="ChustaSoft.Common.Wpf" Version="1.1.1" />
     <PackageReference Include="MaterialDesignThemes" Version="3.1.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.3" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.3" />
@@ -39,8 +39,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ChustaSoft.GamersPlatformUtils.Services\ChustaSoft.GamersPlatformUtils.Services.csproj" />
-
-    <Folder Include="Modules\Linker\" />
 
     <Compile Update="MainWindowViewModel.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -55,6 +53,13 @@
     </Compile>
     <Compile Update="Modules\Cleaner\CleanerControlModel.cs">
       <DependentUpon>CleanerControl.xaml</DependentUpon>
+    </Compile>
+
+    <Compile Update="Modules\Linker\LinkerControlViewModel.cs">
+      <DependentUpon>LinkerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Modules\Linker\LinkerControlModel.cs">
+      <DependentUpon>LinkerControl.xaml</DependentUpon>
     </Compile>
 
     <Compile Update="Helpers\IViewModelFactory.cs">

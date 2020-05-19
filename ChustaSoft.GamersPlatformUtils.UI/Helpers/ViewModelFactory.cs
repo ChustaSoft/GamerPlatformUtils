@@ -3,10 +3,12 @@ using ChustaSoft.GamersPlatformUtils.Services;
 using ChustaSoft.GamersPlatformUtils.UI.Controls;
 using ChustaSoft.GamersPlatformUtils.UI.Enums;
 using ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner;
+using ChustaSoft.GamersPlatformUtils.UI.Modules.Linker;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ChustaSoft.GamersPlatformUtils.UI.Helpers
 {
@@ -38,7 +40,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Helpers
                 case ViewModelType.Cleaner:
                     return GetCleanerControlViewModel();
                 case ViewModelType.Linker:
-                    return null;
+                    return GetLinkerControlViewModel();
                 default:
                     return _mainWindowViewModel;
             }
@@ -76,6 +78,23 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Helpers
             }
 
             return _viewModels[ViewModelType.Cleaner];
+        }
+
+        private ViewModelBase GetLinkerControlViewModel()
+        {
+            if (!_viewModels.ContainsKey(ViewModelType.Linker))
+            {
+                var viewModel = new LinkerControlViewModel(_logger, _serviceProvider.GetService<ILinkerService>());
+
+                if(_mainWindowViewModel.Model?.Platforms != null)
+                {
+                    viewModel.Assign(_mainWindowViewModel.Model.Platforms.Select(x => PlatformMapper.Map(x)));
+                }
+
+                _viewModels.Add(ViewModelType.Linker, viewModel);
+            }
+
+            return _viewModels[ViewModelType.Linker];
         }
 
     }
