@@ -42,7 +42,7 @@
             </StackPanel>
         </materialDesign:Card>
 
-        <controls:Loading x:Name="loadingControl" Text="Loading ..." BackgroundColor="#555577" TextColor="#ffffff" PanelOpacity="0.5" Visible="{Binding Model.IsLoading, Mode=OneWay}" TopBarVisible="False" BottomBarVisible="True" Width="400" />
+        <controls:Loading x:Name="loadingControl" Text="Loading ..." BackgroundColor="#555577" TextColor="#ffffff" PanelOpacity="0.5" Visible="{Binding IsLoading, Mode=OneWay}" TopBarVisible="False" BottomBarVisible="True" Width="400" />
 
     </Grid>
 
