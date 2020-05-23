@@ -5,7 +5,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:ChustaSoft.Common.Controls;assembly=ChustaSoft.Common.WPF"
-             xmlns:helpers="clr-namespace:ChustaSoft.Common.Helpers;assembly=ChustaSoft.Common.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -14,7 +13,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Card.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <helpers:VisibilityConverter x:Key="VisibilityConverter" /> 
+            <BooleanToVisibilityConverter x:Key="VisibilityConverter" /> 
         </ResourceDictionary>
     </UserControl.Resources>
 

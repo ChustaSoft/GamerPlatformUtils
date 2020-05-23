@@ -54,13 +54,13 @@
                     </Setter>
                 </Style>
             </TabControl.Resources>
-            <TabItem Header="Cleaner" Width="200">
+            <TabItem Header="Cleaner" Width="200" Height="35">
                 <Grid Background="{DynamicResource MaterialDesignCardBackground}">
                     <cleaner:CleanerControl DataContext="{Binding CleanerControlViewModel}"></cleaner:CleanerControl>
                 </Grid>
             </TabItem>
-            
-            <TabItem Header="Linker" Width="200">
+
+            <TabItem Header="Linker" Width="200" Height="35">
                 <Grid Background="{DynamicResource MaterialDesignCardBackground}">
                     <linker:LinkerControl DataContext="{Binding LinkerControlViewModel}"></linker:LinkerControl>
                 </Grid>
