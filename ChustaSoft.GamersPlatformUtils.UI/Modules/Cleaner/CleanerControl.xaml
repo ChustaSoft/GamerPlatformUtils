@@ -59,7 +59,9 @@
                 <Button Content="Clean" Command="{Binding CleanCommand}" Margin="{Binding ButtonMargins}"></Button>
             </StackPanel>
         </materialDesign:Card>
-        
+
+        <controls:Loading x:Name="loadingControl" Grid.Row="0" Text="Loading ..." HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" BackgroundColor="{DynamicResource MaterialDesignCardBackground}" TextColor="#ffffff" PanelOpacity="0.5" Visible="{Binding IsLoading, Mode=OneWay}" LoadingPosition="Top" />
+
     </Grid>
     
 </UserControl>

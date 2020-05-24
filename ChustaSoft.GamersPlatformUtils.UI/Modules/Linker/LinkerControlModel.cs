@@ -2,12 +2,12 @@
 using ChustaSoft.Common.Models;
 using ChustaSoft.GamersPlatformUtils.Abstractions;
 using System.Collections.ObjectModel;
-using System.IO;
+using System.Linq;
 
 namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
 {
     public class LinkerControlModel : ViewModelBase
-    {        
+    {
 
         private ObservableCollection<SelectableOption> _platformsSource;
         public ObservableCollection<SelectableOption> PlatformsSource
@@ -38,15 +38,40 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
             {
                 _pathsAnalyzed = value;
                 OnPropertyChanged(nameof(PathsAnalyzed));
+                OnPropertyChanged(nameof(HasResults));
             }
         }
 
+        public bool HasResults => PathsAnalyzed.Any();
 
-        public LinkerControlModel() 
+
+        public LinkerControlModel()
+        {
+            SetEmptyPlatforms();
+            SetEmptyPaths();
+        }
+
+
+        internal void ClearPaths()
+        {
+            SetEmptyPaths();
+        }
+
+        internal void ChangeAllPathsSelection(bool multipleSelection)
+        {
+            foreach (var filePathSelect in PathsAnalyzed)
+                filePathSelect.Selected = multipleSelection;
+        }
+
+        private void SetEmptyPlatforms()
         {
             PlatformsSource = new ObservableCollection<SelectableOption>();
             PlatformsDestination = new ObservableCollection<SelectableOption>();
-            PathsAnalyzed = new ObservableCollection<SelectableOption<GameLink>>(); 
+        }
+
+        private void SetEmptyPaths()
+        {
+            PathsAnalyzed = new ObservableCollection<SelectableOption<GameLink>>();
         }
 
     }
