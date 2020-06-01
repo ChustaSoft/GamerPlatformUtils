@@ -32,6 +32,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
         }
         public bool HasResults => PathsAnalyzed.Any();
 
+
         public CleanerControlModel()
         {
             SetEmptyPlatforms();
@@ -49,8 +50,6 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
             foreach (var filePathSelect in PathsAnalyzed)
                 filePathSelect.Selected = multipleSelection;
         }
-
-        
 
 
         private void SetEmptyPlatforms()

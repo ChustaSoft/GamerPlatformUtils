@@ -10,7 +10,6 @@ using ChustaSoft.GamersPlatformUtils.UI.Styles;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,11 +17,23 @@ using System.Windows;
 namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
 {
     public class LinkerControlViewModel : TraceableViewModelBase<LinkerControlModel>
-    {        
+    {
+
         private readonly ILinkerService _linkerService;
+
+        private bool _multipleSelection = true;
+
+
+        public bool CleanCompleted { get; private set; }
+        public string CleanResultMessage { get; private set; }
+
 
         public RelayCommand AnalyseCommand { get; private set; }
         public RelayCommand LinkCommand { get; private set; }
+        public RelayCommand ClearCommand { get; private set; }
+        public RelayCommand ChangeAllSelectionCommand { get; private set; }
+        public RelayCommand DiscardCommand { get; private set; }
+
 
         private bool _isLoading;
         public bool IsLoading
@@ -40,6 +51,9 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
         {
             AnalyseCommand = new RelayCommand(OnAnalyze);
             LinkCommand = new RelayCommand(OnLink);
+            ClearCommand = new RelayCommand(OnClear);
+            ChangeAllSelectionCommand = new RelayCommand(OnChangeAllSelection);
+            DiscardCommand = new RelayCommand(OnDiscard);
 
             _linkerService = linkerService;
         }
@@ -47,43 +61,76 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
         public void Assign(IEnumerable<SelectableOption> selectablePlatforms)
         {
             this.Model.PlatformsSource = new ObservableCollection<SelectableOption>(RemoveSteamPlatform(selectablePlatforms));
-
             this.Model.PlatformsDestination = new ObservableCollection<SelectableOption>(SelectSteamPlatform(selectablePlatforms));
-        }
-
-        private IEnumerable<SelectableOption> SelectSteamPlatform(IEnumerable<SelectableOption> selectablePlatforms)
-        {
-            return selectablePlatforms.Where(x => x.Name.ToLower() == SteamConstants.PLATFORM_NAME.ToLower());
-        }
-
-        private IEnumerable<SelectableOption> RemoveSteamPlatform(IEnumerable<SelectableOption> selectablePlatforms)
-        {
-            return selectablePlatforms.Where(x => !x.Name.ToLower().Contains(SteamConstants.PLATFORM_NAME.ToLower()));
         }
 
         private async void OnAnalyze() 
         {
-            this.IsLoading = true;
-
-            var selectedSourcePlatforms = Model.PlatformsSource.Where(x => x.Selected).Select(x => x.Name);
+            var selectedSourcePlatforms = Model.PlatformsSource.GetSelected();
 
             var pathsAnalised = await ManageLoadingVisibility(_linkerService.SearchAsync(selectedSourcePlatforms));
 
-            this.Model.PathsAnalyzed = new ObservableCollection<SelectableOption<GameLink>>( pathsAnalised.Select(x => GameLinkMapper.Map(x)));
+            this.Model.PathsAnalyzed = GameLinkMapper.Map(pathsAnalised);
 
         }
 
         private void OnLink()
         {
-            IEnumerable<GameLink> gameLinksToLink = this.Model.PathsAnalyzed.Where(x => x.Selected).Select(x => x.Value);
+            var gameLinksToLink = this.Model.PathsAnalyzed.GetSelected();
             //TODO: Get selected values and Link them to steam
         }
 
-        private Task<IEnumerable<GameLink>> ManageLoadingVisibility(Task<IEnumerable<GameLink>> task)
+        private void OnClear()
+        {
+            ClearResultView();
+        }
+
+        private void SetCleanResult(string message, bool isCompleted)
+        {
+            CleanResultMessage = message;
+            CleanCompleted = isCompleted;
+
+            OnPropertyChanged(nameof(CleanResultMessage));
+            OnPropertyChanged(nameof(CleanCompleted));
+        }
+
+        private void ClearResultView()
+        {
+            this.Model.ClearPaths();
+            ResetDefaultMultipleSelection();
+        }
+
+        private void OnChangeAllSelection()
+        {
+            this.Model.ChangeAllPathsSelection(_multipleSelection);
+            _multipleSelection = !_multipleSelection;
+        }
+
+        private void OnDiscard()
+        {
+            SetCleanResult(string.Empty, false);
+        }
+
+        private void ResetDefaultMultipleSelection()
+        {
+            _multipleSelection = false;
+        }
+
+        private Task<IEnumerable<GameLink>> ManageLoadingVisibility(Task<IEnumerable<GameLink>> analyzeTask)
         {
             this.IsLoading = true;
-            task.ContinueWith(x => this.IsLoading = false);
-            return task;
+            analyzeTask.ContinueWith(x => this.IsLoading = false);
+            return analyzeTask;
+        }
+
+        private IEnumerable<SelectableOption> SelectSteamPlatform(IEnumerable<SelectableOption> selectablePlatforms)
+        {
+            return selectablePlatforms.Where(x => x.Name.Equals(SteamConstants.PLATFORM_NAME));
+        }
+
+        private IEnumerable<SelectableOption> RemoveSteamPlatform(IEnumerable<SelectableOption> selectablePlatforms)
+        {
+            return selectablePlatforms.Where(x => !x.Name.Contains(SteamConstants.PLATFORM_NAME));
         }
 
 

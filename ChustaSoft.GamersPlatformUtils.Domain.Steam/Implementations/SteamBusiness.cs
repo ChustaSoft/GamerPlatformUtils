@@ -118,7 +118,7 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
         {
             Regex pathRegex = new Regex(@"[A-Z]:\\\\(.*)", RegexOptions.IgnoreCase);
 
-            return pathRegex.Match(configLine).Value.Replace("\\\\", "\\");
+            return pathRegex.Match(configLine).Value.Replace("\\\\", "\\").Replace('"', ' ').Trim();
         }
 
     }

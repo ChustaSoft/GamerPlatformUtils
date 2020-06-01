@@ -5,7 +5,10 @@ using ChustaSoft.GamersPlatformUtils.Services;
 using ChustaSoft.GamersPlatformUtils.UI.Helpers;
 using ChustaSoft.GamersPlatformUtils.UI.Styles;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
@@ -28,6 +31,18 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
         public RelayCommand ClearCommand { get; private set; }
         public RelayCommand ChangeAllSelectionCommand { get; private set; }
         public RelayCommand DiscardCommand { get; private set; }
+
+
+        private bool _isLoading;
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+            }
+        }
 
 
         public CleanerControlViewModel(ILogger logger, IAnalyzerService analyzerService, IFileService fileService)
@@ -55,8 +70,8 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
         private async void OnAnalyze() 
         {
             var selectedPlatforms = Model.Platforms.GetSelected();
-            var pathsAnalised = await _analyzerService.AnalyzeAsync(selectedPlatforms);
-
+            var pathsAnalised = await ManageLoadingVisibility(_analyzerService.AnalyzeAsync(selectedPlatforms));
+            
             this.Model.PathsAnalyzed = FileInfoMapper.Map(pathsAnalised);
             ResetDefaultMultipleSelection();
         }
@@ -70,24 +85,9 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
             ClearResultView();
         }
 
-        private void SetCleanResult(string message, bool isCompleted)
-        {
-            CleanResultMessage = message;
-            CleanCompleted = isCompleted;
-
-            OnPropertyChanged(nameof(CleanResultMessage));
-            OnPropertyChanged(nameof(CleanCompleted));
-        }
-
         private void OnClear()
         {
             ClearResultView();
-        }
-
-        private void ClearResultView()
-        {
-            this.Model.ClearPaths();
-            ResetDefaultMultipleSelection();
         }
 
         private void OnChangeAllSelection() 
@@ -101,11 +101,32 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
             SetCleanResult(string.Empty, false);
         }
 
+        private void SetCleanResult(string message, bool isCompleted)
+        {
+            CleanResultMessage = message;
+            CleanCompleted = isCompleted;
+
+            OnPropertyChanged(nameof(CleanResultMessage));
+            OnPropertyChanged(nameof(CleanCompleted));
+        }
+
+        private void ClearResultView()
+        {
+            this.Model.ClearPaths();
+            ResetDefaultMultipleSelection();
+        }
+
         private void ResetDefaultMultipleSelection() 
         {
             _multipleSelection = false;
         }
 
+        private Task<IEnumerable<FileInfo>> ManageLoadingVisibility(Task<IEnumerable<FileInfo>> analyzeTask)
+        {
+            this.IsLoading = true;
+            analyzeTask.ContinueWith(x => this.IsLoading = false);
+            return analyzeTask;
+        }
 
         #region Styles
 
