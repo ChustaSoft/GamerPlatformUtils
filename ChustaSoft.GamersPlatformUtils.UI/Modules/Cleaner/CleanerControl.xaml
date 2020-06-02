@@ -54,9 +54,9 @@
 
         <materialDesign:Card Grid.Row="1" Height="50">
             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
-                <controls:MultiSelection Items="{Binding Model.Platforms, Mode=TwoWay}" DefaultText="Select platforms..." />
-                <Button Content="Analyze" Command="{Binding AnalyseCommand}" Margin="{Binding ButtonMargins}"></Button>
-                <Button Content="Clean" Command="{Binding CleanCommand}" Margin="{Binding ButtonMargins}"></Button>
+                <controls:MultiSelection Items="{Binding Model.Platforms, Mode=TwoWay}" DefaultText="Select platforms..." Margin="0 0 10 0" />
+                <Button Content="Analyze" Command="{Binding AnalyseCommand}" Margin="{Binding ButtonMargins}" Width="100px"></Button>
+                <Button Content="Clean" Command="{Binding CleanCommand}" Margin="{Binding ButtonMargins}" Width="100px"></Button>
             </StackPanel>
         </materialDesign:Card>
 

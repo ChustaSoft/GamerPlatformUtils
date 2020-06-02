@@ -57,8 +57,8 @@
             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
                 <controls:Selection Items="{Binding Model.PlatformsDestination, Mode=TwoWay}" DefaultText="Select destination platform..." Margin="0 0 10 0" />
                 <controls:MultiSelection Items="{Binding Model.PlatformsSource, Mode=TwoWay}" DefaultText="Select source platforms..." Margin="0 0 10 0" />
-                <Button Content="Analyze" Command="{Binding AnalyseCommand}" Margin="{Binding ButtonMargins}"></Button>
-                <Button Content="Link" Command="{Binding LinkCommand}" Margin="{Binding ButtonMargins}"></Button>
+                <Button Content="Analyze" Command="{Binding AnalyseCommand}" Margin="{Binding ButtonMargins}" Width="100px"></Button>
+                <Button Content="Link" Command="{Binding LinkCommand}" Margin="{Binding ButtonMargins}" Width="100px"></Button>
             </StackPanel>
         </materialDesign:Card>
 
