@@ -55,7 +55,7 @@
             </StackPanel>
         </materialDesign:Card>
 
-        <controls:Loading x:Name="loadingControl" Grid.Row="0" Text="Loading ..." HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" BackgroundColor="{DynamicResource MaterialDesignCardBackground}" TextColor="#ffffff" PanelOpacity="0.5" Visible="{Binding IsLoading, Mode=OneWay}" LoadingPosition="Top" />
+        <controls:Loading x:Name="loadingControl" Grid.Row="0" Visible="{Binding IsLoading, Mode=OneWay}" Style="{StaticResource GPU_LoadingStyle}" />
 
     </Grid>
 
