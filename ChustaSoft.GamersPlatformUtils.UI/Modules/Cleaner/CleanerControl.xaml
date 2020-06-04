@@ -12,6 +12,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Card.xaml" />
+                <ResourceDictionary Source="/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="VisibilityConverter" /> 
         </ResourceDictionary>
@@ -40,7 +41,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <CheckBox IsChecked="{Binding Path=Selected, Mode=TwoWay}" Margin="0 0 10 0" />
+                            <CheckBox IsChecked="{Binding Path=Selected, Mode=TwoWay}" Margin="{StaticResource DefaultRightMargin}" />
                             <TextBlock Text="{Binding Path=Name, Mode=OneWay}" />
                         </StackPanel>
                     </DataTemplate>
@@ -54,9 +55,9 @@
 
         <materialDesign:Card Grid.Row="1" Height="50">
             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
-                <controls:MultiSelection Items="{Binding Model.Platforms, Mode=TwoWay}" DefaultText="Select platforms..." Margin="0 0 10 0" />
-                <Button Content="Analyze" Command="{Binding AnalyseCommand}" Margin="{Binding ButtonMargins}" Width="100px"></Button>
-                <Button Content="Clean" Command="{Binding CleanCommand}" Margin="{Binding ButtonMargins}" Width="100px"></Button>
+                <controls:MultiSelection Items="{Binding Model.Platforms, Mode=TwoWay}" DefaultText="Select platforms..." Margin="{StaticResource DefaultRightMargin}" />
+                <Button Content="Analyze" Command="{Binding AnalyseCommand}" Style="{StaticResource GPU_ButtonStyle}"></Button>
+                <Button Content="Clean" Command="{Binding CleanCommand}" Style="{StaticResource GPU_ButtonStyle}"></Button>
             </StackPanel>
         </materialDesign:Card>
 
