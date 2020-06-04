@@ -25,16 +25,8 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Visibility="{Binding Model.HasResults, Converter={StaticResource VisibilityConverter}, Mode=OneWay}">
-                <Button 
-                        Content="{materialDesign:PackIcon CheckAll}" ToolTip="Select / Unselect all"
-                        Style="{DynamicResource MaterialDesignFloatingActionLightButton}" Height="25" Width="25" Margin="0 5 5 0"
-                        Command="{Binding ChangeAllSelectionCommand}">
-                </Button>
-                <Button 
-                        Content="{materialDesign:PackIcon Clear}" ToolTip="Clear results"
-                        Style="{DynamicResource MaterialDesignFloatingActionDarkButton}" Height="25" Width="25" Margin="0 5 5 0"
-                        Command="{Binding ClearCommand}">
-                </Button>
+                <Button Style="{StaticResource GPU_SelectAllActionButtonStyle}" Command="{Binding ChangeAllSelectionCommand}"></Button>
+                <Button Style="{DynamicResource GPU_ClearAllActionButtonStyle}" Command="{Binding ClearCommand}"></Button>
             </StackPanel>
             <ListView Grid.Row="0" ItemsSource="{Binding Model.PathsAnalyzed}" ScrollViewer.CanContentScroll="True" >
                 
