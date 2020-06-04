@@ -16,7 +16,15 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}" Icon="/Resources/chustasoft-logo.png" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow">
-    
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
             <b:CallMethodAction TargetObject="{Binding}" MethodName="OnLoad" />
@@ -33,34 +41,13 @@
         </Grid.ColumnDefinitions>
 
         <TabControl Grid.Row="0">
-            <TabControl.Resources>
-                <Style TargetType="TabItem">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="TabItem">
-                                <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="{DynamicResource MaterialDesignBody}" CornerRadius="5,5,0,0" Margin="0,0,2,0">
-                                    <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="10,2"/>
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsSelected" Value="True">
-                                        <Setter TargetName="Border" Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}" />
-                                    </Trigger>
-                                    <Trigger Property="IsSelected" Value="False">
-                                        <Setter TargetName="Border" Property="Background" Value="{DynamicResource MaterialDesignCardBackground}" />
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </TabControl.Resources>
-            <TabItem Header="Cleaner" Width="200" Height="35">
+            <TabItem Header="Cleaner" Style="{StaticResource GPU_TabItemStyle}">
                 <Grid Background="{DynamicResource MaterialDesignCardBackground}">
                     <cleaner:CleanerControl DataContext="{Binding CleanerControlViewModel}"></cleaner:CleanerControl>
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Linker" Width="200" Height="35">
+            <TabItem Header="Linker" Style="{StaticResource GPU_TabItemStyle}">
                 <Grid Background="{DynamicResource MaterialDesignCardBackground}">
                     <linker:LinkerControl DataContext="{Binding LinkerControlViewModel}"></linker:LinkerControl>
                 </Grid>
