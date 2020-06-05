@@ -12,6 +12,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Card.xaml" />
+                <ResourceDictionary Source="/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="VisibilityConverter" /> 
         </ResourceDictionary>
@@ -24,23 +25,15 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Visibility="{Binding Model.HasResults, Converter={StaticResource VisibilityConverter}, Mode=OneWay}">
-                <Button 
-                        Content="{materialDesign:PackIcon CheckAll}" ToolTip="Select / Unselect all"
-                        Style="{DynamicResource MaterialDesignFloatingActionLightButton}" Height="25" Width="25" Margin="0 5 5 0"
-                        Command="{Binding ChangeAllSelectionCommand}">
-                </Button>
-                <Button 
-                        Content="{materialDesign:PackIcon Clear}" ToolTip="Clear results"
-                        Style="{DynamicResource MaterialDesignFloatingActionDarkButton}" Height="25" Width="25" Margin="0 5 5 0"
-                        Command="{Binding ClearCommand}">
-                </Button>
+                <Button Style="{StaticResource GPU_SelectAllActionButtonStyle}" Command="{Binding ChangeAllSelectionCommand}"></Button>
+                <Button Style="{DynamicResource GPU_ClearAllActionButtonStyle}" Command="{Binding ClearCommand}"></Button>
             </StackPanel>
             <ListView Grid.Row="0" ItemsSource="{Binding Model.PathsAnalyzed}" ScrollViewer.CanContentScroll="True" >
                 
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <CheckBox IsChecked="{Binding Path=Selected, Mode=TwoWay}" Margin="0 0 10 0" />
+                            <CheckBox IsChecked="{Binding Path=Selected, Mode=TwoWay}" Margin="{StaticResource DefaultRightMargin}" />
                             <TextBlock Text="{Binding Path=Name, Mode=OneWay}" />
                         </StackPanel>
                     </DataTemplate>
@@ -54,13 +47,13 @@
 
         <materialDesign:Card Grid.Row="1" Height="50">
             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
-                <controls:MultiSelection Items="{Binding Model.Platforms, Mode=TwoWay}" DefaultText="Select platforms..." />
-                <Button Content="Analyze" Command="{Binding AnalyseCommand}" Margin="{Binding ButtonMargins}"></Button>
-                <Button Content="Clean" Command="{Binding CleanCommand}" Margin="{Binding ButtonMargins}"></Button>
+                <controls:MultiSelection Items="{Binding Model.Platforms, Mode=TwoWay}" DefaultText="Select platforms..." Margin="{StaticResource DefaultRightMargin}" />
+                <Button Content="Analyze" Command="{Binding AnalyseCommand}" Style="{StaticResource GPU_ButtonStyle}"></Button>
+                <Button Content="Clean" Command="{Binding CleanCommand}" Style="{StaticResource GPU_ButtonStyle}"></Button>
             </StackPanel>
         </materialDesign:Card>
 
-        <controls:Loading x:Name="loadingControl" Grid.Row="0" Text="Loading ..." HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" BackgroundColor="{DynamicResource MaterialDesignCardBackground}" TextColor="#ffffff" PanelOpacity="0.5" Visible="{Binding IsLoading, Mode=OneWay}" LoadingPosition="Top" />
+        <controls:Loading x:Name="loadingControl" Grid.Row="0" Visible="{Binding IsLoading, Mode=OneWay}" Style="{StaticResource GPU_LoadingStyle}" />
 
     </Grid>
     

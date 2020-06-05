@@ -1,7 +1,6 @@
 ﻿using ChustaSoft.Common.Base;
 using ChustaSoft.GamersPlatformUtils.Domain;
 using ChustaSoft.GamersPlatformUtils.Services;
-using ChustaSoft.GamersPlatformUtils.UI.Styles;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Windows;
@@ -24,13 +23,6 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Controls
         public InformationControlViewModel(ILogger logger)
             : base(logger)
         { }
-
-
-        #region Styles
-
-        public Thickness IconsMargins => StyleConstants.HorizontalCommonMargins;
-
-        #endregion
 
     }
 }

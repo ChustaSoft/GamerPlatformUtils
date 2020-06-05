@@ -3,13 +3,11 @@ using ChustaSoft.Common.Helpers;
 using ChustaSoft.Common.Models;
 using ChustaSoft.GamersPlatformUtils.Services;
 using ChustaSoft.GamersPlatformUtils.UI.Helpers;
-using ChustaSoft.GamersPlatformUtils.UI.Styles;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
 {
@@ -127,12 +125,6 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Cleaner
             analyzeTask.ContinueWith(x => this.IsLoading = false);
             return analyzeTask;
         }
-
-        #region Styles
-
-        public static Thickness ButtonMargins => StyleConstants.HorizontalCommonMargins;
-
-        #endregion
 
     }
 }

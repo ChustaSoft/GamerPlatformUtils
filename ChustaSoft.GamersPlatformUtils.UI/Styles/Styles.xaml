@@ -1,0 +1,70 @@
+﻿<ResourceDictionary 
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+            xmlns:controls="clr-namespace:ChustaSoft.Common.Controls;assembly=ChustaSoft.Common.WPF" 
+    >
+
+    <Thickness x:Key="DefaultHorizontalMargins">5 0 5 0</Thickness>
+    <Thickness x:Key="DefaultRightMargin">0 0 10 0</Thickness>
+
+    <Style x:Key="GPU_ButtonStyle" BasedOn="{StaticResource {x:Type Button}}" TargetType="Button">
+        <Setter Property="Margin" Value="{StaticResource DefaultHorizontalMargins}"/>
+        <Setter Property="Width" Value="100px"/>
+    </Style>
+
+    <Style x:Key="GPU_SelectAllActionButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource MaterialDesignFloatingActionLightButton}">
+        <Setter Property="Margin" Value="0 5 5 0"/>
+        <Setter Property="Width" Value="25"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="ToolTip" Value="Select / Unselect all" />
+        <Setter Property="Content" Value="{materialDesign:PackIcon CheckAll}" />
+    </Style>
+
+    <Style x:Key="GPU_ClearAllActionButtonStyle" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource MaterialDesignFloatingActionDarkButton}">
+        <Setter Property="Margin" Value="0 5 5 0"/>
+        <Setter Property="Width" Value="25"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="ToolTip" Value="Clear results" />
+        <Setter Property="Content" Value="{materialDesign:PackIcon Clear}" />
+    </Style>
+
+    <Style x:Key="GPU_PlatformImageStyle" TargetType="Image">
+        <Setter Property="Margin" Value="{StaticResource DefaultHorizontalMargins}"/>
+        <Setter Property="Width" Value="20px"/>
+        <Setter Property="Height" Value="20px"/>
+    </Style>
+
+    <Style x:Key="GPU_LoadingStyle" TargetType="controls:Loading">
+        <Setter Property="Text" Value="Loading..."/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="TextColor" Value="#ffffff"/>
+        <Setter Property="PanelOpacity" Value="0.5"/>
+        <Setter Property="LoadingPosition" Value="Top"/>
+        <Setter Property="BackgroundColor" Value="{DynamicResource MaterialDesignCardBackground}"/>
+    </Style>
+
+    <Style x:Key="GPU_TabItemStyle"  TargetType="TabItem">
+        <Setter Property="Width" Value="200px"/>
+        <Setter Property="Height" Value="35px"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="{DynamicResource MaterialDesignBody}" CornerRadius="5,5,0,0" Margin="0,0,2,0">
+                        <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="10,2"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="False">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource MaterialDesignCardBackground}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

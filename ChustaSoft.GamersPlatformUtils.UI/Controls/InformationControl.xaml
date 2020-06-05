@@ -7,14 +7,19 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+        </ResourceDictionary>
     </UserControl.Resources>
 
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
         <StackPanel Orientation="Horizontal">
-            <Image Source="/Resources/xbox-logo.png"  Width="20" Height="20" Visibility="{Binding HasXbox, Converter={StaticResource VisibilityConverter}, ConverterParameter=Xbox}" Margin="{Binding IconsMargins}"/>
-            <Image Source="/Resources/steam-logo.png"  Width="20" Height="20" Visibility="{Binding HasSteam, Converter={StaticResource VisibilityConverter}, ConverterParameter=Steam}" Margin="{Binding IconsMargins}"/>
-            <Image Source="/Resources/origin-logo.png"  Width="20" Height="20" Visibility="{Binding HasOrigin, Converter={StaticResource VisibilityConverter}, ConverterParameter=Origin}" Margin="{Binding IconsMargins}"/>
+            <Image Source="/Resources/xbox-logo.png" Visibility="{Binding HasXbox, Converter={StaticResource VisibilityConverter}, ConverterParameter=Xbox}" Style="{StaticResource GPU_PlatformImageStyle}" />
+            <Image Source="/Resources/steam-logo.png" Visibility="{Binding HasSteam, Converter={StaticResource VisibilityConverter}, ConverterParameter=Steam}" Style="{StaticResource GPU_PlatformImageStyle}" />
+            <Image Source="/Resources/origin-logo.png" Visibility="{Binding HasOrigin, Converter={StaticResource VisibilityConverter}, ConverterParameter=Origin}" Style="{StaticResource GPU_PlatformImageStyle}" />
         </StackPanel>
         <Label Content="{Binding Model.MachineName}" />
         <Label Content="{Binding Model.MachineSystem}" />

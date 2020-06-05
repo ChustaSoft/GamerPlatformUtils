@@ -6,13 +6,11 @@ using ChustaSoft.GamersPlatformUtils.Abstractions;
 using ChustaSoft.GamersPlatformUtils.Domain;
 using ChustaSoft.GamersPlatformUtils.Services;
 using ChustaSoft.GamersPlatformUtils.UI.Helpers;
-using ChustaSoft.GamersPlatformUtils.UI.Styles;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
 {
@@ -132,13 +130,6 @@ namespace ChustaSoft.GamersPlatformUtils.UI.Modules.Linker
         {
             return selectablePlatforms.Where(x => !x.Name.Contains(SteamConstants.PLATFORM_NAME));
         }
-
-
-        #region Styles
-
-        public static Thickness ButtonMargins => StyleConstants.HorizontalCommonMargins;
-
-        #endregion
 
     }
 }
