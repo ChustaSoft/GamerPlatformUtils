@@ -90,7 +90,7 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
         private void TryAddSecondaryPaths(List<string> librariesPaths)
         {
             var secondaryPaths = _readFileRepository.Read(this.AppPath + SteamConstants.CONFIG_SUBPATH)
-                .Where(x => x.Value.Contains(SteamConstants.BASEFOLDER_CONFIG_KEY))
+                .Where(x => x.Key.Contains(SteamConstants.BASEFOLDER_CONFIG_KEY))
                 .Select(x => x.Value);
 
             if (secondaryPaths.Any())
