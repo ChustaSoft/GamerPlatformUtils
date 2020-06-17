@@ -51,6 +51,7 @@ namespace ChustaSoft.GamersPlatformUtils.UI
         internal static ServiceCollection ConfigureRepositories(this ServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<XMLFileRepository>();
+            serviceCollection.AddScoped<VDFFileRepository>();
             serviceCollection.AddScoped<PowershellFileRepository>();
             serviceCollection.AddTransient<ServiceResolver>(serviceProvider => key =>
             {
@@ -58,6 +59,8 @@ namespace ChustaSoft.GamersPlatformUtils.UI
                 {
                     case RepositoriesDefinition.XML_REPOSITORY:
                         return serviceProvider.GetService<XMLFileRepository>();
+                    case RepositoriesDefinition.VDF_REPOSITORY:
+                        return serviceProvider.GetService<VDFFileRepository>();
                     case RepositoriesDefinition.POWERSHELL_REPOSITORY:
                         return serviceProvider.GetService<PowershellFileRepository>();
                     

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ChustaSoft.GamersPlatformUtils.Domain
 {
-    public class XboxBusiness : FileDependantPlatformBase, IXboxBusiness, ILinkFinder
+    public class XboxBusiness : PlatformBase, IXboxBusiness, ILinkFinder
     {
 
         public XboxBusiness(ServiceResolver serviceAccessor)

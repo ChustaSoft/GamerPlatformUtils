@@ -1,11 +1,9 @@
-﻿using Chustasoft.GamersPlatformUtils.Infrastructure.Implementations;
-using ChustaSoft.GamersPlatformUtils.Abstractions;
+﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
 using Microsoft.Win32;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ChustaSoft.GamersPlatformUtils.Domain
@@ -13,8 +11,8 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
     public class SteamBusiness : PlatformBase, ISteamBusiness, IAnalyzer
     {
 
-        public SteamBusiness()
-            : base()
+        public SteamBusiness(ServiceResolver serviceAccessor)
+           : base(serviceAccessor, RepositoriesDefinition.VDF_REPOSITORY)
         { }
 
 
@@ -36,27 +34,13 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
             });
         }
 
-        protected async override void LoadPlatform()
+        protected override void LoadPlatform()
         {
             this.AppPath = GetPath();
             this.Available = !string.IsNullOrEmpty(AppPath);
             this.Name = SteamConstants.PLATFORM_NAME;
             this.Brand = SteamConstants.BRAND_NAME;
-            //this.Libraries = await GetLibraries();
-
-
-            var configPath = this.AppPath + SteamConstants.CONFIG_SUBPATH;
-            //var dataArray = await File.ReadAllLinesAsync(configPath);
-
-            //var secondaryPaths = dataArray.Where(x => x.Contains(SteamConstants.BASEFOLDER_CONFIG_KEY));
-
-            //return secondaryPaths.Select(x => GetPathFromConfigLine(x));
-
-            var repo = new JSONFileRepository();
-
-            var data = repo.Read(configPath);
-
-            //return Enumerable.Empty<string>();
+            this.Libraries = GetLibraries();
         }
 
 
@@ -93,22 +77,25 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
             return files.OrderBy(x => x.FullName);
         }
 
-        //private async Task<IEnumerable<string>> GetLibraries()
-        //{
-        //    var librariesPaths = new List<string>();
+        private IEnumerable<string> GetLibraries()
+        {
+            var librariesPaths = new List<string>();
 
-        //    TryAddMainPath(librariesPaths);
-        //    await TryAddSecondaryPaths(librariesPaths);
+            TryAddMainPath(librariesPaths);
+            TryAddSecondaryPaths(librariesPaths);
 
-        //    return librariesPaths;
-        //}
+            return librariesPaths;
+        }
 
-        //private async Task TryAddSecondaryPaths(List<string> librariesPaths)
-        //{
-        //    var secondaryPaths = await GetSecondaryPathsAsync();
-        //    if (secondaryPaths.Any())
-        //        librariesPaths.AddRange(secondaryPaths);
-        //}
+        private void TryAddSecondaryPaths(List<string> librariesPaths)
+        {
+            var secondaryPaths = _readFileRepository.Read(this.AppPath + SteamConstants.CONFIG_SUBPATH)
+                .Where(x => x.Value.Contains(SteamConstants.BASEFOLDER_CONFIG_KEY))
+                .Select(x => x.Value);
+
+            if (secondaryPaths.Any())
+                librariesPaths.AddRange(secondaryPaths);
+        }
 
         private void TryAddMainPath(List<string> librariesPaths)
         {
@@ -116,29 +103,6 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
             if (Directory.Exists(mainPath))
                 librariesPaths.Add(mainPath);
         }
-
-        //private IEnumerable<string> GetSecondaryPathsAsync()
-        //{
-        //    var configPath = this.AppPath + SteamConstants.CONFIG_SUBPATH;
-        //    //var dataArray = await File.ReadAllLinesAsync(configPath);
-
-        //    //var secondaryPaths = dataArray.Where(x => x.Contains(SteamConstants.BASEFOLDER_CONFIG_KEY));
-
-        //    //return secondaryPaths.Select(x => GetPathFromConfigLine(x));
-
-        //    var repo = new JSONFileRepository();
-
-        //    var data = repo.Read(configPath);
-
-        //    return Enumerable.Empty<string>();
-        //}
-
-        //private string GetPathFromConfigLine(string configLine)
-        //{
-        //    Regex pathRegex = new Regex(@"[A-Z]:\\\\(.*)", RegexOptions.IgnoreCase);
-
-        //    return pathRegex.Match(configLine).Value.Replace("\\\\", "\\").Replace('"', ' ').Trim();
-        //}
 
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ChustaSoft.GamersPlatformUtils.Domain
 {
-    public class OriginBusiness : FileDependantPlatformBase, IOriginBusiness, ILinkFinder, IAnalyzer
+    public class OriginBusiness : PlatformBase, IOriginBusiness, ILinkFinder, IAnalyzer
     {
 
         private string ConfigXMLPath { get; set; }
