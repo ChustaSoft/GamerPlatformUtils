@@ -6,6 +6,7 @@ using ChustaSoft.GamersPlatformUtils.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 
 namespace ChustaSoft.GamersPlatformUtils.UI
 {
@@ -49,8 +50,21 @@ namespace ChustaSoft.GamersPlatformUtils.UI
 
         internal static ServiceCollection ConfigureRepositories(this ServiceCollection serviceCollection)
         {
-            serviceCollection.AddScoped<IReadWriteFileRepository, XMLFileRepository>();
-            serviceCollection.AddScoped<IReadFileRepository, PowershellFileRepository>();
+            serviceCollection.AddScoped<XMLFileRepository>();
+            serviceCollection.AddScoped<PowershellFileRepository>();
+            serviceCollection.AddTransient<ServiceResolver>(serviceProvider => key =>
+            {
+                switch (key)
+                {
+                    case RepositoriesDefinition.XML_REPOSITORY:
+                        return serviceProvider.GetService<XMLFileRepository>();
+                    case RepositoriesDefinition.POWERSHELL_REPOSITORY:
+                        return serviceProvider.GetService<PowershellFileRepository>();
+                    
+                    default:
+                        throw new KeyNotFoundException();
+                }
+            });
             serviceCollection.AddScoped<IFileDeleteRepository, SystemFileRepository>();
 
             return serviceCollection;
@@ -65,4 +79,5 @@ namespace ChustaSoft.GamersPlatformUtils.UI
             => serviceProvider.GetRequiredService<ILoggerProvider>().CreateLogger("DEBUG");
 
     }
+
 }

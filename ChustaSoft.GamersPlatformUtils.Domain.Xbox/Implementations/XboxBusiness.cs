@@ -7,17 +7,12 @@ using System.Threading.Tasks;
 
 namespace ChustaSoft.GamersPlatformUtils.Domain
 {
-    public class XboxBusiness : PlatformBase, IXboxBusiness, ILinkFinder
+    public class XboxBusiness : FileDependantPlatformBase, IXboxBusiness, ILinkFinder
     {
 
-        private readonly IReadFileRepository _readFileRepository;
-
-
-        public XboxBusiness(IReadFileRepository readFileRepository) 
-            : base()
-        {
-            _readFileRepository = readFileRepository;
-        }
+        public XboxBusiness(ServiceResolver serviceAccessor)
+            : base(serviceAccessor, RepositoriesDefinition.POWERSHELL_REPOSITORY)
+        { }
 
 
         public Task<IEnumerable<GameLink>> FindAsync()

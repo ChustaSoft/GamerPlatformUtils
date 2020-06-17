@@ -10,30 +10,31 @@ using System.Threading.Tasks;
 
 namespace ChustaSoft.GamersPlatformUtils.Domain
 {
-    public class OriginBusiness : PlatformBase, IOriginBusiness, ILinkFinder, IAnalyzer
+    public class OriginBusiness : FileDependantPlatformBase, IOriginBusiness, ILinkFinder, IAnalyzer
     {
-
-        private readonly IReadWriteFileRepository _readWriteFileRepository;
 
         private string ConfigXMLPath { get; set; }
 
 
-        public OriginBusiness(IReadWriteFileRepository readWriteFileRepository)
-            : base()
-        {
-            _readWriteFileRepository = readWriteFileRepository;
-        }
+        public OriginBusiness(ServiceResolver serviceAccessor)
+            : base(serviceAccessor, RepositoriesDefinition.XML_REPOSITORY)
+        { }
 
 
         public Task<IEnumerable<GameLink>> FindAsync()
         {
             return Task.Run(() => {
+                var gameLinks = new List<GameLink>();
 
-                var  xmlValues = _readWriteFileRepository.Read(this.ConfigXMLPath);
-
-                string libraryLocation = xmlValues.ContainsKey(OriginConstants.LIBRARY_XML_KEY) ? xmlValues[OriginConstants.LIBRARY_XML_KEY] : string.Empty;
-
-                return GetGameLinksFromLibraryDirectory(libraryLocation);
+                foreach (var pathLibrary in this.Libraries) 
+                {
+                    if (Directory.Exists(pathLibrary))
+                    {
+                        foreach (var subDirectory in Directory.GetDirectories(pathLibrary))
+                            gameLinks.Add(new GameLink(Path.GetFileName(subDirectory), FileSystem.GetFileInfo(Path.Combine(pathLibrary, subDirectory))));
+                    }
+                }
+                return gameLinks.AsEnumerable();
             });
         }
 
@@ -52,26 +53,41 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
             this.Available = Directory.Exists(this.AppPath);
             this.Name = OriginConstants.PLATFORM_NAME;
             this.Brand = OriginConstants.BRAND_NAME;
-            this.Libraries = Enumerable.Empty<string>();
+            this.Libraries = GetLibraries();
         }
 
-        private IEnumerable<GameLink> GetGameLinksFromLibraryDirectory(string path)
+
+        private IEnumerable<string> GetLibraries()
         {
-            List<GameLink> gameLinks = new List<GameLink>();
+            var librariesPaths = new List<string>();
 
-            if (Directory.Exists(path))
-            {
-                Directory.GetDirectories(path).ToList().ForEach(subDirectory =>
-                {
-                    gameLinks.Add(new GameLink { Name = Path.GetFileName(subDirectory), Path = FileSystem.GetFileInfo((Path.Combine(path, subDirectory))) });
-                });
-            }
+            TryAddSecondaryPath(librariesPaths);
 
-            return gameLinks;
+            return librariesPaths;
+        }
+
+        private void TryAddSecondaryPath(List<string> librariesPaths)
+        {
+            var xmlValues = _readFileRepository.Read(this.ConfigXMLPath);
+
+            if (xmlValues.ContainsKey(OriginConstants.LIBRARY_XML_KEY))
+                librariesPaths.Add(xmlValues[OriginConstants.LIBRARY_XML_KEY]);
         }
 
         private IEnumerable<string> FindPaths()
         {
+            /*TODO: Bug
+             * Paso 1: Parece ser que primero carga del registro todos los installation paths, los cuales los añade por defecto a la lista de directorios a borrar
+             * 1. SearchOnCurrentLocations
+             * 2. SearchOnLegacyLocations
+             * 3. AddNestedFiles (Con este registra todos los subpaths de cada installation de Origin)
+             * Paso 2: En realidad, debería sólo incluir la segunda búsqueda, que es el siguiente paso
+             * 1. FindFilesByType
+             * 2. FindFilesOnLibFolder
+             * 
+             * foundpaths solo debería devolver lo que hace el paso 2 ??
+             * Qué funcion tiene la lista files ??
+            */
             List<string> foundPaths = new List<string>();
             List<string> files = new List<string>();
 
@@ -140,9 +156,7 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
             if (!string.IsNullOrEmpty(path)){
                 Regex fileRegex = new Regex("(cab|exe|msi|so)", RegexOptions.IgnoreCase);
 
-                files.AddRange(from f in Directory.GetFiles(path)
-                               where fileRegex.IsMatch(f)
-                               select f);
+                files.AddRange(from f in Directory.GetFiles(path) where fileRegex.IsMatch(f) select f);
             }
         }
 
@@ -159,18 +173,20 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
         private IEnumerable<string> SearchOnCurrentLocations()
         {
             string regPath = Environment.Is64BitOperatingSystem ? OriginConstants.CURRENT_LOCATION_64_SYSTEM : OriginConstants.CURRENT_LOCATION_32_SYSTEM;
+
             return GetPaths(regPath);
         }
 
         private IEnumerable<string> SearchOnLegacyLocations()
         {
             string regPath = Environment.Is64BitOperatingSystem ? OriginConstants.LEGACY_LOCATION_64_SYSTEM : OriginConstants.LEGACY_LOCATION_32_SYSTEM;
+
             return GetPaths(regPath);
         }
 
         private IEnumerable<string> GetPaths(string directoryPath)
         {
-            List<string> foundPaths = new List<string>();
+            var foundPaths = new List<string>();
             using (var root = Registry.LocalMachine.OpenSubKey(directoryPath))
             {
                 if(root != null) {
