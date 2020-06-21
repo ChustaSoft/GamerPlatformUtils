@@ -64,7 +64,7 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
 
             foreach (var nestedDirectory in commonDirectory.EnumerateDirectories())
             {
-                if (nestedDirectory.FullName.Contains(SteamConstants.REDIST_FOLDER_NAME))
+                if (IsTrashFolder(nestedDirectory))
                 {
                     var nestedFolderFiles = nestedDirectory.GetFiles().ToList();
                     files.AddRange(nestedFolderFiles);
@@ -75,6 +75,15 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
             }
 
             return files.OrderBy(x => x.FullName);
+        }
+
+        private bool IsTrashFolder(DirectoryInfo nestedDirectory)
+        {
+            foreach (var trashFolder in SteamConstants.TRASH_FOLDERS)
+                if (nestedDirectory.FullName.Contains(trashFolder))
+                    return true;
+
+            return false;
         }
 
         private IEnumerable<string> GetLibraries()
