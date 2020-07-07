@@ -76,18 +76,6 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
 
         private IEnumerable<string> FindPaths()
         {
-            /*TODO: Bug
-             * Paso 1: Parece ser que primero carga del registro todos los installation paths, los cuales los añade por defecto a la lista de directorios a borrar
-             * 1. SearchOnCurrentLocations
-             * 2. SearchOnLegacyLocations
-             * 3. AddNestedFiles (Con este registra todos los subpaths de cada installation de Origin)
-             * Paso 2: En realidad, debería sólo incluir la segunda búsqueda, que es el siguiente paso
-             * 1. FindFilesByType
-             * 2. FindFilesOnLibFolder
-             * 
-             * foundpaths solo debería devolver lo que hace el paso 2 ??
-             * Qué funcion tiene la lista files ??
-            */
             List<string> foundPaths = new List<string>();
             List<string> files = new List<string>();
 
@@ -98,7 +86,7 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
             FindFilesByType(files, foundPaths);
             FindFilesOnLibFolder(files, foundPaths);
 
-            return foundPaths;
+            return files;
         }
 
         private void AddNestedFiles(List<string> paths)
@@ -106,6 +94,7 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
             var nested = paths.Where(Directory.Exists).Select(Directory.GetDirectories)
                 .SelectMany(nestedGameFolders => nestedGameFolders)
                 .ToList();
+
             paths.AddRange(nested);
         }
 
