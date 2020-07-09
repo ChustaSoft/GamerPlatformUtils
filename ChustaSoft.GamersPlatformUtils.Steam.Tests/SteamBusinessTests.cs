@@ -11,9 +11,8 @@ namespace ChustaSoft.GamersPlatformUtils.Steam.Tests
         [Test]
         public void Given_SteamPlatformInInstalledEnvironment_When_Available_Then_True()
         {
-            var steamPlatform = new SteamBusiness((x) => new VDFFileRepository());
-
 #if DEBUG
+            var steamPlatform = new SteamBusiness((x) => new VDFFileRepository());
             Assert.IsTrue(steamPlatform.Available);
 #else
             Assert.IsTrue(true);
@@ -23,9 +22,8 @@ namespace ChustaSoft.GamersPlatformUtils.Steam.Tests
         [Test]
         public async Task Given_InstalledEnviromentAvailable_When_Analyze_Then_ReturnListOfFiles()
         {
-            var steamPlatform = new SteamBusiness((x) => new VDFFileRepository());
-
 #if DEBUG
+            var steamPlatform = new SteamBusiness((x) => new VDFFileRepository());
             var files = await steamPlatform.AnalyzeAsync();
             bool result = files.Count() >= 0;
 
