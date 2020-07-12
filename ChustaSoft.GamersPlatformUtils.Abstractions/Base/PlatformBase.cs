@@ -5,6 +5,9 @@ namespace ChustaSoft.GamersPlatformUtils.Abstractions
     public abstract class PlatformBase : IPlatform
     {
 
+        protected readonly IReadFileRepository _readFileRepository;
+
+
         public virtual bool Available { get; protected set; }
         public virtual string Name { get; protected set; }
         public virtual string Brand { get; protected set; }
@@ -12,8 +15,10 @@ namespace ChustaSoft.GamersPlatformUtils.Abstractions
         public virtual IEnumerable<string> Libraries { get; protected set; }
 
 
-        public PlatformBase()
+        public PlatformBase(ServiceResolver serviceAccessor, string fileRepositoryKey)
         {
+            _readFileRepository = serviceAccessor(fileRepositoryKey);
+
             LoadPlatform();
         }
 

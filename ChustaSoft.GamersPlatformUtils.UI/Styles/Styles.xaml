@@ -45,7 +45,7 @@
         <Setter Property="BackgroundColor" Value="{DynamicResource MaterialDesignCardBackground}"/>
     </Style>
 
-    <Style x:Key="GPU_TabItemStyle"  TargetType="TabItem">
+    <Style x:Key="GPU_TabItemStyle" TargetType="TabItem">
         <Setter Property="Width" Value="200px"/>
         <Setter Property="Height" Value="35px"/>
         <Setter Property="Template">
@@ -65,6 +65,12 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style x:Key="GPU_ListActionButtonsContainerStyle" TargetType="StackPanel">
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Margin" Value="{StaticResource DefaultHorizontalMargins}" />
     </Style>
 
 </ResourceDictionary>

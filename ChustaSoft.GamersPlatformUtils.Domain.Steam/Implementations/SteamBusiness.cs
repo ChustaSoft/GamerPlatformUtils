@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ChustaSoft.GamersPlatformUtils.Domain
@@ -12,8 +11,8 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
     public class SteamBusiness : PlatformBase, ISteamBusiness, IAnalyzer
     {
 
-        public SteamBusiness()
-            : base()
+        public SteamBusiness(ServiceResolver serviceAccessor)
+           : base(serviceAccessor, RepositoriesDefinition.VDF_REPOSITORY)
         { }
 
 
@@ -22,22 +21,17 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
             if (string.IsNullOrEmpty(AppPath))
                 return null;
 
-            var paths = new List<string>();
-
-            paths = await SetPathsAsync();
-
             return await Task.Run(() =>
             {
                 var filesList = new List<FileInfo>();
 
-                foreach (string path in paths)
+                foreach (string path in this.Libraries)
                 {
                     filesList.AddRange(GetFiles(path));
                 }
 
                 return filesList;
-            }
-            );
+            });
         }
 
         protected override void LoadPlatform()
@@ -46,27 +40,7 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
             this.Available = !string.IsNullOrEmpty(AppPath);
             this.Name = SteamConstants.PLATFORM_NAME;
             this.Brand = SteamConstants.BRAND_NAME;
-            this.Libraries = Enumerable.Empty<string>();
-        }
-
-        private async Task<List<string>> SetPathsAsync()
-        {
-            string commonSteamPath = $"{AppPath}{SteamConstants.GAMES_FOLDER}";
-
-            if (CheckMainPath(commonSteamPath))
-                return null;
-
-            List<string> paths = new List<string>();
-
-            paths.Add(commonSteamPath);
-            paths.AddRange(await GetSecondaryPathsAsync());
-
-            return paths;
-        }
-
-        private static bool CheckMainPath(string commonSteamPath)
-        {
-            return !Directory.Exists(commonSteamPath);
+            this.Libraries = GetLibraries();
         }
 
 
@@ -90,7 +64,7 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
 
             foreach (var nestedDirectory in commonDirectory.EnumerateDirectories())
             {
-                if (nestedDirectory.FullName.Contains(SteamConstants.REDIST_FOLDER_NAME))
+                if (IsTrashFolder(nestedDirectory))
                 {
                     var nestedFolderFiles = nestedDirectory.GetFiles().ToList();
                     files.AddRange(nestedFolderFiles);
@@ -103,22 +77,40 @@ namespace ChustaSoft.GamersPlatformUtils.Domain
             return files.OrderBy(x => x.FullName);
         }
 
-        private async Task<IEnumerable<string>> GetSecondaryPathsAsync()
+        private bool IsTrashFolder(DirectoryInfo nestedDirectory)
         {
-            var configPath = this.AppPath + SteamConstants.CONFIG_SUBPATH;
-            var dataArray = await File.ReadAllLinesAsync(configPath);
+            foreach (var trashFolder in SteamConstants.TRASH_FOLDERS)
+                if (nestedDirectory.FullName.Contains(trashFolder))
+                    return true;
 
-            var secondaryPaths = dataArray.Where(x => x.Contains(SteamConstants.BASEFOLDER_CONFIG_KEY));
-
-            return secondaryPaths.Select(x => GetPathFromConfigLine(x));
-
+            return false;
         }
 
-        private string GetPathFromConfigLine(string configLine)
+        private IEnumerable<string> GetLibraries()
         {
-            Regex pathRegex = new Regex(@"[A-Z]:\\\\(.*)", RegexOptions.IgnoreCase);
+            var librariesPaths = new List<string>();
 
-            return pathRegex.Match(configLine).Value.Replace("\\\\", "\\").Replace('"', ' ').Trim();
+            TryAddMainPath(librariesPaths);
+            TryAddSecondaryPaths(librariesPaths);
+
+            return librariesPaths;
+        }
+
+        private void TryAddSecondaryPaths(List<string> librariesPaths)
+        {
+            var secondaryPaths = _readFileRepository.Read(this.AppPath + SteamConstants.CONFIG_SUBPATH)
+                .Where(x => x.Key.Contains(SteamConstants.BASEFOLDER_CONFIG_KEY))
+                .Select(x => x.Value);
+
+            if (secondaryPaths.Any())
+                librariesPaths.AddRange(secondaryPaths);
+        }
+
+        private void TryAddMainPath(List<string> librariesPaths)
+        {
+            var mainPath = $"{AppPath}{SteamConstants.GAMES_FOLDER}";
+            if (Directory.Exists(mainPath))
+                librariesPaths.Add(mainPath);
         }
 
     }

@@ -1,12 +1,11 @@
 ﻿using ChustaSoft.GamersPlatformUtils.Abstractions;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
 namespace ChustaSoft.GamersPlatformUtils.Infrastructure
 {
-	public class XMLFileRepository : IReadWriteFileRepository
+    public class XMLFileRepository : IReadFileRepository
 	{
 
 		public XMLFileRepository()
@@ -23,11 +22,6 @@ namespace ChustaSoft.GamersPlatformUtils.Infrastructure
 				dataDictionary.Add(GetElementProperty(element, "key"), (GetElementProperty(element, "value")));
 			}
 			return dataDictionary;
-		}
-
-		public void Write()
-		{
-			throw new NotImplementedException();
 		}
 
 
