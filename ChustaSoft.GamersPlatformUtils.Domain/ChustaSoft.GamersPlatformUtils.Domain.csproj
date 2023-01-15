@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>ChustaSoft.GamersPlatformUtils.Domain</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ChustaSoft.Common" Version="1.2.2" />
+    <PackageReference Include="ChustaSoft.Common" Version="2.8.0" />
   </ItemGroup>
 
   <ItemGroup>
