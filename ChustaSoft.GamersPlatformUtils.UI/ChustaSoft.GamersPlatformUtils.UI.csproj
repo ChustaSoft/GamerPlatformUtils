@@ -1,71 +1,71 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net7.0-windows</TargetFramework>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Resources\chustasoft-logo.png" />
-    <None Remove="Resources\origin-logo.png" />
-    <None Remove="Resources\steam-logo.png" />
-    <None Remove="Resources\xbox-logo.png" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="Resources\chustasoft-logo.png" />
+		<None Remove="Resources\origin-logo.png" />
+		<None Remove="Resources\steam-logo.png" />
+		<None Remove="Resources\xbox-logo.png" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Content Include="Resources\chustasoft-logo.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\origin-logo.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\steam-logo.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\xbox-logo.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+	<ItemGroup>
+		<Content Include="Resources\chustasoft-logo.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\origin-logo.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\steam-logo.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\xbox-logo.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="ChustaSoft.Common.Wpf" Version="1.2.0" />
-    <PackageReference Include="MaterialDesignThemes" Version="3.1.3" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.5" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.5" />
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
-    <PackageReference Include="NReco.Logging.File" Version="1.0.5" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="ChustaSoft.Common.Wpf" Version="2.6.0" />
+		<PackageReference Include="MaterialDesignThemes" Version="4.7.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+		<PackageReference Include="NReco.Logging.File" Version="1.1.5" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ChustaSoft.GamersPlatformUtils.Services\ChustaSoft.GamersPlatformUtils.Services.csproj" />
+	<ItemGroup>
+		<ProjectReference Include="..\ChustaSoft.GamersPlatformUtils.Services\ChustaSoft.GamersPlatformUtils.Services.csproj" />
 
-    <Compile Update="MainWindowViewModel.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
-    
-    <Compile Update="Controls\InformationControlViewModel.cs">
-      <DependentUpon>InformationControl.xaml</DependentUpon>
-    </Compile>
+		<Compile Update="MainWindowViewModel.cs">
+			<DependentUpon>MainWindow.xaml</DependentUpon>
+		</Compile>
 
-    <Compile Update="Modules\Cleaner\CleanerControlViewModel.cs">
-      <DependentUpon>CleanerControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Modules\Cleaner\CleanerControlModel.cs">
-      <DependentUpon>CleanerControl.xaml</DependentUpon>
-    </Compile>
+		<Compile Update="Controls\InformationControlViewModel.cs">
+			<DependentUpon>InformationControl.xaml</DependentUpon>
+		</Compile>
 
-    <Compile Update="Modules\Linker\LinkerControlViewModel.cs">
-      <DependentUpon>LinkerControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Modules\Linker\LinkerControlModel.cs">
-      <DependentUpon>LinkerControl.xaml</DependentUpon>
-    </Compile>
+		<Compile Update="Modules\Cleaner\CleanerControlViewModel.cs">
+			<DependentUpon>CleanerControl.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Modules\Cleaner\CleanerControlModel.cs">
+			<DependentUpon>CleanerControl.xaml</DependentUpon>
+		</Compile>
 
-    <Compile Update="Helpers\IViewModelFactory.cs">
-      <DependentUpon>ViewModelFactory.cs</DependentUpon>
-    </Compile>
-    
-  </ItemGroup>
+		<Compile Update="Modules\Linker\LinkerControlViewModel.cs">
+			<DependentUpon>LinkerControl.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Modules\Linker\LinkerControlModel.cs">
+			<DependentUpon>LinkerControl.xaml</DependentUpon>
+		</Compile>
+
+		<Compile Update="Helpers\IViewModelFactory.cs">
+			<DependentUpon>ViewModelFactory.cs</DependentUpon>
+		</Compile>
+
+	</ItemGroup>
 
 </Project>
