@@ -30,11 +30,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="ChustaSoft.Common.Wpf" Version="2.6.0" />
-		<PackageReference Include="MaterialDesignThemes" Version="4.7.0" />
+		<PackageReference Include="MaterialDesignThemes" Version="4.8.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
-		<PackageReference Include="NReco.Logging.File" Version="1.1.5" />
+		<PackageReference Include="NReco.Logging.File" Version="1.1.6" />
 	</ItemGroup>
 
 	<ItemGroup>
